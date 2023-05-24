@@ -59,7 +59,7 @@
     "vite": "^4.3.3"
   },
   "engines": {
-    "node": ">=18.x.x"
+    "node": ">=16.x.x"
   },
   "packageManager": "pnpm@8.1.0"
 }

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="bump node">
-      <change afterPath="$PROJECT_DIR$/.vercel" afterDir="false" />
-    </list>
+    <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="debug node" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -43,7 +41,7 @@
       <workItem from="1684894598731" duration="1402000" />
       <workItem from="1684896038913" duration="66000" />
       <workItem from="1684896113654" duration="18000" />
-      <workItem from="1684896161457" duration="642000" />
+      <workItem from="1684896161457" duration="949000" />
     </task>
     <task id="LOCAL-00001" summary="dark mode">
       <created>1684895216489</created>
@@ -59,7 +57,28 @@
       <option name="project" value="LOCAL" />
       <updated>1684896562850</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="debug node">
+      <created>1684896952998</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1684896952998</updated>
+    </task>
+    <task id="LOCAL-00004" summary="ignore env">
+      <created>1684896979808</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1684896979808</updated>
+    </task>
+    <task id="LOCAL-00005" summary="debug node">
+      <created>1684897061370</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1684897061370</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -79,6 +98,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="dark mode" />
     <MESSAGE value="bump node" />
-    <option name="LAST_COMMIT_MESSAGE" value="bump node" />
+    <MESSAGE value="ignore env" />
+    <MESSAGE value="debug node" />
+    <option name="LAST_COMMIT_MESSAGE" value="debug node" />
   </component>
 </project>

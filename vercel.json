@@ -1,4 +1,10 @@
 {
   "rewrites": [{ "source": "/(.*)", "destination": "/" }],
-  "buildCommand": "pnpm build:turbo"
+  "buildCommand": "pnpm build:turbo",
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "node@20.1.0"
+    }
+  ]
 }

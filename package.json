@@ -26,6 +26,7 @@
     "@emotion/styled": "^11.10.8",
     "@fontsource/plus-jakarta-sans": "^4.5.11",
     "framer-motion": "^10.12.4",
+    "node": "^20.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
@@ -34,7 +35,7 @@
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^17.6.1",
-    "@types/node": "^18.16.2",
+    "@types/node": "^20.1.0",
     "@types/react": "18.2.0",
     "@types/react-dom": "^18.2.1",
     "@types/react-helmet": "^6.1.6",
@@ -50,8 +51,8 @@
     "vite": "^4.3.3"
   },
   "engines": {
-    "node": "20.1.0",
-    "pnpm": ">=8.5.1"
+    "node": ">=16.x.x",
+    "pnpm": ">=8"
   },
   "packageManager": "pnpm@8.1.0"
 }

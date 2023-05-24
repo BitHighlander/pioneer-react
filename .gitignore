@@ -3,7 +3,8 @@ node_modules
 dist
 dist-ssr
 *.local
-
+.idea
+.env
 yarn-error.log*
 .pnpm-debug.log*
 

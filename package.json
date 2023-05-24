@@ -27,6 +27,7 @@
     "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
     "@esbuild-plugins/node-modules-polyfill": "^0.2.2",
     "@fontsource/plus-jakarta-sans": "^4.5.11",
+    "@pioneer-sdk/sdk": "1.1.73",
     "framer-motion": "^10.12.4",
     "node": "^20.2.0",
     "react": "^18.2.0",

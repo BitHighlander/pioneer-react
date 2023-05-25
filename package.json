@@ -26,7 +26,7 @@
     "@emotion/react": "^11.10.8",
     "@emotion/styled": "^11.10.8",
     "@fontsource/plus-jakarta-sans": "^4.5.11",
-    "@pioneer-sdk/sdk": "^1.1.73",
+    "@pioneer-sdk/sdk": "1.1.85",
     "@shapeshiftoss/hdwallet-core": "^1.50.0",
     "@shapeshiftoss/hdwallet-metamask": "^1.50.0",
     "@types/uuid": "^9.0.1",

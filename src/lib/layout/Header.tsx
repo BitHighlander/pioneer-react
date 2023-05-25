@@ -59,7 +59,8 @@ import { usePioneer } from "lib/context/Pioneer";
 
 const Header = () => {
   const { state } = usePioneer();
-  const { api, user, context } = state;
+  // const { api, user, context } = state;
+  let api = {}
   const { isOpen, onOpen, onClose } = useDisclosure();
   // const [pioneerConnected, setPioneerConnected] = useState(false);
 

@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="begin build">
+    <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="begin layout">
+      <change afterPath="$PROJECT_DIR$/src/lib/assets/Icons/KeepKeyIcon.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/assets/Icons/KeplrIcon.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/assets/Icons/MetaMaskIcon.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/assets/Icons/TallyHoIcon.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/assets/Icons/XDEFIIcon.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/assets/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/assets/png/keepkey.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/assets/png/keplr.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/assets/png/metamask.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/assets/png/pioneer.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/pages/home/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/pages/home/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/layout/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/layout/Header.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,8 +72,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.build:turbo" />
+        <item itemvalue="npm.dev" />
       </list>
     </recent_temporary>
   </component>
@@ -205,7 +216,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684971793950</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="begin layout">
+      <created>1684973470901</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1684973470901</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -231,6 +249,7 @@
     <MESSAGE value="dark mode" />
     <MESSAGE value="debug build" />
     <MESSAGE value="begin build" />
-    <option name="LAST_COMMIT_MESSAGE" value="begin build" />
+    <MESSAGE value="begin layout" />
+    <option name="LAST_COMMIT_MESSAGE" value="begin layout" />
   </component>
 </project>

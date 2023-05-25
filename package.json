@@ -21,6 +21,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^2.0.19",
     "@chakra-ui/react": "^2.6.0",
     "@emotion/react": "^11.10.8",
     "@emotion/styled": "^11.10.8",
@@ -35,6 +36,7 @@
     "react-helmet": "^6.1.0",
     "react-icons": "^4.8.0",
     "react-router-dom": "^6.10.0",
+    "short-uuid": "^4.2.2",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

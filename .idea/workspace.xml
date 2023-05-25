@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="begin pioneer">
+    <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="pioneer-sdk no pollyfill!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/layout/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/layout/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vite.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,8 +74,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.build:turbo" />
         <item itemvalue="npm.dev" />
+        <item itemvalue="npm.build:turbo" />
         <item itemvalue="npm.serve" />
       </list>
     </recent_temporary>
@@ -230,7 +233,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684980174480</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="pioneer-sdk no pollyfill!">
+      <created>1684984785429</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1684984785429</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -258,6 +268,7 @@
     <MESSAGE value="begin build" />
     <MESSAGE value="begin layout" />
     <MESSAGE value="begin pioneer" />
-    <option name="LAST_COMMIT_MESSAGE" value="begin pioneer" />
+    <MESSAGE value="pioneer-sdk no pollyfill!" />
+    <option name="LAST_COMMIT_MESSAGE" value="pioneer-sdk no pollyfill!" />
   </component>
 </project>

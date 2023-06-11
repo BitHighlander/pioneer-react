@@ -28,6 +28,7 @@
 // import { KkRestAdapter } from "@keepkey/hdwallet-keepkey-rest";
 // import { KeepKeySdk } from "@keepkey/keepkey-sdk";
 import { SDK } from "@pioneer-sdk/sdk";
+
 import * as core from "@shapeshiftoss/hdwallet-core";
 // import * as keplr from "@shapeshiftoss/hdwallet-keplr";
 import * as metaMask from "@shapeshiftoss/hdwallet-metamask";
@@ -203,13 +204,13 @@ export const PioneerProvider = ({
         },
       };
       // const sdkKeepKey = await KeepKeySdk.create(config);
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      if (!config.apiKey !== serviceKey) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        localStorage.setItem("serviceKey", config.apiKey);
-      }
+      // // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // // @ts-ignore
+      // if (!config.apiKey !== serviceKey) {
+      //   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //   // @ts-ignore
+      //   localStorage.setItem("serviceKey", config.apiKey);
+      // }
       const keyring = new core.Keyring();
       const metaMaskAdapter = metaMask.MetaMaskAdapter.useKeyring(keyring);
       const walletMetaMask = await metaMaskAdapter.pairDevice();
@@ -222,15 +223,15 @@ export const PioneerProvider = ({
         console.log("walletMetaMask: ", walletMetaMask);
         console.log("ethAddress: ", walletMetaMask.ethAddress);
       }
-
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      // const walletInit = await KkRestAdapter.useKeyring(keyring).pairDevice(
-      //   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //   // @ts-ignore
-      //   sdk
-      // );
+      //
+      // // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // // @ts-ignore
+      // // eslint-disable-next-line react-hooks/rules-of-hooks
+      // // const walletInit = await KkRestAdapter.useKeyring(keyring).pairDevice(
+      // //   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // //   // @ts-ignore
+      // //   sdk
+      // // );
 
       if (!queryKey) {
         queryKey = `key:${uuidv4()}`;
@@ -267,13 +268,14 @@ export const PioneerProvider = ({
         wss,
         paths,
       };
+      // console.log("pioneerApi: ",pioneerApi)
       const appInit = new SDK(spec, configPioneer);
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       const api = await appInit.init(walletMetaMask);
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      dispatch({ type: WalletActions.SET_WALLET, payload: walletMetaMask });
+      // // @ts-ignore
+      // dispatch({ type: WalletActions.SET_WALLET, payload: walletMetaMask });
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       dispatch({ type: WalletActions.SET_APP, payload: appInit });
@@ -283,7 +285,8 @@ export const PioneerProvider = ({
       // @ts-ignore
       const user = await api.User();
       // eslint-disable-next-line no-console
-      console.log("user: ", user.data);
+      console.log("user: ", user);
+      
 
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore

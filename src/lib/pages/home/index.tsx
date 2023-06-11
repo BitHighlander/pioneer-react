@@ -111,37 +111,37 @@ const Home = () => {
                 </VStack>
             </Box>
 
-            <Box
-                backgroundColor="gray.800"
-                height="100vh"
-                position="fixed"
-                top="0"
-                left="80px" // Adjust based on your previous column width
-                padding="10"
-                display="flex"
-                flexDirection="column"
-                alignItems="start"
-                justifyContent="start"
-            >
-                <Heading size="md" color="white" my="4">
-                    Server Title
-                </Heading>
-                <Divider />
-                <List mt="4" color="white">
-                    {channels.map((channel, index) => (
-                        <ListItem key={index}>
-                            <IconButton
-                                aria-label="Channel"
-                                icon={<FaChevronDown />}
-                                size="xs"
-                                variant="ghost"
-                                colorScheme="purple"
-                            />
-                            {channel}
-                        </ListItem>
-                    ))}
-                </List>
-            </Box>
+            {/*<Box*/}
+            {/*    backgroundColor="gray.800"*/}
+            {/*    height="100vh"*/}
+            {/*    position="fixed"*/}
+            {/*    top="0"*/}
+            {/*    left="80px" // Adjust based on your previous column width*/}
+            {/*    padding="10"*/}
+            {/*    display="flex"*/}
+            {/*    flexDirection="column"*/}
+            {/*    alignItems="start"*/}
+            {/*    justifyContent="start"*/}
+            {/*>*/}
+            {/*    <Heading size="md" color="white" my="4">*/}
+            {/*        Server Title*/}
+            {/*    </Heading>*/}
+            {/*    <Divider />*/}
+            {/*    <List mt="4" color="white">*/}
+            {/*        {channels.map((channel, index) => (*/}
+            {/*            <ListItem key={index}>*/}
+            {/*                <IconButton*/}
+            {/*                    aria-label="Channel"*/}
+            {/*                    icon={<FaChevronDown />}*/}
+            {/*                    size="xs"*/}
+            {/*                    variant="ghost"*/}
+            {/*                    colorScheme="purple"*/}
+            {/*                />*/}
+            {/*                {channel}*/}
+            {/*            </ListItem>*/}
+            {/*        ))}*/}
+            {/*    </List>*/}
+            {/*</Box>*/}
 
             <Drawer
                 isOpen={isOpen}

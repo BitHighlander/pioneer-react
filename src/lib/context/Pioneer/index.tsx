@@ -299,12 +299,36 @@ export const PioneerProvider = ({
       setBlockchainContext(user.data.blockchainContext);
       setAssetContext(user.data.assetContext);
 
-      // // get walletSoftware
-      // const walletSoftware = await nativeAdapter.pairDevice("testid");
-      // await nativeAdapter.initialize();
-      // // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // // @ts-ignore
-      // walletSoftware.loadDevice({ mnemonic });
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const nativeAdapter = NativeAdapter.useKeyring(keyring);
+
+      // get walletSoftware
+      const walletSoftware = await nativeAdapter.pairDevice("testid");
+      await nativeAdapter.initialize();
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      await walletSoftware.loadDevice({ mnemonic:"alcohol woman abuse must during monitor noble actual mixed trade anger aisle" });
+
+      // eslint-disable-next-line no-console
+      console.log("walletSoftware: ", walletSoftware);
+      // eslint-disable-next-line no-console
+      console.log("isInitialized: ", await walletSoftware?.isInitialized());
+      // eslint-disable-next-line no-console
+      console.log("getLabel: ", await walletSoftware?.getLabel());
+
+      // get eth address
+      const addressInfo = {
+        addressNList: [2147483692, 2147483708, 2147483648, 0, 0],
+        coin: "Ethereum",
+        scriptType: "ethereum",
+        showDisplay: false,
+      };
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      const ethAddress = await walletSoftware.ethGetAddress(addressInfo);
+      // eslint-disable-next-line no-console
+      console.log("ethAddress: ", ethAddress);
+
       //
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore

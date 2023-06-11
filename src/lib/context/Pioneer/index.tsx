@@ -32,7 +32,7 @@ import { SDK } from "@pioneer-sdk/sdk";
 import * as core from "@shapeshiftoss/hdwallet-core";
 // import * as keplr from "@shapeshiftoss/hdwallet-keplr";
 import * as metaMask from "@shapeshiftoss/hdwallet-metamask";
-// import { NativeAdapter } from "@shapeshiftoss/hdwallet-native";
+import { NativeAdapter } from "@shapeshiftoss/hdwallet-native";
 // import { entropyToMnemonic } from "bip39";
 import {
   createContext,

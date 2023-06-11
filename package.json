@@ -30,6 +30,7 @@
     "@pioneer-sdk/sdk": "1.1.112",
     "@shapeshiftoss/hdwallet-core": "^1.50.0",
     "@shapeshiftoss/hdwallet-metamask": "^1.50.0",
+    "@shapeshiftoss/hdwallet-native": "^1.50.3",
     "@types/uuid": "^9.0.1",
     "framer-motion": "^10.12.4",
     "react": "^18.2.0",

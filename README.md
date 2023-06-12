@@ -3,7 +3,7 @@
 - ⚡ blazing fast dev server and build
 - 🔗 route management added (`react-router-dom` configured)
 
-[**Live Demo**](https://https://vercel.com/bithighlander/pioneer-template/)
+[**Live Demo**](https://pioneer-template.vercel.app/)
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/git?s=https://github.com/sozonome/vite-react-chakra-starter) [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/sozonome/vite-react-chakra-starter)
 

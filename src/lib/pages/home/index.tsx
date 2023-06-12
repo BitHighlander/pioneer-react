@@ -49,67 +49,67 @@ const Home = () => {
             <SomeImage />
             <CTASection />
 
-            <Box
-                backgroundColor="gray.900"
-                height="100vh"
-                position="fixed"
-                top="0"
-                left="0"
-                padding="2"
-                display="flex"
-                flexDirection="column"
-                alignItems="center"
-                justifyContent="space-between"
-            >
-                <VStack spacing={6} align="stretch">
-                    {avatars.map((avatar) => (
-                        <Avatar
-                            key={avatar.id}
-                            name="User name"
-                            src={avatar.src}
-                            size="md"
-                            showBorder={true}
-                        />
-                    ))}
-                    <Button ref={btnRef} colorScheme="purple" onClick={onOpen}>
-                        P
-                    </Button>
-                </VStack>
+            {/*<Box*/}
+            {/*    backgroundColor="gray.900"*/}
+            {/*    height="100vh"*/}
+            {/*    position="fixed"*/}
+            {/*    top="0"*/}
+            {/*    left="0"*/}
+            {/*    padding="2"*/}
+            {/*    display="flex"*/}
+            {/*    flexDirection="column"*/}
+            {/*    alignItems="center"*/}
+            {/*    justifyContent="space-between"*/}
+            {/*>*/}
+            {/*    <VStack spacing={6} align="stretch">*/}
+            {/*        {avatars.map((avatar) => (*/}
+            {/*            <Avatar*/}
+            {/*                key={avatar.id}*/}
+            {/*                name="User name"*/}
+            {/*                src={avatar.src}*/}
+            {/*                size="md"*/}
+            {/*                showBorder={true}*/}
+            {/*            />*/}
+            {/*        ))}*/}
+            {/*        <Button ref={btnRef} colorScheme="purple" onClick={onOpen}>*/}
+            {/*            P*/}
+            {/*        </Button>*/}
+            {/*    </VStack>*/}
 
-                <VStack spacing={6} align="stretch">
-                    <IconButton
-                        aria-label="Add friend"
-                        icon={<FaUserPlus />}
-                        size="lg"
-                        variant="ghost"
-                        colorScheme="purple"
-                    />
+            {/*    <VStack spacing={6} align="stretch">*/}
+            {/*        <IconButton*/}
+            {/*            aria-label="Add friend"*/}
+            {/*            icon={<FaUserPlus />}*/}
+            {/*            size="lg"*/}
+            {/*            variant="ghost"*/}
+            {/*            colorScheme="purple"*/}
+            {/*        />*/}
 
-                    <IconButton
-                        aria-label="Inbox"
-                        icon={<FaInbox />}
-                        size="lg"
-                        variant="ghost"
-                        colorScheme="purple"
-                    />
+            {/*        <IconButton*/}
+            {/*            aria-label="Inbox"*/}
+            {/*            icon={<FaInbox />}*/}
+            {/*            size="lg"*/}
+            {/*            variant="ghost"*/}
+            {/*            colorScheme="purple"*/}
+            {/*        />*/}
 
-                    <IconButton
-                        aria-label="Voice"
-                        icon={<FaMicrophone />}
-                        size="lg"
-                        variant="ghost"
-                        colorScheme="purple"
-                    />
+            {/*        <IconButton*/}
+            {/*            aria-label="Voice"*/}
+            {/*            icon={<FaMicrophone />}*/}
+            {/*            size="lg"*/}
+            {/*            variant="ghost"*/}
+            {/*            colorScheme="purple"*/}
+            {/*        />*/}
 
-                    <IconButton
-                        aria-label="Settings"
-                        icon={<FaHeadset />}
-                        size="lg"
-                        variant="ghost"
-                        colorScheme="purple"
-                    />
-                </VStack>
-            </Box>
+            {/*        <IconButton*/}
+            {/*            aria-label="Settings"*/}
+            {/*            icon={<FaHeadset />}*/}
+            {/*            size="lg"*/}
+            {/*            variant="ghost"*/}
+            {/*            colorScheme="purple"*/}
+            {/*        />*/}
+            {/*    </VStack>*/}
+            {/*</Box>*/}
 
             {/*<Box*/}
             {/*    backgroundColor="gray.800"*/}

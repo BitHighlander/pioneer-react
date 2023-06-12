@@ -280,7 +280,7 @@ const Header = () => {
         <HStack spacing={8}>
           {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <Link onClick={handleToHome}>
-            <Box>Pioneer University</Box>
+            <Box>Pioneer Template</Box>
           </Link>
         </HStack>
         <Spacer />
@@ -327,6 +327,22 @@ const Header = () => {
             {/* <MenuDivider /> */}
             <MenuItem>
               <SimpleGrid columns={3} row={1}>
+                <Card align="center" onClick={() => setContextWallet("native")}>
+                  <CardBody>
+                    <Avatar src={PIONEER_ICON}>
+                      {nativePaired ? (
+                          <div>
+                            <AvatarBadge boxSize="1.25em" bg="green.500" />
+                          </div>
+                      ) : (
+                          <div>
+                            <AvatarBadge boxSize="1.25em" bg="red.500" />
+                          </div>
+                      )}
+                    </Avatar>
+                  </CardBody>
+                  <small>Pioneer</small>
+                </Card>
                 <Card align="center" onClick={() => setContextWallet("metamask")}>
                   <CardBody>
                     <Avatar src={METAMASK_ICON}>

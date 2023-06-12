@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="begin native">
+    <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="add all wallets begin">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/layout/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/layout/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/pages/home/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/pages/home/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +97,7 @@
       <workItem from="1686260300799" duration="14000" />
       <workItem from="1686265212933" duration="1589000" />
       <workItem from="1686352824981" duration="4376000" />
-      <workItem from="1686451784244" duration="12047000" />
+      <workItem from="1686451784244" duration="13329000" />
     </task>
     <task id="LOCAL-00001" summary="dark mode">
       <created>1684895216489</created>
@@ -273,7 +274,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686497019450</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="add all wallets begin">
+      <created>1686526732669</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1686526732669</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -305,6 +313,7 @@
     <MESSAGE value="pioneer-sdk no pollyfill! WORKING" />
     <MESSAGE value="pioneer-sdk no pollyfill! WORKING FOREAL" />
     <MESSAGE value="begin native" />
-    <option name="LAST_COMMIT_MESSAGE" value="begin native" />
+    <MESSAGE value="add all wallets begin" />
+    <option name="LAST_COMMIT_MESSAGE" value="add all wallets begin" />
   </component>
 </project>

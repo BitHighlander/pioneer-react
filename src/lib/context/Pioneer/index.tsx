@@ -46,7 +46,7 @@ import * as core from "@shapeshiftoss/hdwallet-core";
 // import * as keplr from "@shapeshiftoss/hdwallet-keplr";
 import * as metaMask from "@shapeshiftoss/hdwallet-metamask";
 import { NativeAdapter } from "@shapeshiftoss/hdwallet-native";
-// import { entropyToMnemonic } from "bip39";
+import { entropyToMnemonic } from "bip39";
 import {
   createContext,
   useReducer,
@@ -314,37 +314,46 @@ export const PioneerProvider = ({
       setBlockchainContext(user.data.blockchainContext);
       setAssetContext(user.data.assetContext);
 
+
       // eslint-disable-next-line react-hooks/rules-of-hooks
       const nativeAdapter = NativeAdapter.useKeyring(keyring);
 
-      // get walletSoftware
-      const walletSoftware = await nativeAdapter.pairDevice("testid");
-      await nativeAdapter.initialize();
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      await walletSoftware.loadDevice({ mnemonic:"alcohol woman abuse must during monitor noble actual mixed trade anger aisle" });
+      let hashStored = localStorage.getItem("hash");
+      if(hashStored){
+        const hashSplice = (str: string | any[] | null) => {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          return str.slice(0, 34);
+        };
+        const hash = hashSplice(hashStored);
+        //eslint-disable-next-line no-console
+        console.log("hash (trimmed): ", hash);
+        // get walletSoftware
+        const walletSoftware = await nativeAdapter.pairDevice("testid");
+        await nativeAdapter.initialize();
 
-      // eslint-disable-next-line no-console
-      console.log("walletSoftware: ", walletSoftware);
-      // eslint-disable-next-line no-console
-      console.log("isInitialized: ", await walletSoftware?.isInitialized());
-      // eslint-disable-next-line no-console
-      console.log("getLabel: ", await walletSoftware?.getLabel());
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        const hashBytes = hash.replace("0x", "");
+        // eslint-disable-next-line no-console
+        console.log("hashBytes", hashBytes);
+        // eslint-disable-next-line no-console
+        console.log("hashBytes", hashBytes.length);
+        const mnemonic = entropyToMnemonic(hashBytes.toString(`hex`));
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        await walletSoftware.loadDevice({ mnemonic });
+        // eslint-disable-next-line no-console
+        console.log("walletSoftware: ", walletSoftware);
+        // eslint-disable-next-line no-console
+        console.log("isInitialized: ", await walletSoftware?.isInitialized());
+        // eslint-disable-next-line no-console
+        console.log("getLabel: ", await walletSoftware?.getLabel());
+        const successSoftware = await appInit.pairWallet(walletSoftware);
+        // eslint-disable-next-line no-console
+        console.log("successSoftware: ", successSoftware);
+      }
 
-      // // get eth address
-      // const addressInfo = {
-      //   addressNList: [2147483692, 2147483708, 2147483648, 0, 0],
-      //   coin: "Ethereum",
-      //   scriptType: "ethereum",
-      //   showDisplay: false,
-      // };
-      // // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // // @ts-ignore
-      // const ethAddress = await walletSoftware.ethGetAddress(addressInfo);
-      // // eslint-disable-next-line no-console
-      // console.log("ethAddress: ", ethAddress);
-
-      //
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -359,10 +368,6 @@ export const PioneerProvider = ({
       const successKeepKey = await appInit.pairWallet(walletKeepKey);
       // eslint-disable-next-line no-console
       console.log("successKeepKey: ", successKeepKey);
-
-      const successSoftware = await appInit.pairWallet(walletSoftware);
-      // eslint-disable-next-line no-console
-      console.log("successSoftware: ", successSoftware);
 
 
       // eslint-disable-next-line no-console

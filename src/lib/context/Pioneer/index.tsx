@@ -242,10 +242,10 @@ export const PioneerProvider = ({
 
       // add custom paths
       const paths: any = [];
-      // const spec = "https://pioneers.dev/spec/swagger.json";
-      // const wss = "wss://pioneers.dev";
-      const spec = "http://127.0.0.1:9001/spec/swagger.json";
-      const wss = "ws://127.0.0.1:9001";
+      const spec = "https://pioneers.dev/spec/swagger.json";
+      const wss = "wss://pioneers.dev";
+      // const spec = "http://127.0.0.1:9001/spec/swagger.json";
+      // const wss = "ws://127.0.0.1:9001";
       const configPioneer: any = {
         blockchains,
         username,
@@ -324,48 +324,39 @@ export const PioneerProvider = ({
         // eslint-disable-next-line no-console
         console.log("successSoftware: ", successSoftware);
       }
+
+      const config: any = {
+        apiKey: serviceKey || "notSet",
+        pairingInfo: {
+          name: "ShapeShift",
+          imageUrl: "https://assets.coincap.io/assets/icons/fox@2x.png",
+          basePath: "http://localhost:1646/spec/swagger.json",
+          url: "https://pioneer-template.vercel.com",
+        },
+      };
+      const sdkKeepKey = await KeepKeySdk.create(config);
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      if (!config.apiKey !== serviceKey) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        localStorage.setItem("serviceKey", config.apiKey);
+      }
+
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       // eslint-disable-next-line react-hooks/rules-of-hooks
-      // const walletInit = await KkRestAdapter.useKeyring(keyring).pairDevice(
-      //     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //     // @ts-ignore
-      //     sdkKeepKey
-      // );
-      // console.log("walletInit: ", walletInit);
-      //
-      // const config: any = {
-      //   apiKey: serviceKey || "notSet",
-      //   pairingInfo: {
-      //     name: "ShapeShift",
-      //     imageUrl: "https://assets.coincap.io/assets/icons/fox@2x.png",
-      //     basePath: "http://localhost:1646/spec/swagger.json",
-      //     url: "https://pioneer-template.vercel.com",
-      //   },
-      // };
-      // const sdkKeepKey = await KeepKeySdk.create(config);
-      // // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // // @ts-ignore
-      // if (!config.apiKey !== serviceKey) {
-      //   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //   // @ts-ignore
-      //   localStorage.setItem("serviceKey", config.apiKey);
-      // }
-      //
-      // // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // // @ts-ignore
-      // // eslint-disable-next-line react-hooks/rules-of-hooks
-      // const walletKeepKey = await KkRestAdapter.useKeyring(
-      //   keyring
-      //     // @ts-ignore
-      // ).pairDevice(sdkKeepKey);
-      // // eslint-disable-next-line no-console
-      // console.log("walletKeepKey: ", walletKeepKey);
-      //
-      // // pair keepkey
-      // const successKeepKey = await appInit.pairWallet(walletKeepKey);
-      // // eslint-disable-next-line no-console
-      // console.log("successKeepKey: ", successKeepKey);
+      const walletKeepKey = await KkRestAdapter.useKeyring(
+        keyring
+          // @ts-ignore
+      ).pairDevice(sdkKeepKey);
+      // eslint-disable-next-line no-console
+      console.log("walletKeepKey: ", walletKeepKey);
+
+      // pair keepkey
+      const successKeepKey = await appInit.pairWallet(walletKeepKey);
+      // eslint-disable-next-line no-console
+      console.log("successKeepKey: ", successKeepKey);
 
 
       // eslint-disable-next-line no-console

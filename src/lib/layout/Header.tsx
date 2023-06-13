@@ -151,81 +151,61 @@ const Header = () => {
   //   console.log("setAssetContext: USER: ", user);
   // }, [user, user?.assetContext]); // once on startup
 
-  // // onStart()
-  // useEffect(() => {
-  //   onStart();
-  // }, [state, state.api]); // once on startup
+  // onStart()
+  useEffect(() => {
+    onStart();
+  }, [state, state.api]); // once on startup
 
-  // const setUser = async function () {
-  //   try {
-  //     // eslint-disable-next-line @typescript-eslint/no-shadow
-  //     const { wallets, walletDescriptions, balances, pubkeys } = user;
-  //     // eslint-disable-next-line no-console
-  //     console.log("wallets: ", wallets);
-  //
-  //     // const walletsAvailable = [
-  //     //   { name: "keepkey", icon: KeepKeyIcon, paired: false },
-  //     //   { name: "metamask", icon: MetaMaskIcon, paired: false },
-  //     //   { name: "tallyho", icon: TallyHoIcon, paired: false },
-  //     //   { name: "xdefi", icon: XDEFIIcon, paired: false },
-  //     //   { name: "keplr", icon: KeplrIcon, paired: false },
-  //     // ];
-  //     //
-  //     // for (let i = 0; i < walletsAvailable.length; i++) {
-  //     //   const wallet = walletsAvailable[i];
-  //     //   // if found, mark it as paired
-  //     //   const match = walletDescriptions.filter(
-  //     //     (e: any) => e.type === wallet.name
-  //     //   );
-  //     //   if (match.length >= 0) {
-  //     //     walletsAvailable[i].paired = true;
-  //     //   }
-  //     // }
-  //
-  //     for (let i = 0; i < walletDescriptions.length; i++) {
-  //       const wallet = walletDescriptions[i];
-  //       if (wallet.type === "keepkey") {
-  //         wallet.icon = KeepKeyIcon;
-  //       }
-  //       if (wallet.type === "metamask") {
-  //         setMetamaskPaired(true);
-  //       }
-  //       if (wallet.type === "keepkey") {
-  //         setKeepkeyPaired(true);
-  //       }
-  //       if (wallet.type === "native") {
-  //         setNativePaired(true);
-  //       }
-  //       // TODO is it connected currently?
-  //       wallet.paired = true;
-  //       walletDescriptions[i] = wallet;
-  //     }
-  //     // eslint-disable-next-line no-console
-  //     console.log("walletDescriptions: ", walletDescriptions);
-  //     // setWalletsAvailable(walletsAvailable);
-  //     setWalletDescriptions(walletDescriptions);
-  //     setBalances(balances);
-  //     // eslint-disable-next-line no-console
-  //     console.log("walletsAvailable: ", walletsAvailable);
-  //
-  //     // eslint-disable-next-line no-console
-  //     console.log("balances: ", balances);
-  //
-  //     // eslint-disable-next-line no-console
-  //     console.log("pubkeys: ", pubkeys);
-  //   } catch (e) {
-  //     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  //     // @ts-ignore
-  //     // eslint-disable-next-line no-console
-  //     console.error("header e: ", e);
-  //     // setKeepKeyError("Bridge is offline!");
-  //   }
-  // };
-  //
-  // // onStart()
-  // useEffect(() => {
-  //   setUser();
-  // }, [user]); // once on startup
+  const setUser = async function () {
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-shadow
+      const { wallets, walletDescriptions, balances, pubkeys } = user;
+      // eslint-disable-next-line no-console
+      console.log("wallets: ", wallets);
+
+      for (let i = 0; i < walletDescriptions.length; i++) {
+        const wallet = walletDescriptions[i];
+        if (wallet.type === "keepkey") {
+          wallet.icon = KeepKeyIcon;
+        }
+        if (wallet.type === "metamask") {
+          setMetamaskPaired(true);
+        }
+        if (wallet.type === "keepkey") {
+          setKeepkeyPaired(true);
+        }
+        if (wallet.type === "native") {
+          setNativePaired(true);
+        }
+        wallet.paired = true;
+        walletDescriptions[i] = wallet;
+      }
+      // eslint-disable-next-line no-console
+      console.log("walletDescriptions: ", walletDescriptions);
+      // setWalletsAvailable(walletsAvailable);
+      setWalletDescriptions(walletDescriptions);
+      setBalances(balances);
+      // eslint-disable-next-line no-console
+      console.log("walletsAvailable: ", walletsAvailable);
+
+      // eslint-disable-next-line no-console
+      console.log("balances: ", balances);
+
+      // eslint-disable-next-line no-console
+      console.log("pubkeys: ", pubkeys);
+    } catch (e) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      // eslint-disable-next-line no-console
+      console.error("header e: ", e);
+      // setKeepKeyError("Bridge is offline!");
+    }
+  };
+
+  // onStart()
+  useEffect(() => {
+    setUser();
+  }, [user]); // once on startup
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
@@ -243,22 +223,22 @@ const Header = () => {
             <ModalHeader>Blockchain Select</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-              {/* {balances.map((balance) => ( */}
-              {/*    <Card> */}
-              {/*      <Avatar src={balance.image} /> */}
-              {/*      <CardBody> */}
-              {/*        <Heading size="md">{balance.blockchain}</Heading> */}
-              {/*        <Text py="2"> */}
-              {/*          {balance.amount} {balance.symbol} */}
-              {/*        </Text> */}
-              {/*      </CardBody> */}
-              {/*      <CardFooter> */}
-              {/*        <Button variant="solid" colorScheme="blue"> */}
-              {/*          select */}
-              {/*        </Button> */}
-              {/*      </CardFooter> */}
-              {/*    </Card> */}
-              {/* ))} */}
+               {/*{balances.map((balance:any) => (*/}
+               {/*   <Card>*/}
+               {/*     <Avatar src={balance?.image} />*/}
+               {/*     <CardBody>*/}
+               {/*       <Heading size="md">{balance?.blockchain}</Heading>*/}
+               {/*       <Text py="2">*/}
+               {/*         {balance?.amount} {balance?.symbol}*/}
+               {/*       </Text>*/}
+               {/*     </CardBody>*/}
+               {/*     <CardFooter>*/}
+               {/*       <Button variant="solid" colorScheme="blue">*/}
+               {/*         select*/}
+               {/*       </Button>*/}
+               {/*     </CardFooter>*/}
+               {/*   </Card>*/}
+               {/*))}*/}
             </ModalBody>
             <ModalFooter>
               <Button colorScheme="blue" mr={3} onClick={onClose}>

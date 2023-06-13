@@ -206,24 +206,6 @@ export const PioneerProvider = ({
       // eslint-disable-next-line no-console
       console.log("username: ", username);
 
-      //
-      const config: any = {
-        apiKey: serviceKey || "notSet",
-        pairingInfo: {
-          name: "ShapeShift",
-          imageUrl: "https://assets.coincap.io/assets/icons/fox@2x.png",
-          basePath: "http://localhost:1646/spec/swagger.json",
-          url: "https://pioneer-template.vercel.com",
-        },
-      };
-      const sdkKeepKey = await KeepKeySdk.create(config);
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      if (!config.apiKey !== serviceKey) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        localStorage.setItem("serviceKey", config.apiKey);
-      }
       const keyring = new core.Keyring();
       const metaMaskAdapter = metaMask.MetaMaskAdapter.useKeyring(keyring);
       const walletMetaMask = await metaMaskAdapter.pairDevice();
@@ -236,17 +218,6 @@ export const PioneerProvider = ({
         console.log("walletMetaMask: ", walletMetaMask);
         console.log("ethAddress: ", walletMetaMask.ethAddress);
       }
-
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      const walletInit = await KkRestAdapter.useKeyring(keyring).pairDevice(
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        sdkKeepKey
-      );
-      console.log("walletInit: ", walletInit);
-
 
       if (!queryKey) {
         queryKey = `key:${uuidv4()}`;
@@ -353,21 +324,48 @@ export const PioneerProvider = ({
         // eslint-disable-next-line no-console
         console.log("successSoftware: ", successSoftware);
       }
-
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       // eslint-disable-next-line react-hooks/rules-of-hooks
-      const walletKeepKey = await KkRestAdapter.useKeyring(
-        keyring
-          // @ts-ignore
-      ).pairDevice(sdkKeepKey);
-      // eslint-disable-next-line no-console
-      console.log("walletKeepKey: ", walletKeepKey);
-
-      // pair keepkey
-      const successKeepKey = await appInit.pairWallet(walletKeepKey);
-      // eslint-disable-next-line no-console
-      console.log("successKeepKey: ", successKeepKey);
+      // const walletInit = await KkRestAdapter.useKeyring(keyring).pairDevice(
+      //     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //     // @ts-ignore
+      //     sdkKeepKey
+      // );
+      // console.log("walletInit: ", walletInit);
+      //
+      // const config: any = {
+      //   apiKey: serviceKey || "notSet",
+      //   pairingInfo: {
+      //     name: "ShapeShift",
+      //     imageUrl: "https://assets.coincap.io/assets/icons/fox@2x.png",
+      //     basePath: "http://localhost:1646/spec/swagger.json",
+      //     url: "https://pioneer-template.vercel.com",
+      //   },
+      // };
+      // const sdkKeepKey = await KeepKeySdk.create(config);
+      // // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // // @ts-ignore
+      // if (!config.apiKey !== serviceKey) {
+      //   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //   // @ts-ignore
+      //   localStorage.setItem("serviceKey", config.apiKey);
+      // }
+      //
+      // // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // // @ts-ignore
+      // // eslint-disable-next-line react-hooks/rules-of-hooks
+      // const walletKeepKey = await KkRestAdapter.useKeyring(
+      //   keyring
+      //     // @ts-ignore
+      // ).pairDevice(sdkKeepKey);
+      // // eslint-disable-next-line no-console
+      // console.log("walletKeepKey: ", walletKeepKey);
+      //
+      // // pair keepkey
+      // const successKeepKey = await appInit.pairWallet(walletKeepKey);
+      // // eslint-disable-next-line no-console
+      // console.log("successKeepKey: ", successKeepKey);
 
 
       // eslint-disable-next-line no-console

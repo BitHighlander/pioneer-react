@@ -1,65 +1,56 @@
-import { CloseIcon, HamburgerIcon } from "@chakra-ui/icons";
-import {
-  Avatar,
-  AvatarBadge,
-  Box,
-  Button,
-  Flex,
-  HStack,
-  IconButton,
-  Link,
-  Menu,
-  Image,
-  MenuButton,
-  MenuDivider,
-  Icon,
-  MenuItem,
-  MenuList,
-  Spacer,
-  Text,
-  useDisclosure,
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionIcon,
-  AccordionPanel,
-  SimpleGrid,
-  Card,
-  CardHeader,
-  Heading,
-  CardBody,
-  CardFooter,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
-} from "@chakra-ui/react";
-import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { CloseIcon, ArrowUpDownIcon } from '@chakra-ui/icons';
+import { Avatar, AvatarBadge, Box, Button, Flex, HStack, IconButton, Link, Menu, Image, MenuButton, MenuDivider, Icon, MenuItem, MenuList, Spacer, Text, useDisclosure, Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel, SimpleGrid, Card, CardHeader, Heading, CardBody, CardFooter, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter } from '@chakra-ui/react';
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { KeepKeyIcon } from "lib/assets/Icons/KeepKeyIcon";
-import { KeplrIcon } from "lib/assets/Icons/KeplrIcon";
-import { MetaMaskIcon } from "lib/assets/Icons/MetaMaskIcon";
-import { TallyHoIcon } from "lib/assets/Icons/TallyHoIcon";
-import { XDEFIIcon } from "lib/assets/Icons/XDEFIIcon";
+import { KeepKeyIcon } from 'lib/assets/Icons/KeepKeyIcon';
+import { KeplrIcon } from 'lib/assets/Icons/KeplrIcon';
+import { MetaMaskIcon } from 'lib/assets/Icons/MetaMaskIcon';
+import { TallyHoIcon } from 'lib/assets/Icons/TallyHoIcon';
+import { XDEFIIcon } from 'lib/assets/Icons/XDEFIIcon';
 
 // import type { ReactNode } from "react";
 // import { KeepKeySdk } from "@keepkey/keepkey-sdk";
 // @ts-ignore
-import KEEPKEY_ICON from "lib/assets/png/keepkey.png";
+import KEEPKEY_ICON from 'lib/assets/png/keepkey.png';
 // @ts-ignore
-import METAMASK_ICON from "lib/assets/png/metamask.png";
+import METAMASK_ICON from 'lib/assets/png/metamask.png';
 // @ts-ignore
-import PIONEER_ICON from "lib/assets/png/pioneer.png";
+import PIONEER_ICON from 'lib/assets/png/pioneer.png';
 // import Context from "lib/context";
-import { usePioneer } from "lib/context/Pioneer";
+import { usePioneer } from 'lib/context/Pioneer';
+
+const getWalletType = (user: { walletDescriptions: any[]; }, context: any) => {
+  if (user && user.walletDescriptions) {
+    const wallet = user.walletDescriptions.find(w => w.id === context);
+    return wallet ? wallet.type : null;
+  }
+  return null;
+}
+
+const getWalletBadgeContent = (walletType: string) => {
+  const icons:any = {
+    metamask: METAMASK_ICON,
+    keepkey: KEEPKEY_ICON,
+    native: PIONEER_ICON,
+  };
+
+  const icon = icons[walletType];
+
+  if (!icon) {
+    return <div />;
+  }
+
+  return (
+      <AvatarBadge boxSize="1.25em" bg="green.500">
+        <Image rounded="full" src={icon} />
+      </AvatarBadge>
+  );
+}
 
 const Header = () => {
-  const { state } = usePioneer();
-  const { api, user, context } = state;
+  const { state, dispatch } = usePioneer();
+  const { api, user, context, wallets } = state;
   // let api = {}
   const { isOpen, onOpen, onClose } = useDisclosure();
   // const [pioneerConnected, setPioneerConnected] = useState(false);
@@ -69,33 +60,42 @@ const Header = () => {
   //   context: undefined,
   //   totalValueUsd: undefined,
   // });
-
+  const [walletType, setWalletType] = useState("");
   const [walletDescriptions, setWalletDescriptions] = useState([]);
   const [walletsAvailable, setWalletsAvailable] = useState([]);
   const [balances, setBalances] = useState([]);
   const [metamaskPaired, setMetamaskPaired] = useState(false);
   const [keepkeyPaired, setKeepkeyPaired] = useState(false);
   const [nativePaired, setNativePaired] = useState(false);
-  const [assetContext, setAssetContext] = useState("");
-  const [assetContextImage, setAssetContextImage] = useState("");
-  const [blockchainContext, setBlockchainContext] = useState("");
-  const [blockchainContextImage, setBlockchainContextImage] = useState("");
+  const [assetContext, setAssetContext] = useState('');
+  const [assetContextImage, setAssetContextImage] = useState('');
+  const [blockchainContext, setBlockchainContext] = useState('');
+  const [blockchainContextImage, setBlockchainContextImage] = useState('');
   // const [pubkeys, setPubkeys] = useState([]);
   // const [walletDescriptions, setWalletDescriptions] = useState([]);
   // const [features, setKeepKeyFeatures] = useState({});
 
   const navigate = useNavigate();
-  const handleToHome = () => navigate("/");
+  const handleToHome = () => navigate('/');
 
   const setContextWallet = async function (wallet: string) {
     try {
       // eslint-disable-next-line no-console
-      console.log("setContextWallet: ", wallet);
+      console.log("wallets: ",wallets)
+      const matchedWallet = wallets.find((w: { type: string; }) => w.type === wallet);
+
+      if (matchedWallet) {
+        dispatch({ type: 'SET_WALLET', payload: matchedWallet });
+        dispatch({ type: 'SET_CONTEXT', payload: wallet });
+      } else {
+        console.log('No wallet matched the type of the context');
+        alert("wallet not paired yet")
+      }
     } catch (e) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       // eslint-disable-next-line no-console
-      console.error("header e: ", e);
+      console.error('header e: ', e);
       // setKeepKeyError("Bridge is offline!");
     }
   };
@@ -103,12 +103,12 @@ const Header = () => {
   const setContextBlockchain = async function (blockchain: string) {
     try {
       // eslint-disable-next-line no-console
-      console.log("setContextBlockchain: ", blockchain);
+      console.log('setContextBlockchain: ', blockchain);
     } catch (e) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       // eslint-disable-next-line no-console
-      console.error("header e: ", e);
+      console.error('header e: ', e);
       // setKeepKeyError("Bridge is offline!");
     }
   };
@@ -116,12 +116,12 @@ const Header = () => {
   const setContextAsset = async function (asset: string) {
     try {
       // eslint-disable-next-line no-console
-      console.log("setContextAsset: ", asset);
+      console.log('setContextAsset: ', asset);
     } catch (e) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       // eslint-disable-next-line no-console
-      console.error("header e: ", e);
+      console.error('header e: ', e);
       // setKeepKeyError("Bridge is offline!");
     }
   };
@@ -130,15 +130,14 @@ const Header = () => {
     try {
       // if(!wallet)
       //   await connect();
-      //set color mode dark
-      localStorage.setItem("chakra-ui-color-mode", "dark");
+      // set color mode dark
+      localStorage.setItem('chakra-ui-color-mode', 'dark');
       // eslint-disable-next-line no-console
-
     } catch (e) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       // eslint-disable-next-line no-console
-      console.error("header e: ", e);
+      console.error('header e: ', e);
       // setKeepKeyError("Bridge is offline!");
     }
   };
@@ -158,46 +157,48 @@ const Header = () => {
 
   const setUser = async function () {
     try {
-      // eslint-disable-next-line @typescript-eslint/no-shadow
-      const { wallets, walletDescriptions, balances, pubkeys } = user;
-      // eslint-disable-next-line no-console
-      console.log("wallets: ", wallets);
+      if(user && user.wallets){
+        const { wallets, walletDescriptions, balances, pubkeys } = user;
+        // eslint-disable-next-line no-console
+        console.log('wallets: ', wallets);
 
-      for (let i = 0; i < walletDescriptions.length; i++) {
-        const wallet = walletDescriptions[i];
-        if (wallet.type === "keepkey") {
-          wallet.icon = KeepKeyIcon;
+        for (let i = 0; i < walletDescriptions.length; i++) {
+          const wallet = walletDescriptions[i];
+          if (wallet.type === 'keepkey') {
+            wallet.icon = KeepKeyIcon;
+          }
+          if (wallet.type === 'metamask') {
+            setMetamaskPaired(true);
+          }
+          if (wallet.type === 'keepkey') {
+            setKeepkeyPaired(true);
+          }
+          if (wallet.type === 'native') {
+            setNativePaired(true);
+          }
+          wallet.paired = true;
+          walletDescriptions[i] = wallet;
         }
-        if (wallet.type === "metamask") {
-          setMetamaskPaired(true);
-        }
-        if (wallet.type === "keepkey") {
-          setKeepkeyPaired(true);
-        }
-        if (wallet.type === "native") {
-          setNativePaired(true);
-        }
-        wallet.paired = true;
-        walletDescriptions[i] = wallet;
+        // eslint-disable-next-line no-console
+        console.log('walletDescriptions: ', walletDescriptions);
+        // setWalletsAvailable(walletsAvailable);
+        setWalletDescriptions(walletDescriptions);
+        setBalances(balances);
+        // eslint-disable-next-line no-console
+        console.log('walletsAvailable: ', walletsAvailable);
+
+        // eslint-disable-next-line no-console
+        console.log('balances: ', balances);
+
+        // eslint-disable-next-line no-console
+        console.log('pubkeys: ', pubkeys);
       }
-      // eslint-disable-next-line no-console
-      console.log("walletDescriptions: ", walletDescriptions);
-      // setWalletsAvailable(walletsAvailable);
-      setWalletDescriptions(walletDescriptions);
-      setBalances(balances);
-      // eslint-disable-next-line no-console
-      console.log("walletsAvailable: ", walletsAvailable);
 
-      // eslint-disable-next-line no-console
-      console.log("balances: ", balances);
-
-      // eslint-disable-next-line no-console
-      console.log("pubkeys: ", pubkeys);
     } catch (e) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       // eslint-disable-next-line no-console
-      console.error("header e: ", e);
+      console.error('header e: ', e);
       // setKeepKeyError("Bridge is offline!");
     }
   };
@@ -207,107 +208,93 @@ const Header = () => {
     setUser();
   }, [user]); // once on startup
 
+  const handleNavigate = (route: string) => {
+    navigate(route);
+    onClose();
+  };
+
+  useEffect(() => {
+    if (context) {
+      console.log('header context: ', context);
+      setWalletType(context);
+      // const { wallet, asset, blockchain } = context;
+      // console.log('header context: ', context);
+      // if (wallet) {
+      //   setWalletType(wallet);
+      // }
+      // if (asset) {
+      //   setAssetContext(asset);
+      // }
+      // if (blockchain) {
+      //   setBlockchainContext(blockchain);
+      // }
+    }
+  }, [context]);
+
+  useEffect(() => {
+    if (wallets) {
+      setMetamaskPaired(!!wallets.find((w: { type: string; }) => w.type === "metamask"));
+      setKeepkeyPaired(!!wallets.find((w: { type: string; }) => w.type === "keepkey"));
+      setNativePaired(!!wallets.find((w: { type: string; }) => w.type === "native"));
+    }
+  }, [wallets]);
+
+  const avatarContent = api ? getWalletBadgeContent(walletType) : (
+      <AvatarBadge boxSize="1.25em" bg="red.500">
+        <Image rounded="full" src={PIONEER_ICON} />  {/* Use the default icon here */}
+      </AvatarBadge>
+  );
+
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   return (
-      <Flex
-          as="header"
-          width="full"
-          alignSelf="flex-start"
-          gridGap={2}
-          alignItems="center"
-      >
+      <Flex as="header" width="full" alignSelf="flex-start" gridGap={2} alignItems="center">
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>Blockchain Select</ModalHeader>
+            <ModalHeader>Select Option</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-               {/*{balances.map((balance:any) => (*/}
-               {/*   <Card>*/}
-               {/*     <Avatar src={balance?.image} />*/}
-               {/*     <CardBody>*/}
-               {/*       <Heading size="md">{balance?.blockchain}</Heading>*/}
-               {/*       <Text py="2">*/}
-               {/*         {balance?.amount} {balance?.symbol}*/}
-               {/*       </Text>*/}
-               {/*     </CardBody>*/}
-               {/*     <CardFooter>*/}
-               {/*       <Button variant="solid" colorScheme="blue">*/}
-               {/*         select*/}
-               {/*       </Button>*/}
-               {/*     </CardFooter>*/}
-               {/*   </Card>*/}
-               {/*))}*/}
+              <Button w="full" mb={2} onClick={() => handleNavigate('/dapps')}>
+                Explore Dapps
+              </Button>
+              <Button w="full" mb={2} onClick={() => handleNavigate('/blockchains')}>
+                Explore Blockchains
+              </Button>
+              <Button w="full" mb={2} onClick={() => handleNavigate('/assets')}>
+                Explore Assets
+              </Button>
+              <Button w="full" mb={2} onClick={() => handleNavigate('/nodes')}>
+                Explore Nodes
+              </Button>
+              <Button w="full" mb={2} onClick={() => handleNavigate('/become-pioneer')}>
+                Become a Pioneer
+              </Button>
             </ModalBody>
             <ModalFooter>
               <Button colorScheme="blue" mr={3} onClick={onClose}>
                 Close
               </Button>
-              {/* <Button onClick={() => onSubmitSelect} variant="green"> */}
-              {/*  Select Coin */}
-              {/* </Button> */}
             </ModalFooter>
           </ModalContent>
         </Modal>
-        <IconButton
-            size="md"
-            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-            aria-label="Open Menu"
-            display={{ md: "none" }}
-            onClick={isOpen ? onClose : onOpen}
-        />
+        <IconButton size="md" icon={isOpen ? <CloseIcon /> : <ArrowUpDownIcon />} aria-label="Open Menu" onClick={isOpen ? onClose : onOpen} />
         <HStack spacing={8}>
-          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <Link onClick={handleToHome}>
-            <Box>Pioneer Template</Box>
+            <Box>Pioneer</Box>
           </Link>
         </HStack>
         <Spacer />
         <Menu>
-          {/*<Avatar size="lg" src={PIONEER_ICON}>*/}
-          {/*  {user?.assetContext}*/}
-          {/*</Avatar>*/}
-          {/*<MenuButton>a: {user?.assetContext}</MenuButton>*/}
-          {/*<MenuButton>b: {user?.blockchainContext}</MenuButton>*/}
-          <MenuButton
-              as={Button}
-              rounded="full"
-              variant="link"
-              cursor="pointer"
-              minW={200}
-          >
+          <MenuButton as={Button} rounded="full" variant="link" cursor="pointer" minW={200}>
             <Avatar size="lg" src={PIONEER_ICON}>
-              {api ? (
-                  <div>
-                    {!metamaskPaired && !keepkeyPaired && !nativePaired ? (
-                        <div>
-                          <AvatarBadge boxSize="1.25em" bg="green.500" />
-                        </div>
-                    ) : (
-                        <div />
-                    )}
-                    {metamaskPaired ? (
-                        <div>
-                          <AvatarBadge boxSize="1.25em" bg="green.500">
-                            <Image rounded="full" src={METAMASK_ICON} />
-                          </AvatarBadge>
-                        </div>
-                    ) : (
-                        <div />
-                    )}
-                  </div>
-              ) : (
-                  <AvatarBadge boxSize="1.25em" bg="red.500" />
-              )}
+              {avatarContent}
             </Avatar>
           </MenuButton>
           <MenuList>
-            {/* <MenuItem>{state.username}</MenuItem> */}
-            {/* <MenuDivider /> */}
             <MenuItem>
               <SimpleGrid columns={3} row={1}>
-                <Card align="center" onClick={() => setContextWallet("native")}>
+                <Card align="center" onClick={() => setContextWallet('native')}>
                   <CardBody>
                     <Avatar src={PIONEER_ICON}>
                       {nativePaired ? (
@@ -323,7 +310,7 @@ const Header = () => {
                   </CardBody>
                   <small>Pioneer</small>
                 </Card>
-                <Card align="center" onClick={() => setContextWallet("metamask")}>
+                <Card align="center" onClick={() => setContextWallet('metamask')}>
                   <CardBody>
                     <Avatar src={METAMASK_ICON}>
                       {metamaskPaired ? (
@@ -339,7 +326,7 @@ const Header = () => {
                   </CardBody>
                   <small>MetaMask</small>
                 </Card>
-                <Card align="center" onClick={() => setContextWallet("keepkey")}>
+                <Card align="center" onClick={() => setContextWallet('keepkey')}>
                   <CardBody>
                     <Avatar src={KEEPKEY_ICON}>
                       {keepkeyPaired ? (
@@ -357,7 +344,6 @@ const Header = () => {
                 </Card>
               </SimpleGrid>
             </MenuItem>
-            <MenuDivider />
             <Accordion defaultIndex={[0]} allowMultiple>
               <AccordionItem>
                 <h2>
@@ -379,9 +365,6 @@ const Header = () => {
                 </AccordionPanel>
               </AccordionItem>
             </Accordion>
-            {/*<MenuItem>context: {user.context || "not Paired"}</MenuItem>*/}
-            <MenuDivider />
-            {/*<MenuItem>Total Value(usd): {user.totalValueUsd}</MenuItem>*/}
           </MenuList>
         </Menu>
       </Flex>

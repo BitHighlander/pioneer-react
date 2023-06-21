@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="clean up">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="Wallet Context Switching">
       <change beforePath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/layout/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/layout/Header.tsx" afterDir="false" />
     </list>

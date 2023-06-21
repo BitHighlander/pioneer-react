@@ -187,20 +187,17 @@ export const PioneerProvider = ({ children }: { children: React.ReactNode }): JS
       // eslint-disable-next-line no-console
       console.log('username: ', username);
 
+      interface Window {
+        ethereum?: any; // Customize the type if needed
+      }
+
+      const isMetaMaskAvailable = (): boolean => {
+        return (window as any).ethereum !== undefined && (window as any).ethereum.isMetaMask;
+      };
+
       const keyring = new core.Keyring();
       const metaMaskAdapter = metaMask.MetaMaskAdapter.useKeyring(keyring);
-      const walletMetaMask = await metaMaskAdapter.pairDevice();
-      if (walletMetaMask) {
-        // pair metamask
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        await walletMetaMask.initialize();
-        // eslint-disable-next-line no-console
-        console.log('walletMetaMask: ', walletMetaMask);
-        console.log('ethAddress: ', walletMetaMask.ethAddress);
-        // @ts-ignore
-        dispatch({ type: WalletActions.ADD_WALLET, payload: walletMetaMask });
-      }
+      console.log("metaMaskAdapter: ",metaMaskAdapter)
 
       if (!queryKey) {
         queryKey = `key:${uuidv4()}`;
@@ -231,109 +228,174 @@ export const PioneerProvider = ({ children }: { children: React.ReactNode }): JS
       // console.log("pioneerApi: ",pioneerApi)
       const appInit = new SDK(spec, configPioneer);
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      const api = await appInit.init(walletMetaMask);
-      // @ts-ignore
-      dispatch({ type: WalletActions.SET_CONTEXT, payload: 'metamask' });
-      // setSetWallets(wallets.push(walletMetaMask))
-      // @ts-ignore
-      dispatch({ type: WalletActions.SET_WALLET, payload: walletMetaMask });
-      // @ts-ignore
-      dispatch({ type: WalletActions.SET_APP, payload: appInit });
-      // @ts-ignore
-      dispatch({ type: WalletActions.SET_API, payload: api });
-      // @ts-ignore
-      const user = await api.User();
-      // eslint-disable-next-line no-console
-      console.log('user: ', user);
 
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      dispatch({ type: WalletActions.SET_USER, payload: user.data });
-      // setUsername(localStorage.getItem("username"));
+      // Example usage
+      let walletMetaMask
+      if (isMetaMaskAvailable()) {
+        walletMetaMask = await metaMaskAdapter.pairDevice();
+        if (walletMetaMask) {
+          // pair metamask
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          await walletMetaMask.initialize();
+          // eslint-disable-next-line no-console
+          console.log('walletMetaMask: ', walletMetaMask);
+          console.log('ethAddress: ', walletMetaMask.ethAddress);
+          // @ts-ignore
+          dispatch({ type: WalletActions.ADD_WALLET, payload: walletMetaMask });
+        }
+      } else {
+        console.log('MetaMask is not available');
+      }
 
-      // eslint-disable-next-line no-console
-      console.log('user.data.context: ', user.data.context);
-      //@TODO move context back to lable of wallet not wallet type
-      // setContext(user.data.context);
-      // let context = user.data.context;
-      // let walletContext = user.data.walletDescriptions.filter(context);
+      const checkKeepkeyAvailability = async () => {
+        try {
+          const response = await fetch('http://localhost:1646/spec/swagger.json');
+          if (response.status === 200) {
+            return true;
+          }
+        } catch (error) {
+          return false;
+        }
+        return false;
+      };
 
-      setBlockchainContext(user.data.blockchainContext);
-      setAssetContext(user.data.assetContext);
+      let isKeepkeyAvailable = await checkKeepkeyAvailability();
+      
+      let walletKeepKey
+      if(isKeepkeyAvailable){
+        //is keepkey available
+        const config: any = {
+          apiKey: serviceKey || 'notSet',
+          pairingInfo: {
+            name: 'ShapeShift',
+            imageUrl: 'https://assets.coincap.io/assets/icons/fox@2x.png',
+            basePath: 'http://localhost:1646/spec/swagger.json',
+            url: 'https://pioneer-template.vercel.com',
+          },
+        };
+        const sdkKeepKey = await KeepKeySdk.create(config);
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        if (!config.apiKey !== serviceKey) {
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          localStorage.setItem('serviceKey', config.apiKey);
+        }
+
+        walletKeepKey = await KkRestAdapter.useKeyring(
+            keyring
+            // @ts-ignore
+        ).pairDevice(sdkKeepKey);
+        // eslint-disable-next-line no-console
+        console.log('walletKeepKey: ', walletKeepKey);
+
+        // pair keepkey
+        const successKeepKey = await appInit.pairWallet(walletKeepKey);
+        // eslint-disable-next-line no-console
+        console.log('successKeepKey: ', successKeepKey);
+        // @ts-ignore
+        dispatch({ type: WalletActions.ADD_WALLET, payload: walletKeepKey });
+      }
+
+      let walletSoftware
+      let mnemonic
+      let hashStored
+      let hash
       const nativeAdapter = NativeAdapter.useKeyring(keyring);
-
-      const hashStored = localStorage.getItem('hash');
-      if (hashStored) {
+      //is metamask available AND no KeepKey
+      if(walletMetaMask && !isKeepkeyAvailable){
+        //generate software from metamask
+        hashStored = localStorage.getItem('hash');
+        if (!hashStored) {
+          //generate from MM
+          const message = "Pioneers:0xD9B4BEF9:gen1";
+          const { hardenedPath, relPath } = walletMetaMask.ethGetAccountPaths({
+            coin: "Ethereum",
+            accountIdx: 0,
+          })[0];
+          let sig = await walletMetaMask.ethSignMessage({
+            addressNList: hardenedPath.concat(relPath),
+            message,
+          });
+          // @ts-ignore
+          console.log("sig: ",sig.signature)
+          // @ts-ignore
+          localStorage.setItem("hash", sig.signature);
+          // @ts-ignore
+          hashStored = sig.signature;
+        }
+        console.log("hashStored: ",hashStored)
         const hashSplice = (str: string | any[] | null) => {
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
           return str.slice(0, 34);
         };
-        const hash = hashSplice(hashStored);
+        // @ts-ignore
+        hash = hashSplice(hashStored);
         // eslint-disable-next-line no-console
         console.log('hash (trimmed): ', hash);
-        // get walletSoftware
-        const walletSoftware = await nativeAdapter.pairDevice('testid');
-        await nativeAdapter.initialize();
-
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         const hashBytes = hash.replace('0x', '');
-        // eslint-disable-next-line no-console
         console.log('hashBytes', hashBytes);
-        // eslint-disable-next-line no-console
         console.log('hashBytes', hashBytes.length);
-        const mnemonic = entropyToMnemonic(hashBytes.toString(`hex`));
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        mnemonic = entropyToMnemonic(hashBytes.toString(`hex`));
+
+        // get walletSoftware
+        walletSoftware = await nativeAdapter.pairDevice('testid');
+        await nativeAdapter.initialize();
         // @ts-ignore
         await walletSoftware.loadDevice({ mnemonic });
-        // eslint-disable-next-line no-console
-        console.log('walletSoftware: ', walletSoftware);
-        // eslint-disable-next-line no-console
-        console.log('isInitialized: ', await walletSoftware?.isInitialized());
-        // eslint-disable-next-line no-console
-        console.log('getLabel: ', await walletSoftware?.getLabel());
         const successSoftware = await appInit.pairWallet(walletSoftware);
-        // eslint-disable-next-line no-console
         console.log('successSoftware: ', successSoftware);
         // @ts-ignore
         dispatch({ type: WalletActions.ADD_WALLET, payload: walletSoftware });
       }
 
-      const config: any = {
-        apiKey: serviceKey || 'notSet',
-        pairingInfo: {
-          name: 'ShapeShift',
-          imageUrl: 'https://assets.coincap.io/assets/icons/fox@2x.png',
-          basePath: 'http://localhost:1646/spec/swagger.json',
-          url: 'https://pioneer-template.vercel.com',
-        },
-      };
-      const sdkKeepKey = await KeepKeySdk.create(config);
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      if (!config.apiKey !== serviceKey) {
+      //if NO metamask AND NO KeepKey then generate new seed
+      if(!walletMetaMask && !isKeepkeyAvailable && !walletSoftware){
+        //generate new seed
+        //@TODO
+        alert('No wallets found! unable to continue')
+      } else {
+        //prefure KeepKey
+        let walletPreferred = walletKeepKey || walletMetaMask || walletSoftware
+        // @ts-ignore
+        console.log('walletPreferred: ', walletPreferred.type);
+        // @ts-ignore
+        const api = await appInit.init(walletPreferred);
+        // @ts-ignore
+        dispatch({ type: WalletActions.SET_CONTEXT, payload: walletPreferred.type });
+        // setSetWallets(wallets.push(walletMetaMask))
+        // @ts-ignore
+        dispatch({ type: WalletActions.SET_WALLET, payload: walletMetaMask });
+        // @ts-ignore
+        dispatch({ type: WalletActions.SET_APP, payload: appInit });
+        // @ts-ignore
+        dispatch({ type: WalletActions.SET_API, payload: api });
+        // @ts-ignore
+        const user = await api.User();
+        // eslint-disable-next-line no-console
+        console.log('user: ', user);
+
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        localStorage.setItem('serviceKey', config.apiKey);
+        dispatch({ type: WalletActions.SET_USER, payload: user.data });
+        // setUsername(localStorage.getItem("username"));
+
+        // eslint-disable-next-line no-console
+        console.log('user.data.context: ', user.data.context);
+        //@TODO move context back to lable of wallet not wallet type
+        // setContext(user.data.context);
+        // let context = user.data.context;
+        // let walletContext = user.data.walletDescriptions.filter(context);
+
+        setBlockchainContext(user.data.blockchainContext);
+        setAssetContext(user.data.assetContext);
+        // eslint-disable-next-line no-console
+        // console.log("user: ", user);
       }
 
-      const walletKeepKey = await KkRestAdapter.useKeyring(
-          keyring
-          // @ts-ignore
-      ).pairDevice(sdkKeepKey);
-      // eslint-disable-next-line no-console
-      console.log('walletKeepKey: ', walletKeepKey);
-
-      // pair keepkey
-      const successKeepKey = await appInit.pairWallet(walletKeepKey);
-      // eslint-disable-next-line no-console
-      console.log('successKeepKey: ', successKeepKey);
-      // @ts-ignore
-      dispatch({ type: WalletActions.ADD_WALLET, payload: walletKeepKey });
-      // eslint-disable-next-line no-console
-      // console.log("user: ", user);
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e);

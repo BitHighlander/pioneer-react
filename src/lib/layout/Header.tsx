@@ -1,5 +1,5 @@
 import { CloseIcon, ArrowUpDownIcon } from '@chakra-ui/icons';
-import { CircularProgress, Drawer, DrawerOverlay, DrawerContent, DrawerHeader, DrawerBody, Tabs, TabList, TabPanels, Tab, TabPanel, Avatar, AvatarBadge, Box, Button, Flex, HStack, IconButton, Link, Menu, Image, MenuButton, MenuDivider, Icon, MenuItem, MenuList, Spacer, Text, useDisclosure, Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel, SimpleGrid, Card, CardHeader, Heading, CardBody, CardFooter, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter } from '@chakra-ui/react';
+import { Stack, CircularProgress, Drawer, DrawerOverlay, DrawerContent, DrawerHeader, DrawerBody, Tabs, TabList, TabPanels, Tab, TabPanel, Avatar, AvatarBadge, Box, Button, Flex, HStack, IconButton, Link, Menu, Image, MenuButton, MenuDivider, Icon, MenuItem, MenuList, Spacer, Text, useDisclosure, Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel, SimpleGrid, Card, CardHeader, Heading, CardBody, CardFooter, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton, ModalBody, ModalFooter } from '@chakra-ui/react';
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -82,7 +82,6 @@ const Header = () => {
   const [walletType, setWalletType] = useState('');
   const [walletDescriptions, setWalletDescriptions] = useState([]);
   const [walletsAvailable, setWalletsAvailable] = useState([]);
-  const [balances, setBalances] = useState([]);
   const [metamaskPaired, setMetamaskPaired] = useState(false);
   const [keepkeyPaired, setKeepkeyPaired] = useState(false);
   const [nativePaired, setNativePaired] = useState(false);
@@ -93,7 +92,8 @@ const Header = () => {
   const [assetContextImage, setAssetContextImage] = useState('');
   const [blockchainContext, setBlockchainContext] = useState('');
   const [blockchainContextImage, setBlockchainContextImage] = useState('');
-  // const [pubkeys, setPubkeys] = useState([]);
+  const [pubkeys, setPubkeys] = useState([]);
+  const [balances, setBalances] = useState([]);
   // const [features, setKeepKeyFeatures] = useState({});
 
   const navigate = useNavigate();
@@ -211,15 +211,16 @@ const Header = () => {
         console.log('walletDescriptions: ', walletDescriptions);
         // setWalletsAvailable(walletsAvailable);
         setWalletDescriptions(walletDescriptions);
-        setBalances(balances);
+        // setBalances(balances);
         // eslint-disable-next-line no-console
         console.log('walletsAvailable: ', walletsAvailable);
 
         // eslint-disable-next-line no-console
-        console.log('balances: ', balances);
+        // console.log('balances: ', balances);
 
         // eslint-disable-next-line no-console
         console.log('pubkeys: ', pubkeys);
+        setPubkeys(pubkeys);
       }
     } catch (e) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -281,6 +282,14 @@ const Header = () => {
       navigationDisclosure.onOpen();
     }
   };
+
+  let handleCardClick = async function(pubkey:string){
+    try{
+      console.log(pubkey)
+    }catch(e){
+      console.error(e)
+    }
+  }
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
@@ -436,26 +445,51 @@ const Header = () => {
                     <AccordionItem>
                       <h2>
                         <AccordionButton>
-                          <Box as="span" flex="1" textAlign="left">
-                            Balances {balances.length}
-                          </Box>
+                          {/*<Box as="span" flex="1" textAlign="left">*/}
+                          {/*  Balances {balances.length}*/}
+                          {/*</Box>*/}
                           <AccordionIcon />
                         </AccordionButton>
                       </h2>
                       <AccordionPanel pb={4}>
-                        {balances.map((balance: any) => (
-                            <div>
-                              <Avatar size="sm" src={balance.image} />
-                              <small>symbol: {balance.symbol}</small>
-                              <small>balance: {balance.balance}</small>
-                            </div>
-                        ))}
+                        {/*{balances.map((balance: any) => (*/}
+                        {/*    <div>*/}
+                        {/*      <Avatar size="sm" src={balance.image} />*/}
+                        {/*      <small>symbol: {balance.symbol}</small>*/}
+                        {/*      <small>balance: {balance.balance}</small>*/}
+                        {/*    </div>*/}
+                        {/*))}*/}
                       </AccordionPanel>
                     </AccordionItem>
                   </Accordion>
                 </TabPanel>
                 <TabPanel>
-                  <p>three!</p>
+                  <Accordion defaultIndex={[0]} allowMultiple>
+                    <AccordionItem>
+                      <h2>
+                        <AccordionButton>
+                          <Box as="span" flex="1" textAlign="left">
+                            Pubkeys {pubkeys.length}
+                          </Box>
+                          <AccordionIcon />
+                        </AccordionButton>
+                      </h2>
+                      <AccordionPanel pb={4}>
+                        <Stack spacing="2">
+                        {pubkeys.map((pubkey: any) => (
+                            <Card onClick={() => handleCardClick(pubkey.pubkey)} variant="elevated">
+                              <CardHeader cursor="pointer">
+                                <Heading size="sm">Pubkeys</Heading>
+                              </CardHeader>
+                              <CardBody>
+                                <Text>pubkey: {pubkey.pubkey}</Text>
+                              </CardBody>
+                            </Card>
+                        ))}
+                        </Stack>
+                      </AccordionPanel>
+                    </AccordionItem>
+                  </Accordion>
                 </TabPanel>
               </TabPanels>
             </Tabs>

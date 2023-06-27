@@ -32,7 +32,8 @@
         * https://pioneers.dev/docs/
       Transaction Diagram
         * https://github.com/BitHighlander/pioneer/blob/master/docs/pioneerTxs.png
-  
+
+
 */
 import { KkRestAdapter } from '@keepkey/hdwallet-keepkey-rest';
 import { KeepKeySdk } from '@keepkey/keepkey-sdk';

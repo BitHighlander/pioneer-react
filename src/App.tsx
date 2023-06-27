@@ -6,15 +6,15 @@ import Routings from "lib/router/Routings";
 import { theme } from "lib/styles/theme";
 
 const App = () => (
-  <ChakraProvider theme={theme}>
-      <PioneerProvider>
+    <PioneerProvider>
+      <ChakraProvider theme={theme}>
         <Router>
           <Layout>
             <Routings />
           </Layout>
         </Router>
-      </PioneerProvider>
-  </ChakraProvider>
+      </ChakraProvider>
+    </PioneerProvider>
 );
 
 export default App;

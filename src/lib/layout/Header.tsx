@@ -136,13 +136,15 @@ const Header = () => {
   const [metamaskPaired, setMetamaskPaired] = useState(false);
   const [keepkeyPaired, setKeepkeyPaired] = useState(false);
   const [nativePaired, setNativePaired] = useState(false);
-  const [isPioneer, setIsPioneer] = useState(false);
   const [pioneerImage, setPioneerImage] = useState("");
   const [walletSettingsContext, setWalletSettingsContext] = useState("");
   const [assetContext, setAssetContext] = useState("");
   const [assetContextImage, setAssetContextImage] = useState("");
   const [blockchainContext, setBlockchainContext] = useState("");
   const [blockchainContextImage, setBlockchainContextImage] = useState("");
+  const [isSynced, setIsSynced] = useState(false);
+  const [isPioneer, setIsPioneer] = useState(false);
+  const [isFox, setIsFox] = useState(false);
   const [pubkeys, setPubkeys] = useState([]);
   const [balances, setBalances] = useState([]);
   // const [features, setKeepKeyFeatures] = useState({});
@@ -622,8 +624,14 @@ const Header = () => {
 
             <TabPanels>
               <TabPanel>
-                context: {context}
-                <br />
+                <Card>
+                  <CardBody>
+                    <p>context: {context}</p>
+                    <p>isSynced: {isSynced}</p>
+                    <p>isPioneer: {isPioneer}</p>
+                    <p>isFox: {isFox}</p>
+                  </CardBody>
+                </Card>
               </TabPanel>
               <TabPanel>
                 <Accordion defaultIndex={[0]} allowMultiple>

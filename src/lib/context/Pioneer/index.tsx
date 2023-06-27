@@ -397,11 +397,9 @@ export const PioneerProvider = ({
         console.log("walletPreferred: ", walletPreferred.type);
 
         // get pubkeys
-        const pubkeys = await appInit.getPubkeys(walletPreferred);
-        console.log("pubkeys: ", pubkeys);
-
-        // @ts-ignore
-        const api = await appInit.init(walletKeepKey);
+        // const pubkeys = await appInit.getPubkeys(walletPreferred);
+        // console.log("pubkeys: ", pubkeys);
+        
         // @ts-ignore
         // await appInit.refresh()
         // @ts-ignore
@@ -413,48 +411,56 @@ export const PioneerProvider = ({
         // setSetWallets(wallets.push(walletMetaMask))
         // @ts-ignore
         dispatch({ type: WalletActions.SET_WALLET, payload: walletPreferred });
-        // @ts-ignore
-        dispatch({ type: WalletActions.SET_APP, payload: appInit });
-        // @ts-ignore
-        dispatch({ type: WalletActions.SET_API, payload: api });
 
         // now pair the rest
         // @ts-ignore
-        if (walletKeepKey) {
-          const successKeepKey = await appInit.pairWallet(walletKeepKey);
-          console.log("successKeepKey: ", successKeepKey);
-        }
-        if (walletMetaMask) {
-          const successMetaMask = await appInit.pairWallet(walletMetaMask);
-          console.log("successMetaMask: ", successMetaMask);
-        }
-        // @ts-ignore
-        if (walletSoftware) {
-          const successnative = await appInit.pairWallet(walletSoftware);
-          console.log("successnative: ", successnative);
-        }
+        // if (walletKeepKey) {
+        //   const successKeepKey = await appInit.pairWallet(walletKeepKey);
+        //   console.log("successKeepKey: ", successKeepKey);
+        // }
+        // if (walletMetaMask) {
+        //   const successMetaMask = await appInit.pairWallet(walletMetaMask);
+        //   console.log("successMetaMask: ", successMetaMask);
+        // }
+        // // @ts-ignore
+        // if (walletSoftware) {
+        //   const successnative = await appInit.pairWallet(walletSoftware);
+        //   console.log("successnative: ", successnative);
+        // }
 
         // @ts-ignore
-        const user = await api.User();
-        // eslint-disable-next-line no-console
-        console.log("user: ", user.data);
+        const api = await appInit.init(walletPreferred);
+        console.log("api: ", api);
 
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        dispatch({ type: WalletActions.SET_USER, payload: user.data });
-        // setUsername(localStorage.getItem("username"));
+        if(api){
+          // @ts-ignore
+          dispatch({ type: WalletActions.SET_APP, payload: appInit });
+          // @ts-ignore
+          dispatch({ type: WalletActions.SET_API, payload: api });
+          
+          // @ts-ignore
+          const user = await api.User();
+          // eslint-disable-next-line no-console
+          console.log("user: ", user.data);
 
-        // eslint-disable-next-line no-console
-        console.log("user.data.context: ", user.data.context);
-        // @TODO move context back to lable of wallet not wallet type
-        // setContext(user.data.context);
-        // let context = user.data.context;
-        // let walletContext = user.data.walletDescriptions.filter(context);
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          dispatch({ type: WalletActions.SET_USER, payload: user.data });
+          // setUsername(localStorage.getItem("username"));
 
-        setBlockchainContext(user.data.blockchainContext);
-        setAssetContext(user.data.assetContext);
-        // eslint-disable-next-line no-console
-        // console.log("user: ", user);
+          // eslint-disable-next-line no-console
+          console.log("user.data.context: ", user.data.context);
+          // @TODO move context back to lable of wallet not wallet type
+          // setContext(user.data.context);
+          // let context = user.data.context;
+          // let walletContext = user.data.walletDescriptions.filter(context);
+
+          setBlockchainContext(user.data.blockchainContext);
+          setAssetContext(user.data.assetContext);
+          // eslint-disable-next-line no-console
+          // console.log("user: ", user);  
+        }
       }
     } catch (e) {
       // eslint-disable-next-line no-console

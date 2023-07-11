@@ -260,22 +260,24 @@ export const PioneerProvider = ({
 
       // Example usage
       let walletMetaMask: metaMask.MetaMaskHDWallet | undefined;
-      // if (isMetaMaskAvailable()) {
-      //   walletMetaMask = await metaMaskAdapter.pairDevice();
-      //   if (walletMetaMask) {
-      //     // pair metamask
-      //     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //     // @ts-ignore
-      //     await walletMetaMask.initialize();
-      //     // eslint-disable-next-line no-console
-      //     console.log('walletMetaMask: ', walletMetaMask);
-      //     console.log('ethAddress: ', walletMetaMask.ethAddress);
-      //     // @ts-ignore
-      //     dispatch({type: WalletActions.ADD_WALLET, payload: walletMetaMask});
-      //   }
-      // } else {
-      //   console.log('MetaMask is not available');
-      // }
+      if (isMetaMaskAvailable()) {
+        console.log("isMetaMaskAvailable ")
+        walletMetaMask = await metaMaskAdapter.pairDevice();
+        if (walletMetaMask) {
+          // pair metamask
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          await walletMetaMask.initialize();
+          // eslint-disable-next-line no-console
+          console.log('walletMetaMask: ', walletMetaMask);
+          console.log('ethAddress: ', walletMetaMask.ethAddress);
+          // @ts-ignore
+          dispatch({type: WalletActions.ADD_WALLET, payload: walletMetaMask});
+
+        }
+      } else {
+        console.log('MetaMask is not available');
+      }
 
       const checkKeepkeyAvailability = async () => {
         try {
@@ -418,10 +420,11 @@ export const PioneerProvider = ({
         //   const successKeepKey = await appInit.pairWallet(walletKeepKey);
         //   console.log("successKeepKey: ", successKeepKey);
         // }
-        // if (walletMetaMask) {
-        //   const successMetaMask = await appInit.pairWallet(walletMetaMask);
-        //   console.log("successMetaMask: ", successMetaMask);
-        // }
+        if (walletMetaMask) {
+          console.log("walletMetaMask found: ",walletMetaMask)
+          const successMetaMask = await appInit.pairWallet(walletMetaMask);
+          console.log("successMetaMask: ", successMetaMask);
+        }
         // // @ts-ignore
         // if (walletSoftware) {
         //   const successnative = await appInit.pairWallet(walletSoftware);
@@ -443,6 +446,17 @@ export const PioneerProvider = ({
           const user = await api.User();
           // eslint-disable-next-line no-console
           console.log("user: ", user.data);
+
+          const events = await appInit.startSocket();
+          console.log("events: ", events);
+
+          events.on("message", (event: any) => {
+            console.log("event: ", event);
+          });
+
+          events.on("blocks", (event: any) => {
+            console.log("event: ", event);
+          });
 
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore

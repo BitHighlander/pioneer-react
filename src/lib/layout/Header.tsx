@@ -50,14 +50,18 @@ import {
   ModalBody,
   ModalFooter,
 } from "@chakra-ui/react";
-import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { SetStateAction, useContext, useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 
-import { KeepKeyIcon } from "lib/assets/Icons/KeepKeyIcon";
-import { KeplrIcon } from "lib/assets/Icons/KeplrIcon";
-import { MetaMaskIcon } from "lib/assets/Icons/MetaMaskIcon";
-import { TallyHoIcon } from "lib/assets/Icons/TallyHoIcon";
-import { XDEFIIcon } from "lib/assets/Icons/XDEFIIcon";
+//pubkeys
+import Pubkey from "./Pioneer/Pubkey"
+import Balance from "./Pioneer/Balance"
+
+import {KeepKeyIcon} from "lib/assets/Icons/KeepKeyIcon";
+import {KeplrIcon} from "lib/assets/Icons/KeplrIcon";
+import {MetaMaskIcon} from "lib/assets/Icons/MetaMaskIcon";
+import {TallyHoIcon} from "lib/assets/Icons/TallyHoIcon";
+import {XDEFIIcon} from "lib/assets/Icons/XDEFIIcon";
 
 // import type { ReactNode } from "react";
 // import { KeepKeySdk } from "@keepkey/keepkey-sdk";
@@ -68,7 +72,7 @@ import METAMASK_ICON from "lib/assets/png/metamask.png";
 // @ts-ignore
 import PIONEER_ICON from "lib/assets/png/pioneer.png";
 // import Context from "lib/context";
-import { usePioneer } from "lib/context/Pioneer";
+import {usePioneer} from "lib/context/Pioneer";
 
 const getWalletType = (user: { walletDescriptions: any[] }, context: any) => {
   if (user && user.walletDescriptions) {
@@ -88,13 +92,13 @@ const getWalletBadgeContent = (walletType: string) => {
   const icon = icons[walletType];
 
   if (!icon) {
-    return <div />;
+    return <div/>;
   }
 
   return (
-    <AvatarBadge boxSize="1.25em" bg="green.500">
-      <Image rounded="full" src={icon} />
-    </AvatarBadge>
+      <AvatarBadge boxSize="1.25em" bg="green.500">
+        <Image rounded="full" src={icon}/>
+      </AvatarBadge>
   );
 };
 
@@ -108,15 +112,15 @@ const getWalletSettingsContent = (walletType: string) => {
   const icon = icons[walletType];
 
   if (!icon) {
-    return <div />;
+    return <div/>;
   }
 
   return icon;
 };
 
 const Header = () => {
-  const { state, dispatch } = usePioneer();
-  const { api, user, context, wallets } = state;
+  const {state, dispatch} = usePioneer();
+  const {api, user, context, wallets} = state;
   const [placement, setPlacement] = useState("left");
   // let api = {}
   // const { isOpen, onOpen, onClose } = useDisclosure();
@@ -164,7 +168,7 @@ const Header = () => {
     pubkeysPageNumbers.push(i);
   }
 
-  const handlePubkeysPageClick = (pageNumber) => {
+  const handlePubkeysPageClick = (pageNumber: SetStateAction<number>) => {
     setPubkeysCurrentPage(pageNumber);
   };
 
@@ -288,7 +292,10 @@ const Header = () => {
         console.log("walletsAvailable: ", walletsAvailable);
 
         // eslint-disable-next-line no-console
-        // console.log('balances: ', balances);
+        console.log('balances: ', balances);
+        if(balances){
+          setBalances(balances);
+        }
 
         // eslint-disable-next-line no-console
         console.log("pubkeys: ", pubkeys);
@@ -638,20 +645,18 @@ const Header = () => {
                   <AccordionItem>
                     <h2>
                       <AccordionButton>
-                        {/* <Box as="span" flex="1" textAlign="left"> */}
-                        {/*  Balances {balances.length} */}
-                        {/* </Box> */}
+                         <Box as="span" flex="1" textAlign="left">
+                          Balances {balances.length}
+                         </Box>
                         <AccordionIcon />
                       </AccordionButton>
                     </h2>
                     <AccordionPanel pb={4}>
-                      {/* {balances.map((balance: any) => ( */}
-                      {/*    <div> */}
-                      {/*      <Avatar size="sm" src={balance.image} /> */}
-                      {/*      <small>symbol: {balance.symbol}</small> */}
-                      {/*      <small>balance: {balance.balance}</small> */}
-                      {/*    </div> */}
-                      {/* ))} */}
+                       {balances.map((balance: any) => (
+                          <div>
+                            <Balance balance={balance}></Balance>
+                          </div>
+                       ))}
                     </AccordionPanel>
                   </AccordionItem>
                 </Accordion>
@@ -680,7 +685,7 @@ const Header = () => {
                             <Box display='block' overflowY='scroll'>
                               <Box>
                                 <Text>
-                                  {pubkey.master}
+                                  {pubkey.symbol}: {pubkey.master}
                                 </Text>
                               </Box>
                               <Button

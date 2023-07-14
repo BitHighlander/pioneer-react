@@ -55,7 +55,7 @@ import {useNavigate} from "react-router-dom";
 
 //pubkeys
 import Pubkey from "./Pioneer/Pubkey"
-import Balance from "./Pioneer/Balance"
+import Balances from "./Pioneer/Balances"
 
 import {KeepKeyIcon} from "lib/assets/Icons/KeepKeyIcon";
 import {KeplrIcon} from "lib/assets/Icons/KeplrIcon";
@@ -154,7 +154,7 @@ const Header = () => {
   // const [features, setKeepKeyFeatures] = useState({});
   //pubkeys
   const [pubkeysCurrentPage, setPubkeysCurrentPage] = useState(1);
-  const [pubkeysItemsPerPage] = useState(4); // Number of pubkeys items to display per page
+  const [pubkeysItemsPerPage] = useState(2); // Number of pubkeys items to display per page
   const indexOfLastPubkey = pubkeysCurrentPage * pubkeysItemsPerPage;
   const indexOfFirstPubkey = indexOfLastPubkey - pubkeysItemsPerPage;
   const currentPubkeys = pubkeys.slice(indexOfFirstPubkey, indexOfLastPubkey);
@@ -652,11 +652,12 @@ const Header = () => {
                       </AccordionButton>
                     </h2>
                     <AccordionPanel pb={4}>
-                       {balances.map((balance: any) => (
-                          <div>
-                            <Balance balance={balance}></Balance>
-                          </div>
-                       ))}
+                      <Balances balances={balances}></Balances>                      
+                       {/*{balances.map((balance: any) => (*/}
+                       {/*   <div>*/}
+                       {/*     <Balance balance={balance}></Balance>*/}
+                       {/*   </div>*/}
+                       {/*))}*/}
                     </AccordionPanel>
                   </AccordionItem>
                 </Accordion>

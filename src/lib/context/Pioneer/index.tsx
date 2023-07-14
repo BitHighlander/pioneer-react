@@ -44,6 +44,7 @@ import * as metaMask from "@shapeshiftoss/hdwallet-metamask";
 import type { NativeHDWallet } from "@shapeshiftoss/hdwallet-native";
 import { NativeAdapter } from "@shapeshiftoss/hdwallet-native";
 import { entropyToMnemonic } from "bip39";
+
 import {
   createContext,
   useReducer,
@@ -244,6 +245,7 @@ export const PioneerProvider = ({
       // @ts-ignore
       const spec = import.meta.env.VITE_PIONEER_URL_SPEC ||
         "https://pioneers.dev/spec/swagger.json";
+      console.log("spec: ", spec);
       // @ts-ignore
       const wss = import.meta.env.VITE_PIONEER_URL_WS || "wss://pioneers.dev";
       const configPioneer: any = {
@@ -273,7 +275,6 @@ export const PioneerProvider = ({
           console.log('ethAddress: ', walletMetaMask.ethAddress);
           // @ts-ignore
           dispatch({type: WalletActions.ADD_WALLET, payload: walletMetaMask});
-
         }
       } else {
         console.log('MetaMask is not available');

@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="detecting pioneer!">
-      <change afterPath="$PROJECT_DIR$/src/lib/layout/Pioneer/Balances.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/layout/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/layout/Header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/layout/Pioneer/Balance.tsx" beforeDir="false" />
+    <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="begin balances">
+      <change beforePath="$PROJECT_DIR$/src/lib/layout/Pioneer/Balances.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/layout/Pioneer/Balances.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,7 +145,7 @@
       <workItem from="1688764923525" duration="12000" />
       <workItem from="1688843093331" duration="9173000" />
       <workItem from="1689042047052" duration="6130000" />
-      <workItem from="1689295092192" duration="1992000" />
+      <workItem from="1689295092192" duration="2461000" />
     </task>
     <task id="LOCAL-00001" summary="dark mode">
       <created>1684895216489</created>
@@ -411,7 +406,14 @@
       <option name="project" value="LOCAL" />
       <updated>1689039436540</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="begin balances">
+      <created>1689297233411</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1689297233411</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -453,6 +455,7 @@
     <MESSAGE value="begin pubkeys" />
     <MESSAGE value="pubkey work" />
     <MESSAGE value="detecting pioneer!" />
-    <option name="LAST_COMMIT_MESSAGE" value="detecting pioneer!" />
+    <MESSAGE value="begin balances" />
+    <option name="LAST_COMMIT_MESSAGE" value="begin balances" />
   </component>
 </project>

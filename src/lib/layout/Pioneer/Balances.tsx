@@ -1,5 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { Avatar, AvatarBadge, Box, Button, HStack, Stack, Image } from "@chakra-ui/react";
+import {
+    Avatar,
+    AvatarBadge,
+    Box,
+    Button,
+    HStack,
+    Stack,
+    Image,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalCloseButton,
+    ModalBody,
+    ModalFooter,
+    useDisclosure,
+} from "@chakra-ui/react";
 import { usePioneer } from "lib/context/Pioneer";
 
 interface Balance {
@@ -9,9 +25,17 @@ interface Balance {
     size?: string;
     context?: string; // Added context field
 }
+import Send from './Send';
+import Receive from './Receive';
+import View from './View';
 
+// @ts-ignore
 import KEEPKEY_ICON from "lib/assets/png/keepkey.png";
+
+// @ts-ignore
 import METAMASK_ICON from "lib/assets/png/metamask.png";
+
+// @ts-ignore
 import PIONEER_ICON from "lib/assets/png/pioneer.png";
 
 const getWalletType = (user: { walletDescriptions: any[] }, context: any) => {
@@ -46,6 +70,9 @@ export default function Balances(balances: { balances: Balance[] }) {
     const { state, dispatch } = usePioneer();
     const { user } = state;
     const [currentPage, setCurrentPage] = useState(1);
+    const [selectedBalance, setSelectedBalance] = useState<Balance | null>(null);
+    const [selectedAction, setSelectedAction] = useState<string | null>(null);
+    const { isOpen, onOpen, onClose } = useDisclosure();
     const balancesPerPage = 3;
     const indexOfLastBalance = currentPage * balancesPerPage;
     const indexOfFirstBalance = indexOfLastBalance - balancesPerPage;
@@ -58,16 +85,22 @@ export default function Balances(balances: { balances: Balance[] }) {
         setCurrentPage(pageNumber);
     };
 
-    const handleSendClick = (symbol: string) => {
-        console.log(`Send clicked for balance: ${symbol}`);
+    const handleSendClick = (balance: Balance) => {
+        setSelectedBalance(balance);
+        setSelectedAction('send');
+        onOpen();
     };
 
-    const handleReceiveClick = (symbol: string) => {
-        console.log(`Receive clicked for balance: ${symbol}`);
+    const handleReceiveClick = (balance: Balance) => {
+        setSelectedBalance(balance);
+        setSelectedAction('receive');
+        onOpen();
     };
 
-    const handleViewClick = (symbol: string) => {
-        console.log(`View clicked for balance: ${symbol}`);
+    const handleViewClick = (balance: Balance) => {
+        setSelectedBalance(balance);
+        setSelectedAction('view');
+        onOpen();
     };
 
     useEffect(() => {
@@ -83,6 +116,7 @@ export default function Balances(balances: { balances: Balance[] }) {
                         return {
                             ...balance,
                             context: {
+                                // @ts-ignore
                                 ...balance.context,
                                 badge: badgeContent,
                             },
@@ -105,7 +139,7 @@ export default function Balances(balances: { balances: Balance[] }) {
                     <HStack spacing={4} alignItems="center">
                         <Avatar src={balance.image}>
                             <Box position="relative">
-                                {balance.context && balance.context.badge}
+                                {balance.context && balance.context}
                             </Box>
                         </Avatar>
                         <Box>
@@ -118,21 +152,21 @@ export default function Balances(balances: { balances: Balance[] }) {
                         <Button
                             size="sm"
                             variant="outline"
-                            onClick={() => handleSendClick(balance.symbol)}
+                            onClick={() => handleSendClick(balance)}
                         >
                             Send
                         </Button>
                         <Button
                             size="sm"
                             variant="outline"
-                            onClick={() => handleReceiveClick(balance.symbol)}
+                            onClick={() => handleReceiveClick(balance)}
                         >
                             Receive
                         </Button>
                         <Button
                             size="sm"
                             variant="outline"
-                            onClick={() => handleViewClick(balance.symbol)}
+                            onClick={() => handleViewClick(balance)}
                         >
                             View
                         </Button>
@@ -151,6 +185,44 @@ export default function Balances(balances: { balances: Balance[] }) {
                     </Button>
                 ))}
             </Box>
+
+            <Modal isOpen={isOpen} onClose={onClose} isCentered blockScrollOnMount={true}>
+                <ModalOverlay />
+                <ModalContent>
+                    <ModalHeader>{selectedAction}</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalCloseButton />
+                    {selectedAction === 'send' && (
+                        <div>
+                            <h3>Selected Action: Send</h3>
+                            <p>Selected Asset: {selectedBalance?.symbol}</p>
+                            <Send />
+                            {/* Add additional content for sending */}
+                        </div>
+                    )}
+                    {selectedAction === 'receive' && (
+                        <div>
+                            <h3>Selected Action: Receive</h3>
+                            <p>Selected Asset: {selectedBalance?.symbol}</p>
+                            <Receive />
+                            {/* Add additional content for receiving */}
+                        </div>
+                    )}
+                    {selectedAction === 'view' && (
+                        <div>
+                            <h3>Selected Action: View</h3>
+                            <p>Selected Asset: {selectedBalance?.symbol}</p>
+                            <View />
+                            {/* Add additional content for viewing */}
+                        </div>
+                    )}
+                    <ModalFooter>
+                        <Button colorScheme="blue" onClick={onClose}>
+                            Cancel
+                        </Button>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
         </Stack>
     );
 }

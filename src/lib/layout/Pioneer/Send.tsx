@@ -1,96 +1,95 @@
-import React, { useState } from 'react';
-import { Button, FormControl, FormLabel, Input, Spinner } from '@chakra-ui/react';
+import React, { useState, useEffect } from 'react';
+import { Card, Button, FormControl, FormLabel, Input, Spinner, Avatar } from '@chakra-ui/react';
 import { usePioneer } from "lib/context/Pioneer";
 
-const Send = () => {
+const Send = (Asset:any) => {
     const { state, dispatch } = usePioneer();
     const { user, app, api, wallet } = state;
     const [amount, setAmount] = useState('');
     const [address, setAddress] = useState('');
+    const [balance, setBalance] = useState('');
+    const [blockchain, setBlockchain] = useState('');
+    const [caip, setCaip] = useState(null);
     const [txid, setTxid] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-
-    // const handleSend = () => {
-    //     setIsLoading(true);
-    //     // Simulate sending process
-    //     setTimeout(() => {
-    //         setIsLoading(false);
-    //         window.open('https://example.com', '_blank'); // Open link in a new tab
-    //     }, 2000); // Simulated loading time
-    //
-    //     // TODO: Implement actual sending logic
-    // };
 
     const handleSend = async () => {
         try {
             setIsLoading(true);
-            const ASSET = "DAI";
-            const balance = app.balances.filter((e: any) => e.symbol === ASSET);
-            console.log("balance: ", balance);
-            //@ts-ignore
-            if (!balance) Alert(`No balance for asset ${ASSET}`);
-            const TEST_AMOUNT = amount.toString(); // Use the selected amount
-            // user selects balance to send
-            const selectedBalance = balance[0];
-            console.log("selectedBalance: ", selectedBalance);
-            console.log("selectedBalance.symbol: ", selectedBalance.symbol);
-            console.log("selectedBalance.contract: ", selectedBalance.contract);
-            console.log("selectedBalance.symbol: ", selectedBalance.symbol);
-
+            console.log("Asset: ", Asset.asset);
+            console.log("Address: ", address);
+            console.log("amount: ", amount);
+            const ASSET = Asset.asset.symbol;
             if(!address) alert("Must set an address!")
             if(!amount) alert("Must set an amount!")
-
-            const send = {
-                blockchain: "ethereum",
-                network: "ETH", // eww
-                asset: selectedBalance.symbol,
-                contract: selectedBalance.contract,
-                balance: selectedBalance.balance,
+            const send:any = {
+                blockchain: blockchain,
+                network: Asset.asset.network,
+                asset: Asset.asset.symbol,
+                balance: Asset.asset.balance,
                 address,
                 amount,
                 noBroadcast: false,
             };
-
+            if(Asset.asset.contract) send.contract = Asset.asset.contract;
             const tx = {
                 type: "sendToAddress",
                 payload: send,
             };
-
             console.log("tx: ", tx);
             let invocation = await app.build(tx);
             console.log("invocation: ", invocation);
-
             // sign
             invocation = await app.sign(invocation, wallet);
-            // eslint-disable-next-line no-console
             console.log("invocation: ", invocation);
-
-            // get txid
-            const payload = {
-                noBroadcast: false,
-                sync: true,
-                invocationId: "placeholder",
-            };
-            invocation.broadcast = payload;
-            const resultBroadcast = await app.broadcast(invocation);
-            console.log("resultBroadcast: ", resultBroadcast);
-            console.log("resultBroadcast: ", resultBroadcast.broadcast);
-            console.log("resultBroadcast: ", resultBroadcast.broadcast.txid);
-            if(resultBroadcast.broadcast.txid){
-                setTxid(resultBroadcast.broadcast.txid);
+            invocation.network = ASSET //TODO dont do this bullshit, use caip
+            invocation.noBroadcast = false
+            invocation.sync = true
+            invocation = await app.broadcast(invocation);
+            console.log("invocation: ", invocation);
+            if(invocation && invocation.broadcast && invocation.broadcast.txid){
+                setIsLoading(false);
+                setTxid(invocation.broadcast.txid);
+                //TODO open block explorer link
+                //window.open('https://example.com', '_blank'); // Open link in a new tab
             }
-            console.log("resultBroadcast: ", resultBroadcast.broadcast.success);
-            setIsLoading(false);
-            //TODO open block explorer link
-            //window.open('https://example.com', '_blank'); // Open link in a new tab
 
         } catch (error) {
             console.error(error);
         }
     };
 
+    //onStart get balance of asset
+    //get max amount able to send
+    const onStart = async () => {
+        try {
+            console.log("Asset: ", Asset.asset.caip);
+            console.log("Asset: ", Asset.asset);
+            setCaip(Asset.asset.caip)
+            setBalance(Asset.asset.balance)
+            
+            //get asset by caip
+            let asset = await api.AssetByCaip({caip:Asset.asset.caip})
+            console.log("asset: ",asset.data)
+            console.log("asset: ",asset.data[0].blockchain)
+            setBlockchain(asset.data[0].blockchain)
+            //@ts-ignore
+            if(!asset.data[0].blockchain) Alert("unknown asset! ciap: "+Asset.asset.caip)
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    useEffect(() => {
+        onStart(); // Call the onStart function when the component mounts
+    }, []);
+    
     return (
-        <>
+        <Card>
+            <h2>Balance: {balance}</h2>
+            <Avatar src={Asset.asset.image}></Avatar>
+            <small>caip: {caip}</small>
+            <br/>
             {txid ? (<div>
                 txid: <small> {txid} </small>
                 <Button>view on block explorer</Button>
@@ -104,12 +103,12 @@ const Send = () => {
                     <FormLabel>Address:</FormLabel>
                     <Input value={address} onChange={(e) => setAddress(e.target.value)} />
                 </FormControl>
-            </div>)}
 
-            <Button mt={4} colorScheme="blue" onClick={handleSend}>
-                {isLoading ? <Spinner /> : 'Send'}
-            </Button>
-        </>
+                <Button mt={4} colorScheme="blue" onClick={handleSend}>
+                    {isLoading ? <Spinner /> : 'Send'}
+                </Button>
+            </div>)}
+        </Card>
     );
 };
 

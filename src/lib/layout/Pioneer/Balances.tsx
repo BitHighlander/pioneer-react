@@ -80,7 +80,7 @@ export default function Balances({ balances }: { balances: Balance[] }) {
     const [searchQuery, setSearchQuery] = useState('');
     const balancesPerPage = 3;
 
-    const handlePageChange = (pageNumber: number) => {
+    const handlePageChange = (pageNumber: any) => {
         setCurrentPage(pageNumber);
     };
 

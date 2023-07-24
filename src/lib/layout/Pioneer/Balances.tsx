@@ -79,8 +79,6 @@ export default function Balances({ balances }: { balances: Balance[] }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [searchQuery, setSearchQuery] = useState('');
     const balancesPerPage = 3;
-    const indexOfLastBalance = currentPage * balancesPerPage;
-    const indexOfFirstBalance = indexOfLastBalance - balancesPerPage;
 
     const handlePageChange = (pageNumber: number) => {
         setCurrentPage(pageNumber);
@@ -145,26 +143,55 @@ export default function Balances({ balances }: { balances: Balance[] }) {
     });
 
     const sortedBalances = filteredBalances.sort((a: Balance, b: Balance) => b.balance - a.balance);
-    const currentBalances = sortedBalances.slice(indexOfFirstBalance, indexOfLastBalance);
+    const currentBalances = sortedBalances.slice((currentPage - 1) * balancesPerPage, currentPage * balancesPerPage);
     const totalPages = Math.ceil(filteredBalances.length / balancesPerPage);
+
+    // Function to generate custom pagination array
+    const generatePaginationArray = () => {
+        const paginationArray = [];
+        const totalPageButtons = 5; // Number of page buttons to display around the current page
+
+        if (totalPages <= totalPageButtons) {
+            // If total pages are less than or equal to totalPageButtons, show all page numbers
+            for (let i = 1; i <= totalPages; i++) {
+                paginationArray.push(i);
+            }
+        } else {
+            // If total pages are more than totalPageButtons, generate custom pagination
+            const middleButton = Math.floor(totalPageButtons / 2);
+            const startPage = Math.max(currentPage - middleButton, 1);
+            const endPage = Math.min(currentPage + middleButton, totalPages);
+
+            if (startPage > 1) {
+                // Add the first page and ellipsis if the current page is far enough from the first page
+                paginationArray.push(1, '...');
+            }
+
+            // Add page numbers between startPage and endPage (inclusive)
+            for (let i = startPage; i <= endPage; i++) {
+                paginationArray.push(i);
+            }
+
+            if (endPage < totalPages) {
+                // Add the last page and ellipsis if the current page is far enough from the last page
+                paginationArray.push('...', totalPages);
+            }
+        }
+
+        return paginationArray;
+    };
 
     return (
         <Stack spacing={4}>
-            {/*<input*/}
-            {/*    type="text"*/}
-            {/*    placeholder="Search balances..."*/}
-            {/*    value={searchQuery}*/}
-            {/*    onChange={(e) => setSearchQuery(e.target.value)}*/}
-            {/*/>*/}
             <InputGroup>
                 <InputLeftElement pointerEvents='none'>
                     <Search2Icon color='gray.300' />
                 </InputLeftElement>
                 <Input
                     placeholder='Bitcoin...'
-                       type="text"
+                    type="text"
                     value={searchQuery}
-                       onChange={(e) => setSearchQuery(e.target.value)}
+                    onChange={(e) => setSearchQuery(e.target.value)}
                 />
             </InputGroup>
             {currentBalances.map((balance: Balance, index: number) => (
@@ -203,14 +230,14 @@ export default function Balances({ balances }: { balances: Balance[] }) {
                 </Box>
             ))}
             <Box mt={4}>
-                {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
+                {generatePaginationArray().map((page, index) => (
                     <Button
-                        key={page}
+                        key={index}
                         size="sm"
                         variant={currentPage === page ? "solid" : "outline"}
                         onClick={() => handlePageChange(page)}
                     >
-                        {page}
+                        {page === '...' ? '...' : page}
                     </Button>
                 ))}
             </Box>

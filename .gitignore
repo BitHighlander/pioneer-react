@@ -7,7 +7,7 @@ dist-ssr
 .env
 yarn-error.log*
 .pnpm-debug.log*
-yarn.lock
+
 # TS
 *.tsbuildinfo
 

@@ -63,6 +63,8 @@ import {MetaMaskIcon} from "lib/assets/Icons/MetaMaskIcon";
 import {TallyHoIcon} from "lib/assets/Icons/TallyHoIcon";
 import {XDEFIIcon} from "lib/assets/Icons/XDEFIIcon";
 
+const PROJECT_NAME = "*Your Project Name HERE*";
+
 // import type { ReactNode } from "react";
 // import { KeepKeySdk } from "@keepkey/keepkey-sdk";
 // @ts-ignore
@@ -586,7 +588,7 @@ const Header = () => {
                     )}
                   </Avatar>
                 </CardBody>
-                <small>Pioneer</small>
+                <small>{PROJECT_NAME}</small>
               </Card>
               <Card align="center" onClick={() => setContextWallet("metamask")}>
                 <CardBody>

@@ -68,6 +68,7 @@ export enum WalletActions {
   SET_API = "SET_API",
   SET_APP = "SET_APP",
   SET_WALLET = "SET_WALLET",
+  SET_WALLET_DESCRIPTIONS = "SET_WALLET_DESCRIPTIONS",
   ADD_WALLET = "ADD_WALLET",
   RESET_STATE = "RESET_STATE",
 }
@@ -126,6 +127,7 @@ export type ActionTypes =
   | { type: WalletActions.SET_STATUS; payload: any }
   | { type: WalletActions.SET_USERNAME; payload: string }
   | { type: WalletActions.SET_WALLET; payload: any }
+  | { type: WalletActions.SET_WALLET_DESCRIPTIONS; payload: any }
   | { type: WalletActions.SET_APP; payload: any }
   | { type: WalletActions.SET_API; payload: any }
   | { type: WalletActions.SET_USER; payload: any }
@@ -145,6 +147,8 @@ const reducer = (state: InitialState, action: ActionTypes) => {
       return { ...state, username: action.payload };
     case WalletActions.SET_WALLET:
       return { ...state, wallet: action.payload };
+    case WalletActions.SET_WALLET_DESCRIPTIONS:
+      return { ...state, walletDescriptions: action.payload };
     case WalletActions.ADD_WALLET:
       return { ...state, wallets: [...state.wallets, action.payload] };
     case WalletActions.SET_APP:
@@ -179,7 +183,8 @@ export const PioneerProvider = ({
   const [state, dispatch] = useReducer(reducer, initialState);
   // const [username, setUsername] = useState<string | null>(null);
   // const [context, setContext] = useState<string | null>(null);
-  const [wallets, setSetWallets] = useState([]);
+  const [wallets, setWallets] = useState([]);
+  const [walletDescriptions, setWalletDescriptions] = useState([]);
   const [context, setContext] = useState<string | null>(null);
   const [blockchainContext, setBlockchainContext] = useState<string | null>(
     null
@@ -187,10 +192,6 @@ export const PioneerProvider = ({
   const [assetContext, setAssetContext] = useState<string | null>(null);
   const [isStarting, setIsStarting] = useState(false);
 
-  // connect KeepKey
-
-  // connect metamask
-  console.log("PioneerProvider rendered"); // Add this line
   const onStart = async function () {
     try {
       // eslint-disable-next-line no-console
@@ -198,10 +199,8 @@ export const PioneerProvider = ({
       const serviceKey: string | null = localStorage.getItem("serviceKey"); // KeepKey api key
       let queryKey: string | null = localStorage.getItem("queryKey");
       let username: string | null = localStorage.getItem("username");
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       dispatch({ type: WalletActions.SET_USERNAME, payload: username });
-      // eslint-disable-next-line no-console
       console.log("username: ", username);
 
       interface Window {
@@ -275,6 +274,9 @@ export const PioneerProvider = ({
           console.log('ethAddress: ', walletMetaMask.ethAddress);
           // @ts-ignore
           dispatch({type: WalletActions.ADD_WALLET, payload: walletMetaMask});
+
+          //listen for address chain
+
         }
       } else {
         console.log('MetaMask is not available');
@@ -471,10 +473,17 @@ export const PioneerProvider = ({
           // let context = user.data.context;
           // let walletContext = user.data.walletDescriptions.filter(context);
 
-          setBlockchainContext(user.data.blockchainContext);
-          setAssetContext(user.data.assetContext);
+          //set wallets
+          if (user.data.wallets) setWallets(user.data.wallets);
+          if (user.data.walletDescriptions)
+            setWalletDescriptions(user.data.walletDescriptions);
+
+          if (user.data.blockchainContext)
+            setBlockchainContext(user.data.blockchainContext);
+          if (user.data.assetContext) setAssetContext(user.data.assetContext);
+          if (user.data.context) setContext(user.data.context);
           // eslint-disable-next-line no-console
-          // console.log("user: ", user);  
+          // console.log("user: ", user);
         }
       }
     } catch (e) {

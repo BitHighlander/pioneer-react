@@ -242,16 +242,7 @@ const Header = () => {
       // setKeepKeyError("Bridge is offline!");
     }
   };
-
-  // // onStart()
-  // useEffect(() => {
-  //   setAssetContext(user.assetContext);
-  //   // get images
-  //   // eslint-disable-next-line no-console
-  //   console.log("setAssetContext: USER: ", user);
-  // }, [user, user?.assetContext]); // once on startup
-
-  // onStart()
+  
   useEffect(() => {
     onStart();
   }, [state, state.api]); // once on startup
@@ -326,6 +317,15 @@ const Header = () => {
         // }));
 
         setPubkeys(newPubkeys);
+
+
+        // @ts-ignore
+        window.ethereum.on('accountsChanged', function (accounts:any) {
+          // Time to reload your interface with accounts[0]!
+          console.log('accountsChanged: ', accounts);
+          //TODO register new pubkeys
+        })
+
       }
     } catch (e) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -335,8 +335,7 @@ const Header = () => {
       // setKeepKeyError("Bridge is offline!");
     }
   };
-
-  // onStart()
+  
   useEffect(() => {
     setUser();
   }, [user]); // once on startup
@@ -350,17 +349,6 @@ const Header = () => {
     if (context) {
       console.log("header context: ", context);
       setWalletType(context);
-      // const { wallet, asset, blockchain } = context;
-      // console.log('header context: ', context);
-      // if (wallet) {
-      //   setWalletType(wallet);
-      // }
-      // if (asset) {
-      //   setAssetContext(asset);
-      // }
-      // if (blockchain) {
-      //   setBlockchainContext(blockchain);
-      // }
     }
   }, [context]);
 
@@ -549,7 +537,7 @@ const Header = () => {
       />
       <HStack spacing={8}>
         <Link onClick={handleToHome}>
-          <Box>Pioneer</Box>
+          <Box>{PROJECT_NAME}</Box>
         </Link>
       </HStack>
       <Spacer />
@@ -588,7 +576,7 @@ const Header = () => {
                     )}
                   </Avatar>
                 </CardBody>
-                <small>{PROJECT_NAME}</small>
+                <small>Pioneer</small>
               </Card>
               <Card align="center" onClick={() => setContextWallet("metamask")}>
                 <CardBody>
@@ -636,9 +624,11 @@ const Header = () => {
                 <Card>
                   <CardBody>
                     <p>context: {context}</p>
+                    <p>wallets: {walletDescriptions.length}</p>
                     <p>isSynced: {isSynced}</p>
                     <p>isPioneer: {isPioneer}</p>
                     <p>isFox: {isFox}</p>
+                    <p>totalVaule: {isFox}</p>
                   </CardBody>
                 </Card>
               </TabPanel>

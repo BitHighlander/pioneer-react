@@ -39,7 +39,7 @@ import { KkRestAdapter } from "@keepkey/hdwallet-keepkey-rest";
 import { KeepKeySdk } from "@keepkey/keepkey-sdk";
 import { SDK } from "@pioneer-sdk/sdk";
 import * as core from "@shapeshiftoss/hdwallet-core";
-// import * as keplr from "@shapeshiftoss/hdwallet-keplr";
+//import * as keplr from "@shapeshiftoss/hdwallet-keplr";
 import * as metaMask from "@shapeshiftoss/hdwallet-metamask";
 import type { NativeHDWallet } from "@shapeshiftoss/hdwallet-native";
 import { NativeAdapter } from "@shapeshiftoss/hdwallet-native";

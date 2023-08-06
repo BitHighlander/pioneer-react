@@ -322,7 +322,7 @@ const Header = () => {
 
 
         // @ts-ignore
-        window.ethereum.on('accountsChanged', function (accounts:any) {
+        window.ethereum.on('accountsChanged', async function (accounts:any) {
           // Time to reload your interface with accounts[0]!
           //console.log('accountsChanged: ', accounts);
           //TODO register new pubkeys
@@ -337,7 +337,10 @@ const Header = () => {
               ethAddress:account
             }
             app.pairWallet(wallet)
-            //TODO register new account
+            let context = await app.setContext(wallet)
+            if(i!==0){
+              await app.disconnectWallet(context)
+            }
           }
         })
 

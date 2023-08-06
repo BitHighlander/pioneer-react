@@ -16,9 +16,9 @@ const Send = (Asset:any) => {
     const handleSend = async () => {
         try {
             setIsLoading(true);
-            console.log("Asset: ", Asset.asset);
-            console.log("Address: ", address);
-            console.log("amount: ", amount);
+            //console.log("Asset: ", Asset.asset);
+            //console.log("Address: ", address);
+            //console.log("amount: ", amount);
             const ASSET = Asset.asset.symbol;
             if(!address) alert("Must set an address!")
             if(!amount) alert("Must set an amount!")
@@ -36,17 +36,17 @@ const Send = (Asset:any) => {
                 type: "sendToAddress",
                 payload: send,
             };
-            console.log("tx: ", tx);
+            //console.log("tx: ", tx);
             let invocation = await app.build(tx);
-            console.log("invocation: ", invocation);
+            //console.log("invocation: ", invocation);
             // sign
             invocation = await app.sign(invocation, wallet);
-            console.log("invocation: ", invocation);
+            //console.log("invocation: ", invocation);
             invocation.network = ASSET //TODO dont do this bullshit, use caip
             invocation.noBroadcast = false
             invocation.sync = true
             invocation = await app.broadcast(invocation);
-            console.log("invocation: ", invocation);
+            //console.log("invocation: ", invocation);
             if(invocation && invocation.broadcast && invocation.broadcast.txid){
                 setIsLoading(false);
                 setTxid(invocation.broadcast.txid);
@@ -63,15 +63,15 @@ const Send = (Asset:any) => {
     //get max amount able to send
     const onStart = async () => {
         try {
-            console.log("Asset: ", Asset.asset.caip);
-            console.log("Asset: ", Asset.asset);
+            //console.log("Asset: ", Asset.asset.caip);
+            //console.log("Asset: ", Asset.asset);
             setCaip(Asset.asset.caip)
             setBalance(Asset.asset.balance)
             
             //get asset by caip
             let asset = await api.AssetByCaip({caip:Asset.asset.caip})
-            console.log("asset: ",asset.data)
-            console.log("asset: ",asset.data[0].blockchain)
+            //console.log("asset: ",asset.data)
+            //console.log("asset: ",asset.data[0].blockchain)
             setBlockchain(asset.data[0].blockchain)
             //@ts-ignore
             if(!asset.data[0].blockchain) Alert("unknown asset! ciap: "+Asset.asset.caip)

@@ -107,7 +107,7 @@ export default function Balances({ balances }: { balances: Balance[] }) {
             try {
                 if (user && user.wallets) {
                     const { walletDescriptions, balances } = user;
-                    console.log("walletDescriptions: ", walletDescriptions);
+                    //console.log("walletDescriptions: ", walletDescriptions);
                     const updatedBalances = balances.map((balance: Balance) => {
                         const walletType = getWalletType(user, balance.context);
                         const badgeContent = getWalletBadgeContent(walletType);

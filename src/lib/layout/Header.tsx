@@ -52,10 +52,12 @@ import {
 } from "@chakra-ui/react";
 import { SetStateAction, useContext, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import MiddleEllipsis from './Pioneer/MiddleEllipsis';
 
 //pubkeys
 import Pubkey from "./Pioneer/Pubkey"
 import Balances from "./Pioneer/Balances"
+import Wallets from "./Pioneer/Wallets"
 
 import {KeepKeyIcon} from "lib/assets/Icons/KeepKeyIcon";
 import {KeplrIcon} from "lib/assets/Icons/KeplrIcon";
@@ -122,7 +124,7 @@ const getWalletSettingsContent = (walletType: string) => {
 
 const Header = () => {
   const {state, dispatch} = usePioneer();
-  const {api, user, context, wallets} = state;
+  const {api, app, user, context, wallets} = state;
   const [placement, setPlacement] = useState("left");
   // let api = {}
   // const { isOpen, onOpen, onClose } = useDisclosure();
@@ -178,7 +180,7 @@ const Header = () => {
   const setContextWallet = async function (wallet: string) {
     try {
       // eslint-disable-next-line no-console
-      console.log("wallets: ", wallets);
+      //console.log("wallets: ", wallets);
       const matchedWallet = wallets.find(
         (w: { type: string }) => w.type === wallet
       );
@@ -187,7 +189,7 @@ const Header = () => {
         dispatch({ type: "SET_WALLET", payload: matchedWallet });
         dispatch({ type: "SET_CONTEXT", payload: wallet });
       } else {
-        console.log("No wallet matched the type of the context");
+        //console.log("No wallet matched the type of the context");
         // launch modal
         walletDisclosure.onOpen();
         setWalletSettingsContext(wallet);
@@ -204,7 +206,7 @@ const Header = () => {
   const setContextBlockchain = async function (blockchain: string) {
     try {
       // eslint-disable-next-line no-console
-      console.log("setContextBlockchain: ", blockchain);
+      //console.log("setContextBlockchain: ", blockchain);
     } catch (e) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
@@ -217,7 +219,7 @@ const Header = () => {
   const setContextAsset = async function (asset: string) {
     try {
       // eslint-disable-next-line no-console
-      console.log("setContextAsset: ", asset);
+      //console.log("setContextAsset: ", asset);
     } catch (e) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
@@ -252,7 +254,7 @@ const Header = () => {
       if (user && user.wallets) {
         const { wallets, walletDescriptions, balances, pubkeys } = user;
         // eslint-disable-next-line no-console
-        console.log("wallets: ", wallets);
+        //console.log("wallets: ", wallets);
 
         if (user.isPioneer) {
           setIsPioneer(true);
@@ -277,29 +279,29 @@ const Header = () => {
           walletDescriptions[i] = wallet;
         }
         // eslint-disable-next-line no-console
-        console.log("walletDescriptions: ", walletDescriptions);
+        //console.log("walletDescriptions: ", walletDescriptions);
         // setWalletsAvailable(walletsAvailable);
         setWalletDescriptions(walletDescriptions);
         // setBalances(balances);
         // eslint-disable-next-line no-console
-        console.log("walletsAvailable: ", walletsAvailable);
+        //console.log("walletsAvailable: ", walletsAvailable);
 
         // eslint-disable-next-line no-console
-        console.log('balances: ', balances);
+        //console.log('balances: ', balances);
         if(balances){
           setBalances(balances);
         }
 
         // eslint-disable-next-line no-console
-        console.log("pubkeys: ", pubkeys);
+        //console.log("pubkeys: ", pubkeys);
         let newPubkeys:any = []
-        console.log(user.walletDescriptions)
+        console.log("walletDescriptions: ",user.walletDescriptions)
         for(let i = 0; i < pubkeys.length; i++) {
           let pubkey = pubkeys[i];
           let context = pubkey.context;
-          console.log("context: ", context);
+          //console.log("context: ", context);
           let walletType = walletDescriptions.filter((wallet: { context: any; }) => wallet.context === context)[0]?.type;
-          console.log("walletType: ", walletType);
+          //console.log("walletType: ", walletType);
           const icons:any = {
             metamask: METAMASK_ICON,
             keepkey: KEEPKEY_ICON,
@@ -307,7 +309,7 @@ const Header = () => {
           };
           // @ts-ignore
           let walletImage = icons[walletType];
-          console.log("walletImage: ", walletImage);
+          //console.log("walletImage: ", walletImage);
           pubkey.walletImage = walletImage;
           newPubkeys.push(pubkey)
         }
@@ -322,8 +324,21 @@ const Header = () => {
         // @ts-ignore
         window.ethereum.on('accountsChanged', function (accounts:any) {
           // Time to reload your interface with accounts[0]!
-          console.log('accountsChanged: ', accounts);
+          //console.log('accountsChanged: ', accounts);
           //TODO register new pubkeys
+          let walletsPaired = app.wallets
+          console.log("walletsPaired: ", walletsPaired);
+          for(let i = 0; i < accounts.length; i++) {
+            let account = accounts[i];
+            console.log('account: ', account);
+            //TODO check if account is already registered
+            let wallet = {
+              _isMetaMask: true,
+              ethAddress:account
+            }
+            app.pairWallet(wallet)
+            //TODO register new account
+          }
         })
 
       }
@@ -347,7 +362,7 @@ const Header = () => {
 
   useEffect(() => {
     if (context) {
-      console.log("header context: ", context);
+      //console.log("header context: ", context);
       setWalletType(context);
     }
   }, [context]);
@@ -384,7 +399,7 @@ const Header = () => {
 
   const handleCardClick = async function (pubkey: string) {
     try {
-      console.log(pubkey);
+      //console.log(pubkey);
     } catch (e) {
       console.error(e);
     }
@@ -623,12 +638,13 @@ const Header = () => {
               <TabPanel>
                 <Card>
                   <CardBody>
-                    <p>context: {context}</p>
+                    <p>context: <MiddleEllipsis text={app?.context} /></p>
                     <p>wallets: {walletDescriptions.length}</p>
-                    <p>isSynced: {isSynced}</p>
-                    <p>isPioneer: {isPioneer}</p>
-                    <p>isFox: {isFox}</p>
+                    {/*<p>isSynced: {isSynced}</p>*/}
+                    {/*<p>isPioneer: {isPioneer}</p>*/}
+                    {/*<p>isFox: {isFox}</p>*/}
                     <p>totalVaule: {isFox}</p>
+                    <Wallets wallets={walletDescriptions}></Wallets>
                   </CardBody>
                 </Card>
               </TabPanel>
@@ -644,12 +660,7 @@ const Header = () => {
                       </AccordionButton>
                     </h2>
                     <AccordionPanel pb={4}>
-                      <Balances balances={balances}></Balances>                      
-                       {/*{balances.map((balance: any) => (*/}
-                       {/*   <div>*/}
-                       {/*     <Balance balance={balance}></Balance>*/}
-                       {/*   </div>*/}
-                       {/*))}*/}
+                      <Balances balances={balances}></Balances>
                     </AccordionPanel>
                   </AccordionItem>
                 </Accordion>
@@ -665,12 +676,12 @@ const Header = () => {
                       <Card
                           key={pubkey.pubkey}
                           onClick={() => handleCardClick(pubkey.pubkey)}
-                          variant="elevated"
-                          maxW="sm"
-                          borderWidth="1px"
-                          borderRadius="md"
-                          boxShadow="md"
-                          _hover={{ boxShadow: "lg" }}
+                          // variant="elevated"
+                          // maxW="sm"
+                          // borderWidth="1px"
+                          // borderRadius="md"
+                          // boxShadow="md"
+                          // _hover={{ boxShadow: "lg" }}
                       >
                         <CardBody>
                           <Flex align="center">
@@ -678,7 +689,7 @@ const Header = () => {
                             <Box display='block' overflowY='scroll'>
                               <Box>
                                 <Text>
-                                  {pubkey.symbol}: {pubkey.master}
+                                  {pubkey.symbol}: <br/><MiddleEllipsis text={pubkey?.master} />
                                 </Text>
                               </Box>
                               <Button

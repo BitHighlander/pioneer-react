@@ -2,15 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="project name placeholder">
+      <change afterPath="$PROJECT_DIR$/src/lib/layout/Pioneer/MiddleEllipsis.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/layout/Pioneer/Wallets.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/layout/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/layout/Header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/pages/home/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/pages/home/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/layout/Pioneer/Balances.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/layout/Pioneer/Balances.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/layout/Pioneer/Pubkey.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/layout/Pioneer/Pubkey.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/layout/Pioneer/Send.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/layout/Pioneer/Send.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript JSX File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -157,6 +169,9 @@
       <workItem from="1690849056498" duration="1633000" />
       <workItem from="1690853277159" duration="4032000" />
       <workItem from="1690951462098" duration="1000" />
+      <workItem from="1691172005982" duration="9016000" />
+      <workItem from="1691257688150" duration="10000" />
+      <workItem from="1691288543205" duration="6694000" />
     </task>
     <task id="LOCAL-00001" summary="dark mode">
       <created>1684895216489</created>
@@ -480,7 +495,14 @@
       <option name="project" value="LOCAL" />
       <updated>1690401049895</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="project name placeholder">
+      <created>1691172014675</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1691172014675</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

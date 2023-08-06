@@ -638,12 +638,12 @@ const Header = () => {
               <TabPanel>
                 <Card>
                   <CardBody>
-                    <p>context: <MiddleEllipsis text={app?.context} /></p>
-                    <p>wallets: {walletDescriptions.length}</p>
+                    {/*<p>context: <MiddleEllipsis text={app?.context} /></p>*/}
+                    {/*<p>wallets: {walletDescriptions.length}</p>*/}
                     {/*<p>isSynced: {isSynced}</p>*/}
                     {/*<p>isPioneer: {isPioneer}</p>*/}
                     {/*<p>isFox: {isFox}</p>*/}
-                    <p>totalVaule: {isFox}</p>
+                    {/*<p>totalVaule: {isFox}</p>*/}
                     <Wallets wallets={walletDescriptions}></Wallets>
                   </CardBody>
                 </Card>

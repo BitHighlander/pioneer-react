@@ -5,7 +5,7 @@ const APP_NAME = "Pioneer Template";
 const Meta = () => {
   return (
     <Helmet>
-      <title>Pioneer Template</title>
+      <title>{APP_NAME}</title>
       <meta name="description" content="Pioneer Template" />
 
       <meta name="application-name" content={APP_NAME} />

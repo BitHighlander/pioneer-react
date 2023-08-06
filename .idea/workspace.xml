@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="project name placeholder">
-      <change afterPath="$PROJECT_DIR$/src/lib/layout/Pioneer/MiddleEllipsis.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/layout/Pioneer/Wallets.tsx" afterDir="false" />
+    <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="dashboard work">
+      <change afterPath="$PROJECT_DIR$/src/lib/layout/Pioneer/WalletAdvanced.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/layout/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/layout/Header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/layout/Pioneer/Balances.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/layout/Pioneer/Balances.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/layout/Pioneer/Pubkey.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/layout/Pioneer/Pubkey.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/layout/Pioneer/Send.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/layout/Pioneer/Send.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/layout/Meta.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/layout/Meta.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/layout/Pioneer/Wallets.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/layout/Pioneer/Wallets.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,7 +167,7 @@
       <workItem from="1690951462098" duration="1000" />
       <workItem from="1691172005982" duration="9016000" />
       <workItem from="1691257688150" duration="10000" />
-      <workItem from="1691288543205" duration="6694000" />
+      <workItem from="1691288543205" duration="8430000" />
     </task>
     <task id="LOCAL-00001" summary="dark mode">
       <created>1684895216489</created>
@@ -502,7 +498,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691172014675</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="dashboard work">
+      <created>1691339341387</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1691339341387</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -522,7 +525,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="dark mode" />
     <MESSAGE value="debug build" />
     <MESSAGE value="begin build" />
     <MESSAGE value="begin layout" />
@@ -547,6 +549,7 @@
     <MESSAGE value="begin metamask testing" />
     <MESSAGE value="debug ci" />
     <MESSAGE value="project name placeholder" />
-    <option name="LAST_COMMIT_MESSAGE" value="project name placeholder" />
+    <MESSAGE value="dashboard work" />
+    <option name="LAST_COMMIT_MESSAGE" value="dashboard work" />
   </component>
 </project>

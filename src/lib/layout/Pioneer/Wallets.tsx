@@ -125,7 +125,7 @@ export default function Wallets({ wallets }: { wallets: Wallet[] }) {
 
     return (
         <Stack spacing={4}>
-            <Text fontSize='xl'>Wallets Tracked</Text>
+            {/*<Text fontSize='xl'>Wallets Tracked</Text>*/}
             {currentWallets.map((wallet: Wallet, index: number) => (
                 <Box key={index}>
                     <HStack spacing={4} alignItems="center">

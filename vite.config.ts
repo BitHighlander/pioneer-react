@@ -16,7 +16,7 @@ export default defineConfig(({}) => {
   return {
     // vite config
     define: {
-      'process.env': {},
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     },
     plugins: [react()],
     resolve: {
@@ -72,19 +72,36 @@ export default defineConfig(({}) => {
       }
     },
     build: {
+      outDir: "dist",
       minify: false,
+      lib: {
+        entry: resolve(__dirname, "src/lib/index.tsx"), // Set the entry file of your library
+        name: "PioneerLib", // Set the name of your library
+        fileName: (format) => `my-library.${format}.js` // Set the fileName of your library
+      },
       rollupOptions: {
-        external: [
-          /^node:.*/,
-          ""
-        ],
+        input: {
+          main: resolve(__dirname, "src/index.tsx"),
+        },
+        output: {
+          entryFileNames: 'index.js',
+          chunkFileNames: 'index_[hash].js',
+          assetFileNames: 'index_[hash][extname]',
+          format: "es",
+          globals: {
+            'react': 'React',
+            'react-dom': 'ReactDOM',
+            '@chakra-ui/react': 'Chakra',
+            '@emotion/react': 'emotion'
+          },
+          keepNames: true,
+        },
+        external: ['react', 'react-dom', '@chakra-ui/react', '@emotion/react'],
         plugins: [
-          // inject({ Buffer: ['Buffer','Buffer'], process: ['process'] }),
           NodeGlobalsPolyfillPlugin({
             process: true,
             buffer: true
           }),
-          //NodeModulesPolyfillPlugin()
           rollupNodePolyFill()
         ],
       }

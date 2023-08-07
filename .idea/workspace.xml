@@ -2,10 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="clean up">
+      <change afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Balances.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/MiddleEllipsis.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Pubkey.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Receive.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Send.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/View.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Wallets.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/components/pioneer/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/layout/HeaderOld.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/layout/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/layout/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/layout/Pioneer/WalletAdvanced.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vite.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +55,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/assets" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/lib/components/pioneer" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
@@ -53,11 +64,22 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/lib/components/pioneer" />
       <recent name="$PROJECT_DIR$/public/assets" />
       <recent name="$PROJECT_DIR$/src/lib" />
     </key>
   </component>
   <component name="RunManager" selected="npm.build:turbo">
+    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <configuration name="build:turbo" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -88,16 +110,6 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="lint:turbo" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="lint:turbo" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
     <configuration name="serve" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -110,11 +122,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.dev" />
-        <item itemvalue="npm.lint:fix" />
-        <item itemvalue="npm.lint:turbo" />
         <item itemvalue="npm.build:turbo" />
+        <item itemvalue="npm.dev" />
         <item itemvalue="npm.serve" />
+        <item itemvalue="npm.build" />
+        <item itemvalue="npm.lint:fix" />
       </list>
     </recent_temporary>
   </component>
@@ -168,14 +180,8 @@
       <workItem from="1691257688150" duration="10000" />
       <workItem from="1691288543205" duration="12132000" />
       <workItem from="1691352097196" duration="8772000" />
-      <workItem from="1691364529102" duration="1006000" />
-    </task>
-    <task id="LOCAL-00001" summary="dark mode">
-      <created>1684895216489</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1684895216489</updated>
+      <workItem from="1691364529102" duration="5248000" />
+      <workItem from="1691373384952" duration="4632000" />
     </task>
     <task id="LOCAL-00002" summary="bump node">
       <created>1684896562850</created>
@@ -513,7 +519,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691341296769</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="clean up">
+      <created>1691365539350</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1691365539351</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

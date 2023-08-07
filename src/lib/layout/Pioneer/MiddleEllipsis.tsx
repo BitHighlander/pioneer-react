@@ -1,27 +1,27 @@
-import React from 'react';
+import type React from "react";
 
 interface MiddleEllipsisProps {
-    text: string;
+  text: string;
 }
 
 const MiddleEllipsis: React.FC<MiddleEllipsisProps> = ({ text }) => {
-    const maxLength = 20;
-    const ellipsis = '...';
+  const maxLength = 20;
+  const ellipsis = "...";
 
-    if (!text || text.length <= maxLength) {
-        return <span>{text}</span>;
-    }
+  if (!text || text.length <= maxLength) {
+    return <span>{text}</span>;
+  }
 
-    const frontPart = text.slice(0, 7);
-    const backPart = text.slice(-10);
+  const frontPart = text.slice(0, 7);
+  const backPart = text.slice(-10);
 
-    return (
-        <span>
+  return (
+    <span>
       {frontPart}
-            {ellipsis}
-            {backPart}
+      {ellipsis}
+      {backPart}
     </span>
-    );
+  );
 };
 
 export default MiddleEllipsis;

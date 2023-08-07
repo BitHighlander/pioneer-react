@@ -1,11 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="simplier">
+    <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="begin settings">
+      <change beforePath="$PROJECT_DIR$/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/modals/BlockchainsModal.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/components/modals/SettingsModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/modals/SettingsModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/modals/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/modals/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/modals/WalletModal.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/modals/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Balances.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Balances.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/MiddleEllipsis.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/MiddleEllipsis.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Pubkey.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Pubkey.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Receive.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Receive.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Send.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Send.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/View.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/View.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Wallets.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Wallets.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/components/pioneer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/pioneer/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/utils/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/utils/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/layout/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/layout/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/layout/HeaderOld.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/layout/HeaderOld.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/layout/Pioneer/Balances.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/layout/Pioneer/Balances.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/layout/Pioneer/MiddleEllipsis.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/layout/Pioneer/MiddleEllipsis.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/layout/Pioneer/Pubkey.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/layout/Pioneer/Pubkey.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/layout/Pioneer/Receive.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/layout/Pioneer/Receive.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/layout/Pioneer/Send.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/layout/Pioneer/Send.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/layout/Pioneer/View.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/layout/Pioneer/View.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/layout/Pioneer/Wallets.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/layout/Pioneer/Wallets.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/pages/home/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/pages/home/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,23 +84,13 @@
     </key>
   </component>
   <component name="RunManager" selected="npm.build:turbo">
-    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="build" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
     <configuration name="build:turbo" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
         <script value="build:turbo" />
       </scripts>
-      <node-interpreter value="project" />
+      <node-interpreter value="$USER_HOME$/.nvm/versions/node/v20.1.0/bin/node" />
       <envs />
       <method v="2" />
     </configuration>
@@ -96,17 +110,27 @@
       <scripts>
         <script value="lint:fix" />
       </scripts>
-      <node-interpreter value="project" />
+      <node-interpreter value="$USER_HOME$/.nvm/versions/node/v20.1.0/bin/node" />
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="serve" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+    <configuration name="lint:turbo" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
-        <script value="serve" />
+        <script value="lint:turbo" />
       </scripts>
-      <node-interpreter value="project" />
+      <node-interpreter value="$USER_HOME$/.nvm/versions/node/v20.1.0/bin/node" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="type-check" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="type-check" />
+      </scripts>
+      <node-interpreter value="$USER_HOME$/.nvm/versions/node/v20.1.0/bin/node" />
       <envs />
       <method v="2" />
     </configuration>
@@ -114,8 +138,8 @@
       <list>
         <item itemvalue="npm.dev" />
         <item itemvalue="npm.build:turbo" />
-        <item itemvalue="npm.serve" />
-        <item itemvalue="npm.build" />
+        <item itemvalue="npm.type-check" />
+        <item itemvalue="npm.lint:turbo" />
         <item itemvalue="npm.lint:fix" />
       </list>
     </recent_temporary>
@@ -172,14 +196,7 @@
       <workItem from="1691352097196" duration="8772000" />
       <workItem from="1691364529102" duration="5248000" />
       <workItem from="1691373384952" duration="4632000" />
-      <workItem from="1691422264748" duration="13899000" />
-    </task>
-    <task id="LOCAL-00004" summary="ignore env">
-      <created>1684896979808</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1684896979808</updated>
+      <workItem from="1691422264748" duration="15601000" />
     </task>
     <task id="LOCAL-00005" summary="debug node">
       <created>1684897061370</created>
@@ -517,7 +534,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691438006143</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="begin settings">
+      <created>1691440874059</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1691440874059</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -537,7 +561,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="begin build" />
     <MESSAGE value="begin layout" />
     <MESSAGE value="begin pioneer" />
     <MESSAGE value="pioneer-sdk no pollyfill!" />
@@ -562,6 +585,7 @@
     <MESSAGE value="dashboard work" />
     <MESSAGE value="clean up" />
     <MESSAGE value="simplier" />
-    <option name="LAST_COMMIT_MESSAGE" value="simplier" />
+    <MESSAGE value="begin settings" />
+    <option name="LAST_COMMIT_MESSAGE" value="begin settings" />
   </component>
 </project>

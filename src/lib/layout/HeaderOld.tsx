@@ -50,22 +50,17 @@ import {
   ModalBody,
   ModalFooter,
 } from "@chakra-ui/react";
-import { SetStateAction, useContext, useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
-import MiddleEllipsis from './Pioneer/MiddleEllipsis';
+import type { SetStateAction } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-//pubkeys
-import Pubkey from "./Pioneer/Pubkey"
-import Balances from "./Pioneer/Balances"
-import Wallets from "./Pioneer/Wallets"
+// pubkeys
 
-import {KeepKeyIcon} from "lib/assets/Icons/KeepKeyIcon";
-import {KeplrIcon} from "lib/assets/Icons/KeplrIcon";
-import {MetaMaskIcon} from "lib/assets/Icons/MetaMaskIcon";
-import {TallyHoIcon} from "lib/assets/Icons/TallyHoIcon";
-import {XDEFIIcon} from "lib/assets/Icons/XDEFIIcon";
-
-const PROJECT_NAME = "*Your Project Name HERE*";
+import { KeepKeyIcon } from "lib/assets/Icons/KeepKeyIcon";
+import { KeplrIcon } from "lib/assets/Icons/KeplrIcon";
+import { MetaMaskIcon } from "lib/assets/Icons/MetaMaskIcon";
+import { TallyHoIcon } from "lib/assets/Icons/TallyHoIcon";
+import { XDEFIIcon } from "lib/assets/Icons/XDEFIIcon";
 
 // import type { ReactNode } from "react";
 // import { KeepKeySdk } from "@keepkey/keepkey-sdk";
@@ -76,7 +71,14 @@ import METAMASK_ICON from "lib/assets/png/metamask.png";
 // @ts-ignore
 import PIONEER_ICON from "lib/assets/png/pioneer.png";
 // import Context from "lib/context";
-import {usePioneer} from "lib/context/Pioneer";
+import { usePioneer } from "lib/context/Pioneer";
+
+import Balances from "./Pioneer/Balances";
+import MiddleEllipsis from "./Pioneer/MiddleEllipsis";
+import Pubkey from "./Pioneer/Pubkey";
+import Wallets from "./Pioneer/Wallets";
+
+const PROJECT_NAME = "*Your Project Name HERE*";
 
 const getWalletType = (user: { walletDescriptions: any[] }, context: any) => {
   if (user && user.walletDescriptions) {
@@ -96,13 +98,13 @@ const getWalletBadgeContent = (walletType: string) => {
   const icon = icons[walletType];
 
   if (!icon) {
-    return <div/>;
+    return <div />;
   }
 
   return (
-      <AvatarBadge boxSize="1.25em" bg="green.500">
-        <Image rounded="full" src={icon}/>
-      </AvatarBadge>
+    <AvatarBadge boxSize="1.25em" bg="green.500">
+      <Image rounded="full" src={icon} />
+    </AvatarBadge>
   );
 };
 
@@ -116,15 +118,15 @@ const getWalletSettingsContent = (walletType: string) => {
   const icon = icons[walletType];
 
   if (!icon) {
-    return <div/>;
+    return <div />;
   }
 
   return icon;
 };
 
 const HeaderOld = () => {
-  const {state, dispatch} = usePioneer();
-  const {api, app, user, context, wallets} = state;
+  const { state, dispatch } = usePioneer();
+  const { api, app, user, context, wallets } = state;
   const [placement, setPlacement] = useState("left");
   // let api = {}
   // const { isOpen, onOpen, onClose } = useDisclosure();
@@ -156,7 +158,7 @@ const HeaderOld = () => {
   const [pubkeys, setPubkeys] = useState([]);
   const [balances, setBalances] = useState([]);
   // const [features, setKeepKeyFeatures] = useState({});
-  //pubkeys
+  // pubkeys
   const [pubkeysCurrentPage, setPubkeysCurrentPage] = useState(1);
   const [pubkeysItemsPerPage] = useState(2); // Number of pubkeys items to display per page
   const indexOfLastPubkey = pubkeysCurrentPage * pubkeysItemsPerPage;
@@ -176,11 +178,10 @@ const HeaderOld = () => {
     setPubkeysCurrentPage(pageNumber);
   };
 
-
   const setContextWallet = async function (wallet: string) {
     try {
       // eslint-disable-next-line no-console
-      //console.log("wallets: ", wallets);
+      // console.log("wallets: ", wallets);
       const matchedWallet = wallets.find(
         (w: { type: string }) => w.type === wallet
       );
@@ -189,7 +190,7 @@ const HeaderOld = () => {
         dispatch({ type: "SET_WALLET", payload: matchedWallet });
         dispatch({ type: "SET_CONTEXT", payload: wallet });
       } else {
-        //console.log("No wallet matched the type of the context");
+        // console.log("No wallet matched the type of the context");
         // launch modal
         walletDisclosure.onOpen();
         setWalletSettingsContext(wallet);
@@ -206,7 +207,7 @@ const HeaderOld = () => {
   const setContextBlockchain = async function (blockchain: string) {
     try {
       // eslint-disable-next-line no-console
-      //console.log("setContextBlockchain: ", blockchain);
+      // console.log("setContextBlockchain: ", blockchain);
     } catch (e) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
@@ -219,7 +220,7 @@ const HeaderOld = () => {
   const setContextAsset = async function (asset: string) {
     try {
       // eslint-disable-next-line no-console
-      //console.log("setContextAsset: ", asset);
+      // console.log("setContextAsset: ", asset);
     } catch (e) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
@@ -254,7 +255,7 @@ const HeaderOld = () => {
       if (user && user.wallets) {
         const { wallets, walletDescriptions, balances, pubkeys } = user;
         // eslint-disable-next-line no-console
-        //console.log("wallets: ", wallets);
+        // console.log("wallets: ", wallets);
 
         if (user.isPioneer) {
           setIsPioneer(true);
@@ -279,39 +280,41 @@ const HeaderOld = () => {
           walletDescriptions[i] = wallet;
         }
         // eslint-disable-next-line no-console
-        //console.log("walletDescriptions: ", walletDescriptions);
+        // console.log("walletDescriptions: ", walletDescriptions);
         // setWalletsAvailable(walletsAvailable);
         setWalletDescriptions(walletDescriptions);
         // setBalances(balances);
         // eslint-disable-next-line no-console
-        //console.log("walletsAvailable: ", walletsAvailable);
+        // console.log("walletsAvailable: ", walletsAvailable);
 
         // eslint-disable-next-line no-console
-        //console.log('balances: ', balances);
-        if(balances){
+        // console.log('balances: ', balances);
+        if (balances) {
           setBalances(balances);
         }
 
         // eslint-disable-next-line no-console
-        //console.log("pubkeys: ", pubkeys);
-        let newPubkeys:any = []
-        console.log("walletDescriptions: ",user.walletDescriptions)
-        for(let i = 0; i < pubkeys.length; i++) {
-          let pubkey = pubkeys[i];
-          let context = pubkey.context;
-          //console.log("context: ", context);
-          let walletType = walletDescriptions.filter((wallet: { context: any; }) => wallet.context === context)[0]?.type;
-          //console.log("walletType: ", walletType);
-          const icons:any = {
+        // console.log("pubkeys: ", pubkeys);
+        const newPubkeys: any = [];
+        console.log("walletDescriptions: ", user.walletDescriptions);
+        for (let i = 0; i < pubkeys.length; i++) {
+          const pubkey = pubkeys[i];
+          const { context } = pubkey;
+          // console.log("context: ", context);
+          const walletType = walletDescriptions.filter(
+            (wallet: { context: any }) => wallet.context === context
+          )[0]?.type;
+          // console.log("walletType: ", walletType);
+          const icons: any = {
             metamask: METAMASK_ICON,
             keepkey: KEEPKEY_ICON,
             native: PIONEER_ICON,
           };
           // @ts-ignore
-          let walletImage = icons[walletType];
-          //console.log("walletImage: ", walletImage);
+          const walletImage = icons[walletType];
+          // console.log("walletImage: ", walletImage);
           pubkey.walletImage = walletImage;
-          newPubkeys.push(pubkey)
+          newPubkeys.push(pubkey);
         }
         // const updatedPubkeys = user.pubkeys.map((pubkey: { context: any; }) => ({
         //   ...pubkey,
@@ -320,30 +323,28 @@ const HeaderOld = () => {
 
         setPubkeys(newPubkeys);
 
-
         // @ts-ignore
-        window.ethereum.on('accountsChanged', async function (accounts:any) {
+        window.ethereum.on("accountsChanged", async function (accounts: any) {
           // Time to reload your interface with accounts[0]!
-          //console.log('accountsChanged: ', accounts);
-          //TODO register new pubkeys
-          let walletsPaired = app.wallets
+          // console.log('accountsChanged: ', accounts);
+          // TODO register new pubkeys
+          const walletsPaired = app.wallets;
           console.log("walletsPaired: ", walletsPaired);
-          for(let i = 0; i < accounts.length; i++) {
-            let account = accounts[i];
-            console.log('account: ', account);
-            //TODO check if account is already registered
-            let wallet = {
+          for (let i = 0; i < accounts.length; i++) {
+            const account = accounts[i];
+            console.log("account: ", account);
+            // TODO check if account is already registered
+            const wallet = {
               _isMetaMask: true,
-              ethAddress:account
-            }
-            app.pairWallet(wallet)
-            let context = await app.setContext(wallet)
-            if(i!==0){
-              await app.disconnectWallet(context)
+              ethAddress: account,
+            };
+            app.pairWallet(wallet);
+            const context = await app.setContext(wallet);
+            if (i !== 0) {
+              await app.disconnectWallet(context);
             }
           }
-        })
-
+        });
       }
     } catch (e) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -365,7 +366,7 @@ const HeaderOld = () => {
 
   useEffect(() => {
     if (context) {
-      //console.log("header context: ", context);
+      // console.log("header context: ", context);
       setWalletType(context);
     }
   }, [context]);
@@ -402,13 +403,13 @@ const HeaderOld = () => {
 
   const handleCardClick = async function (pubkey: string) {
     try {
-      //console.log(pubkey);
+      // console.log(pubkey);
     } catch (e) {
       console.error(e);
     }
   };
 
-  const handleCopyClick = async (event:any, address:string) => {
+  const handleCopyClick = async (event: any, address: string) => {
     event.stopPropagation(); // Prevent the card from being clicked
 
     try {
@@ -431,16 +432,16 @@ const HeaderOld = () => {
   }, [copySuccess]);
 
   const renderPubkeysPagination = pubkeysPageNumbers.map((pageNumber) => (
-      <Button
-          key={pageNumber}
-          onClick={() => handlePubkeysPageClick(pageNumber)}
-          colorScheme={pageNumber === pubkeysCurrentPage ? "teal" : "gray"}
-          variant="outline"
-          size="sm"
-          mx="1"
-      >
-        {pageNumber}
-      </Button>
+    <Button
+      key={pageNumber}
+      onClick={() => handlePubkeysPageClick(pageNumber)}
+      colorScheme={pageNumber === pubkeysCurrentPage ? "teal" : "gray"}
+      variant="outline"
+      size="sm"
+      mx="1"
+    >
+      {pageNumber}
+    </Button>
   ));
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -641,13 +642,13 @@ const HeaderOld = () => {
               <TabPanel>
                 <Card>
                   <CardBody>
-                    {/*<p>context: <MiddleEllipsis text={app?.context} /></p>*/}
-                    {/*<p>wallets: {walletDescriptions.length}</p>*/}
-                    {/*<p>isSynced: {isSynced}</p>*/}
-                    {/*<p>isPioneer: {isPioneer}</p>*/}
-                    {/*<p>isFox: {isFox}</p>*/}
-                    {/*<p>totalVaule: {isFox}</p>*/}
-                    <Wallets wallets={walletDescriptions}></Wallets>
+                    {/* <p>context: <MiddleEllipsis text={app?.context} /></p> */}
+                    {/* <p>wallets: {walletDescriptions.length}</p> */}
+                    {/* <p>isSynced: {isSynced}</p> */}
+                    {/* <p>isPioneer: {isPioneer}</p> */}
+                    {/* <p>isFox: {isFox}</p> */}
+                    {/* <p>totalVaule: {isFox}</p> */}
+                    <Wallets wallets={walletDescriptions} />
                   </CardBody>
                 </Card>
               </TabPanel>
@@ -656,14 +657,14 @@ const HeaderOld = () => {
                   <AccordionItem>
                     <h2>
                       <AccordionButton>
-                         <Box as="span" flex="1" textAlign="left">
+                        <Box as="span" flex="1" textAlign="left">
                           Balances {balances.length}
-                         </Box>
+                        </Box>
                         <AccordionIcon />
                       </AccordionButton>
                     </h2>
                     <AccordionPanel pb={4}>
-                      <Balances balances={balances}></Balances>
+                      <Balances balances={balances} />
                     </AccordionPanel>
                   </AccordionItem>
                 </Accordion>
@@ -676,36 +677,43 @@ const HeaderOld = () => {
                 </h2>
                 <Stack spacing="2">
                   {currentPubkeys.map((pubkey: any, index: number) => (
-                      <Card
-                          key={pubkey.pubkey}
-                          onClick={() => handleCardClick(pubkey.pubkey)}
-                          // variant="elevated"
-                          // maxW="sm"
-                          // borderWidth="1px"
-                          // borderRadius="md"
-                          // boxShadow="md"
-                          // _hover={{ boxShadow: "lg" }}
-                      >
-                        <CardBody>
-                          <Flex align="center">
-                            <Avatar size="sm" src={pubkey.walletImage} marginRight="2" />
-                            <Box display='block' overflowY='scroll'>
-                              <Box>
-                                <Text>
-                                  {pubkey.symbol}: <br/><MiddleEllipsis text={pubkey?.master} />
-                                </Text>
-                              </Box>
-                              <Button
-                                  size="xs"
-                                  onClick={(event) => handleCopyClick(event, pubkey.master)}
-                                  marginTop="1"
-                              >
-                                {copySuccess ? "Copied!" : "Copy to Clipboard"}
-                              </Button>
+                    <Card
+                      key={pubkey.pubkey}
+                      onClick={() => handleCardClick(pubkey.pubkey)}
+                      // variant="elevated"
+                      // maxW="sm"
+                      // borderWidth="1px"
+                      // borderRadius="md"
+                      // boxShadow="md"
+                      // _hover={{ boxShadow: "lg" }}
+                    >
+                      <CardBody>
+                        <Flex align="center">
+                          <Avatar
+                            size="sm"
+                            src={pubkey.walletImage}
+                            marginRight="2"
+                          />
+                          <Box display="block" overflowY="scroll">
+                            <Box>
+                              <Text>
+                                {pubkey.symbol}: <br />
+                                <MiddleEllipsis text={pubkey?.master} />
+                              </Text>
                             </Box>
-                          </Flex>
-                        </CardBody>
-                      </Card>
+                            <Button
+                              size="xs"
+                              onClick={(event) =>
+                                handleCopyClick(event, pubkey.master)
+                              }
+                              marginTop="1"
+                            >
+                              {copySuccess ? "Copied!" : "Copy to Clipboard"}
+                            </Button>
+                          </Box>
+                        </Flex>
+                      </CardBody>
+                    </Card>
                   ))}
                 </Stack>
                 {renderPubkeysPagination}

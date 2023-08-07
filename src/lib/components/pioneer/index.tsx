@@ -64,6 +64,7 @@ import { SetStateAction, useContext, useEffect, useState} from "react";
 import Balances from "./Pioneer/Balances"
 import Wallets from "./Pioneer/Wallets"
 import {usePioneer} from "lib/context/Pioneer";
+import SettingsModal from 'lib/components/modals/SettingsModal';
 
 const getWalletType = (user: { walletDescriptions: any[] }, context: any) => {
     if (user && user.walletDescriptions) {
@@ -109,10 +110,8 @@ const getWalletSettingsContent = (walletType: string) => {
 const Pioneer = () => {
     const {state, dispatch} = usePioneer();
     const {api, app, user, context, wallets} = state;
-    //modals
-    const [walletModalOpen, setWalletModalOpen] = useState(false);
-    const [blockchainModalOpen, setBlockchainModalOpen] = useState(false);
-    const [settingsModalOpen, setSettingsModalOpen] = useState(false);
+    const { isOpen, onOpen, onClose } = useDisclosure();
+
     //local
     const [copySuccess, setCopySuccess] = useState(false);
     const [walletType, setWalletType] = useState("");
@@ -132,6 +131,15 @@ const Pioneer = () => {
     const [isFox, setIsFox] = useState(false);
     const [pubkeys, setPubkeys] = useState([]);
     const [balances, setBalances] = useState([]);
+
+    const settingsSelected = async function(){
+        try{
+            console.log("settingsSelected");
+            onOpen()
+        }catch(e){
+            console.error(e)
+        }
+    }
 
     const setContextWallet = async function (wallet: string) {
         try {
@@ -250,12 +258,7 @@ const Pioneer = () => {
         </AvatarBadge>
     );
 
-    const blockchainOptions = ["Blockchain 1", "Blockchain 2", "Blockchain 3"]; // add your options here
-    const contextOptions = ["Context 1", "Context 2", "Context 3"]; // add your options here
-
-
     return (
-        <ModalContext.Provider value={{ walletModalOpen, setWalletModalOpen, blockchainModalOpen, setBlockchainModalOpen, settingsModalOpen, setSettingsModalOpen }}>
         <Menu>
             <MenuButton
                 as={Button}
@@ -289,8 +292,9 @@ const Pioneer = () => {
                         <IconButton
                             icon={<FaCog />}
                             isRound
-                            onClick={() => console.log("Settings Clicked")} // replace with your function
+                            onClick={() => settingsSelected()} // replace with your function
                         />
+                        <SettingsModal isOpen={isOpen} onClose={onClose} />
                     </HStack>
                 </Box>
                 <MenuItem>
@@ -345,31 +349,8 @@ const Pioneer = () => {
                         </Card>
                     </SimpleGrid>
                 </MenuItem>
-                {/*<Tabs>*/}
-                {/*    <TabList>*/}
-                {/*        <Tab>NFTS</Tab>*/}
-                {/*        <Tab>Balances</Tab>*/}
-                {/*        <Tab>History</Tab>*/}
-                {/*    </TabList>*/}
-
-                {/*    <TabPanels>*/}
-                {/*        <TabPanel>*/}
-                {/*            <Card>*/}
-                {/*                <CardBody>*/}
-                {/*                    <Wallets wallets={walletDescriptions}></Wallets>*/}
-                {/*                </CardBody>*/}
-                {/*            </Card>*/}
-                {/*        </TabPanel>*/}
-                {/*        <TabPanel>*/}
-                {/*            <Balances balances={balances}></Balances>*/}
-                {/*        </TabPanel>*/}
-                {/*        <TabPanel>*/}
-                {/*        </TabPanel>*/}
-                {/*    </TabPanels>*/}
-                {/*</Tabs>*/}
             </MenuList>
         </Menu>
-        </ModalContext.Provider>
     );
 };
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
 
 export const ModalContext = React.createContext({
     walletModalOpen: false,
@@ -8,3 +8,28 @@ export const ModalContext = React.createContext({
     settingsModalOpen: false,
     setSettingsModalOpen: (isOpen: boolean) => {},
 });
+
+export const ModalProvider = ({ children }) => {
+    const [walletModalOpen, setWalletModalOpen] = useState(false);
+    const [blockchainModalOpen, setBlockchainModalOpen] = useState(false);
+    const [settingsModalOpen, setSettingsModalOpen] = useState(false);
+
+    const handleSetSettingsModalOpen = useCallback((isOpen: boolean) => {
+        setSettingsModalOpen(isOpen);
+    }, []);
+
+    return (
+        <ModalContext.Provider
+            value={{
+                walletModalOpen,
+                setWalletModalOpen,
+                blockchainModalOpen,
+                setBlockchainModalOpen,
+                settingsModalOpen,
+                setSettingsModalOpen: handleSetSettingsModalOpen,
+            }}
+        >
+            {children}
+        </ModalContext.Provider>
+    );
+};

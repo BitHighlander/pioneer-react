@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="clean up">
-      <change afterPath="$PROJECT_DIR$/src/lib/components/modals/BlockchainsModal.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/modals/SettingsModal.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/modals/WalletModal.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/modals/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/utils/index.tsx" afterDir="false" />
+    <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="simplier">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Balances.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Balances.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/modals/SettingsModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/modals/SettingsModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/modals/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/modals/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/components/pioneer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/pioneer/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/pages/home/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/pages/home/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -179,14 +172,7 @@
       <workItem from="1691352097196" duration="8772000" />
       <workItem from="1691364529102" duration="5248000" />
       <workItem from="1691373384952" duration="4632000" />
-      <workItem from="1691422264748" duration="10765000" />
-    </task>
-    <task id="LOCAL-00003" summary="debug node">
-      <created>1684896952998</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1684896952998</updated>
+      <workItem from="1691422264748" duration="13899000" />
     </task>
     <task id="LOCAL-00004" summary="ignore env">
       <created>1684896979808</created>
@@ -524,7 +510,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691422274258</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="simplier">
+      <created>1691438006143</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1691438006143</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -544,7 +537,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="debug build" />
     <MESSAGE value="begin build" />
     <MESSAGE value="begin layout" />
     <MESSAGE value="begin pioneer" />
@@ -569,6 +561,7 @@
     <MESSAGE value="project name placeholder" />
     <MESSAGE value="dashboard work" />
     <MESSAGE value="clean up" />
-    <option name="LAST_COMMIT_MESSAGE" value="clean up" />
+    <MESSAGE value="simplier" />
+    <option name="LAST_COMMIT_MESSAGE" value="simplier" />
   </component>
 </project>

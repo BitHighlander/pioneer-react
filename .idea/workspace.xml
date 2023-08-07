@@ -2,21 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="clean up">
-      <change afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Balances.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/MiddleEllipsis.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Pubkey.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Receive.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Send.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/View.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Wallets.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/pioneer/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/layout/HeaderOld.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/components/modals/BlockchainsModal.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/components/modals/SettingsModal.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/components/modals/WalletModal.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/components/modals/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/components/utils/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/layout/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/layout/Header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/layout/Pioneer/WalletAdvanced.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vite.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Balances.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Balances.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/pioneer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/pioneer/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/pages/home/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/pages/home/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +51,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/lib/components/pioneer" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/lib/components/modals" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
@@ -64,6 +60,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/lib/components/modals" />
       <recent name="$PROJECT_DIR$/src/lib/components/pioneer" />
       <recent name="$PROJECT_DIR$/public/assets" />
       <recent name="$PROJECT_DIR$/src/lib" />
@@ -96,7 +93,7 @@
       <scripts>
         <script value="dev" />
       </scripts>
-      <node-interpreter value="project" />
+      <node-interpreter value="$USER_HOME$/.nvm/versions/node/v20.1.0/bin/node" />
       <envs />
       <method v="2" />
     </configuration>
@@ -122,8 +119,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.build:turbo" />
         <item itemvalue="npm.dev" />
+        <item itemvalue="npm.build:turbo" />
         <item itemvalue="npm.serve" />
         <item itemvalue="npm.build" />
         <item itemvalue="npm.lint:fix" />
@@ -182,13 +179,7 @@
       <workItem from="1691352097196" duration="8772000" />
       <workItem from="1691364529102" duration="5248000" />
       <workItem from="1691373384952" duration="4632000" />
-    </task>
-    <task id="LOCAL-00002" summary="bump node">
-      <created>1684896562850</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1684896562850</updated>
+      <workItem from="1691422264748" duration="10765000" />
     </task>
     <task id="LOCAL-00003" summary="debug node">
       <created>1684896952998</created>
@@ -526,7 +517,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691365539351</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="clean up">
+      <created>1691422274258</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1691422274258</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

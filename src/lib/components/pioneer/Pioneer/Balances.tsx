@@ -73,16 +73,10 @@ const getWalletBadgeContent = (walletType: string) => {
 export default function Balances({ balances }: { balances: Balance[] }) {
     const { state, dispatch } = usePioneer();
     const { user } = state;
-    const [currentPage, setCurrentPage] = useState(1);
     const [selectedBalance, setSelectedBalance] = useState<Balance | null>(null);
     const [selectedAction, setSelectedAction] = useState<string | null>(null);
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [searchQuery, setSearchQuery] = useState('');
-    const balancesPerPage = 3;
-
-    const handlePageChange = (pageNumber: any) => {
-        setCurrentPage(pageNumber);
-    };
 
     const handleSendClick = (balance: Balance) => {
         setSelectedBalance(balance);
@@ -143,42 +137,11 @@ export default function Balances({ balances }: { balances: Balance[] }) {
     });
 
     const sortedBalances = filteredBalances.sort((a: Balance, b: Balance) => b.balance - a.balance);
-    const currentBalances = sortedBalances.slice((currentPage - 1) * balancesPerPage, currentPage * balancesPerPage);
-    const totalPages = Math.ceil(filteredBalances.length / balancesPerPage);
 
-    // Function to generate custom pagination array
-    const generatePaginationArray = () => {
-        const paginationArray = [];
-        const totalPageButtons = 5; // Number of page buttons to display around the current page
-
-        if (totalPages <= totalPageButtons) {
-            // If total pages are less than or equal to totalPageButtons, show all page numbers
-            for (let i = 1; i <= totalPages; i++) {
-                paginationArray.push(i);
-            }
-        } else {
-            // If total pages are more than totalPageButtons, generate custom pagination
-            const middleButton = Math.floor(totalPageButtons / 2);
-            const startPage = Math.max(currentPage - middleButton, 1);
-            const endPage = Math.min(currentPage + middleButton, totalPages);
-
-            if (startPage > 1) {
-                // Add the first page and ellipsis if the current page is far enough from the first page
-                paginationArray.push(1, '...');
-            }
-
-            // Add page numbers between startPage and endPage (inclusive)
-            for (let i = startPage; i <= endPage; i++) {
-                paginationArray.push(i);
-            }
-
-            if (endPage < totalPages) {
-                // Add the last page and ellipsis if the current page is far enough from the last page
-                paginationArray.push('...', totalPages);
-            }
-        }
-
-        return paginationArray;
+    // CSS for the scrollable container
+    const scrollContainerStyles = {
+        maxHeight: '15em', // This value may need to be adjusted according to your design
+        overflowY: 'scroll',
     };
 
     return (
@@ -194,51 +157,41 @@ export default function Balances({ balances }: { balances: Balance[] }) {
                     onChange={(e) => setSearchQuery(e.target.value)}
                 />
             </InputGroup>
-            {currentBalances.map((balance: Balance, index: number) => (
-                <Box key={index}>
-                    <HStack spacing={4} alignItems="center">
-                        <Avatar src={balance.image}></Avatar>
-                        <Box>
-                            <small>asset: {balance.symbol}</small>
-                            <br />
-                            <small>balance: {balance.balance}</small>
-                        </Box>
-                    </HStack>
-                    <HStack mt={2} spacing={2}>
-                        <Button
-                            size="sm"
-                            variant="outline"
-                            onClick={() => handleSendClick(balance)}
-                        >
-                            Send
-                        </Button>
-                        <Button
-                            size="sm"
-                            variant="outline"
-                            onClick={() => handleReceiveClick(balance)}
-                        >
-                            Receive
-                        </Button>
-                        <Button
-                            size="sm"
-                            variant="outline"
-                            onClick={() => handleViewClick(balance)}
-                        >
-                            View
-                        </Button>
-                    </HStack>
-                </Box>
-            ))}
-            <Box mt={4}>
-                {generatePaginationArray().map((page, index) => (
-                    <Button
-                        key={index}
-                        size="sm"
-                        variant={currentPage === page ? "solid" : "outline"}
-                        onClick={() => handlePageChange(page)}
-                    >
-                        {page === '...' ? '...' : page}
-                    </Button>
+            <Box style={scrollContainerStyles}>
+                {sortedBalances.map((balance: Balance, index: number) => (
+                    <Box key={index}>
+                        <HStack spacing={4} alignItems="center">
+                            <Avatar src={balance.image}></Avatar>
+                            <Box>
+                                <small>asset: {balance.symbol}</small>
+                                <br />
+                                <small>balance: {balance.balance}</small>
+                            </Box>
+                        </HStack>
+                        <HStack mt={2} spacing={2}>
+                            <Button
+                                size="sm"
+                                variant="outline"
+                                onClick={() => handleSendClick(balance)}
+                            >
+                                Send
+                            </Button>
+                            <Button
+                                size="sm"
+                                variant="outline"
+                                onClick={() => handleReceiveClick(balance)}
+                            >
+                                Receive
+                            </Button>
+                            <Button
+                                size="sm"
+                                variant="outline"
+                                onClick={() => handleViewClick(balance)}
+                            >
+                                View
+                            </Button>
+                        </HStack>
+                    </Box>
                 ))}
             </Box>
 

@@ -48,7 +48,9 @@ import {
     ModalCloseButton,
     ModalBody,
     ModalFooter,
+    Select
 } from "@chakra-ui/react";
+import { FaCog } from "react-icons/fa";
 import {KeepKeyIcon} from "lib/assets/Icons/KeepKeyIcon";
 // @ts-ignore
 import KEEPKEY_ICON from "lib/assets/png/keepkey.png";
@@ -56,7 +58,8 @@ import KEEPKEY_ICON from "lib/assets/png/keepkey.png";
 import METAMASK_ICON from "lib/assets/png/metamask.png";
 // @ts-ignore
 import PIONEER_ICON from "lib/assets/png/pioneer.png";
-
+import { MiddleEllipsis } from 'lib/components/utils';
+import { ModalContext } from "lib/components/modals";
 import { SetStateAction, useContext, useEffect, useState} from "react";
 import Balances from "./Pioneer/Balances"
 import Wallets from "./Pioneer/Wallets"
@@ -78,10 +81,6 @@ const getWalletBadgeContent = (walletType: string) => {
     };
 
     const icon = icons[walletType];
-
-    if (!icon) {
-        return <div/>;
-    }
 
     return (
         <AvatarBadge boxSize="1.25em" bg="green.500">
@@ -110,7 +109,11 @@ const getWalletSettingsContent = (walletType: string) => {
 const Pioneer = () => {
     const {state, dispatch} = usePioneer();
     const {api, app, user, context, wallets} = state;
-
+    //modals
+    const [walletModalOpen, setWalletModalOpen] = useState(false);
+    const [blockchainModalOpen, setBlockchainModalOpen] = useState(false);
+    const [settingsModalOpen, setSettingsModalOpen] = useState(false);
+    //local
     const [copySuccess, setCopySuccess] = useState(false);
     const [walletType, setWalletType] = useState("");
     const [walletDescriptions, setWalletDescriptions] = useState([]);
@@ -132,17 +135,20 @@ const Pioneer = () => {
 
     const setContextWallet = async function (wallet: string) {
         try {
+            console.log("setContextWallet: ", wallet);
             // eslint-disable-next-line no-console
-            //console.log("wallets: ", wallets);
+            console.log("wallets: ", wallets);
             const matchedWallet = wallets.find(
                 (w: { type: string }) => w.type === wallet
             );
+            console.log("matchedWallet: ", matchedWallet);
             if (matchedWallet) {
-                dispatch({ type: "SET_WALLET", payload: matchedWallet });
-                dispatch({ type: "SET_CONTEXT", payload: wallet });
+                setWalletType(matchedWallet.type);
+                let context = await app.setContext(matchedWallet);
+                dispatch({ type: "SET_CONTEXT", payload: context });
+                dispatch({ type: "SET_WALLET", payload: wallet });
             } else {
                 console.log("No wallet matched the type of the context");
-
             }
         } catch (e) {
             console.error("header e: ", e);
@@ -157,6 +163,7 @@ const Pioneer = () => {
                 console.log("wallets: ", wallets);
 
                 if (user.isPioneer) {
+                    console.log()
                     setIsPioneer(true);
                     setPioneerImage(user.pioneerImage);
                 }
@@ -217,20 +224,8 @@ const Pioneer = () => {
                     //TODO register new pubkeys
                     let walletsPaired = app.wallets
                     console.log("walletsPaired: ", walletsPaired);
-                    for(let i = 0; i < accounts.length; i++) {
-                        let account = accounts[i];
-                        console.log('account: ', account);
-                        //TODO check if account is already registered
-                        let wallet = {
-                            _isMetaMask: true,
-                            ethAddress:account
-                        }
-                        app.pairWallet(wallet)
-                        let context = await app.setContext(wallet)
-                        if(i!==0){
-                            await app.disconnectWallet(context)
-                        }
-                    }
+                    //re-register metamask with more pubkeys
+                    
                 })
 
             }
@@ -255,14 +250,19 @@ const Pioneer = () => {
         </AvatarBadge>
     );
 
+    const blockchainOptions = ["Blockchain 1", "Blockchain 2", "Blockchain 3"]; // add your options here
+    const contextOptions = ["Context 1", "Context 2", "Context 3"]; // add your options here
+
+
     return (
+        <ModalContext.Provider value={{ walletModalOpen, setWalletModalOpen, blockchainModalOpen, setBlockchainModalOpen, settingsModalOpen, setSettingsModalOpen }}>
         <Menu>
             <MenuButton
                 as={Button}
                 rounded="full"
                 variant="link"
                 cursor="pointer"
-                minW={200}
+                minW={300}
             >
                 <Avatar size="lg">
                     {isPioneer ? (
@@ -277,6 +277,22 @@ const Pioneer = () => {
                 </Avatar>
             </MenuButton>
             <MenuList>
+                <Box borderBottomWidth="1px" p="4">
+                    <HStack justifyContent="space-between">
+                        <Button leftIcon={
+                            <Avatar size="xs" src={getWalletSettingsContent(walletType)}>
+                                <AvatarBadge boxSize="0.75em" bg="green.500" />
+                            </Avatar>
+                        }>
+                            <small><MiddleEllipsis text={app?.context} /></small>
+                        </Button>
+                        <IconButton
+                            icon={<FaCog />}
+                            isRound
+                            onClick={() => console.log("Settings Clicked")} // replace with your function
+                        />
+                    </HStack>
+                </Box>
                 <MenuItem>
                     <SimpleGrid columns={3} row={1}>
                         <Card align="center" onClick={() => setContextWallet("native")}>
@@ -329,30 +345,31 @@ const Pioneer = () => {
                         </Card>
                     </SimpleGrid>
                 </MenuItem>
-                <Tabs>
-                    <TabList>
-                        <Tab>Wallets</Tab>
-                        <Tab>Balances</Tab>
-                        <Tab>History</Tab>
-                    </TabList>
+                {/*<Tabs>*/}
+                {/*    <TabList>*/}
+                {/*        <Tab>NFTS</Tab>*/}
+                {/*        <Tab>Balances</Tab>*/}
+                {/*        <Tab>History</Tab>*/}
+                {/*    </TabList>*/}
 
-                    <TabPanels>
-                        <TabPanel>
-                            <Card>
-                                <CardBody>
-                                    <Wallets wallets={walletDescriptions}></Wallets>
-                                </CardBody>
-                            </Card>
-                        </TabPanel>
-                        <TabPanel>
-                            <Balances balances={balances}></Balances>
-                        </TabPanel>
-                        <TabPanel>
-                        </TabPanel>
-                    </TabPanels>
-                </Tabs>
+                {/*    <TabPanels>*/}
+                {/*        <TabPanel>*/}
+                {/*            <Card>*/}
+                {/*                <CardBody>*/}
+                {/*                    <Wallets wallets={walletDescriptions}></Wallets>*/}
+                {/*                </CardBody>*/}
+                {/*            </Card>*/}
+                {/*        </TabPanel>*/}
+                {/*        <TabPanel>*/}
+                {/*            <Balances balances={balances}></Balances>*/}
+                {/*        </TabPanel>*/}
+                {/*        <TabPanel>*/}
+                {/*        </TabPanel>*/}
+                {/*    </TabPanels>*/}
+                {/*</Tabs>*/}
             </MenuList>
         </Menu>
+        </ModalContext.Provider>
     );
 };
 

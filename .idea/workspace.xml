@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="context switching begin rebuild">
+    <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="context work">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Balances.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Balances.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/components/pioneer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/pioneer/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,14 +174,7 @@
       <workItem from="1691364529102" duration="5248000" />
       <workItem from="1691373384952" duration="4632000" />
       <workItem from="1691422264748" duration="15601000" />
-      <workItem from="1691444510581" duration="10847000" />
-    </task>
-    <task id="LOCAL-00006" summary="debug node">
-      <created>1684897172415</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1684897172415</updated>
+      <workItem from="1691444510581" duration="13061000" />
     </task>
     <task id="LOCAL-00007" summary="debug node">
       <created>1684897986845</created>
@@ -521,7 +512,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691455108776</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="context work">
+      <created>1691461412021</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1691461412021</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -541,7 +539,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="begin pioneer" />
     <MESSAGE value="pioneer-sdk no pollyfill!" />
     <MESSAGE value="pioneer-sdk no pollyfill! WORKING" />
     <MESSAGE value="pioneer-sdk no pollyfill! WORKING FOREAL" />
@@ -566,6 +563,7 @@
     <MESSAGE value="simplier" />
     <MESSAGE value="begin settings" />
     <MESSAGE value="context switching begin rebuild" />
-    <option name="LAST_COMMIT_MESSAGE" value="context switching begin rebuild" />
+    <MESSAGE value="context work" />
+    <option name="LAST_COMMIT_MESSAGE" value="context work" />
   </component>
 </project>

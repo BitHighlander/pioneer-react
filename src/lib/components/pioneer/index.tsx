@@ -160,6 +160,8 @@ const Pioneer = () => {
         console.log("context: ", context);
         console.log("app.context: ", app.context);
         setContext(app.context)
+        console.log("app.pubkeyContext: ", app.pubkeyContext.master || app.pubkeyContext.pubkey);
+        setPubkeyContext(app.pubkeyContext.master || app.pubkeyContext.pubkey)
         dispatch({ type: "SET_CONTEXT", payload: context });
         dispatch({ type: "SET_WALLET", payload: wallet });
       } else {
@@ -248,6 +250,7 @@ const Pioneer = () => {
             console.log("MetaMask is in context")
             let addressMetaMask = accounts[0];
             console.log("addressMetaMask: ", addressMetaMask);
+            setPubkeyContext(addressMetaMask);
             if(addressMetaMask !== app.pubkey){
               //push event
               dispatch({ type: "SET_PUBKEY_CONTEXT", payload: addressMetaMask });

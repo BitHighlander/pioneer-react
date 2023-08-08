@@ -172,8 +172,8 @@ const reducer = (state: InitialState, action: ActionTypes) => {
       return { ...state, app: action.payload };
     case WalletActions.SET_API:
       return { ...state, api: action.payload };
-    case WalletActions.SET_USER:
-      return { ...state, user: action.payload };
+    // case WalletActions.SET_USER:
+    //   return { ...state, user: action.payload };
     case WalletActions.RESET_STATE:
       return {
         ...state,
@@ -415,8 +415,7 @@ export const PioneerProvider = ({
           dispatch({ type: WalletActions.SET_APP, payload: appInit });
           // @ts-ignore
           dispatch({ type: WalletActions.SET_API, payload: api });
-
-
+          
 
           // @ts-ignore
           const user = await api.User();

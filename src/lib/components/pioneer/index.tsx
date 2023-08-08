@@ -124,9 +124,11 @@ const Pioneer = () => {
   const [nativePaired, setNativePaired] = useState(false);
   const [pioneerImage, setPioneerImage] = useState("");
   const [walletSettingsContext, setWalletSettingsContext] = useState("");
+  const [context, setContext] = useState("");
   const [assetContext, setAssetContext] = useState("");
   const [assetContextImage, setAssetContextImage] = useState("");
   const [blockchainContext, setBlockchainContext] = useState("");
+  const [pubkeyContext, setPubkeyContext] = useState("");
   const [blockchainContextImage, setBlockchainContextImage] = useState("");
   const [isSynced, setIsSynced] = useState(false);
   const [isPioneer, setIsPioneer] = useState(false);
@@ -155,6 +157,9 @@ const Pioneer = () => {
       if (matchedWallet) {
         setWalletType(matchedWallet.type);
         const context = await app.setContext(matchedWallet.wallet);
+        console.log("context: ", context);
+        console.log("app.context: ", app.context);
+        setContext(app.context)
         dispatch({ type: "SET_CONTEXT", payload: context });
         dispatch({ type: "SET_WALLET", payload: wallet });
       } else {
@@ -167,19 +172,23 @@ const Pioneer = () => {
 
   const setUser = async function () {
     try {
-      if (user && user.wallets) {
-        const { wallets, walletDescriptions, balances, pubkeys } = user;
+      if (app && app.wallets) {
+        const { wallets, balances, pubkeys, pubkeyContext, assetContext, blockchainContext } = app;
         // eslint-disable-next-line no-console
         console.log("wallets: ", wallets);
+        console.log("pubkeyContext: ", pubkeyContext?.master || pubkeyContext?.pubkey);
+        console.log("blockchainContext: ", blockchainContext);
+        setAssetContext(assetContext);
+        setBlockchainContext(blockchainContext);
+        if(pubkeyContext?.master || pubkeyContext?.pubkey)setPubkeyContext(pubkeyContext?.master || pubkeyContext?.pubkey);
+        // if (user.isPioneer) {
+        //   console.log();
+        //   setIsPioneer(true);
+        //   setPioneerImage(user.pioneerImage);
+        // }
 
-        if (user.isPioneer) {
-          console.log();
-          setIsPioneer(true);
-          setPioneerImage(user.pioneerImage);
-        }
-
-        for (let i = 0; i < walletDescriptions.length; i++) {
-          const wallet = walletDescriptions[i];
+        for (let i = 0; i < wallets.length; i++) {
+          const wallet = wallets[i];
           if (wallet.type === "keepkey") {
             wallet.icon = KeepKeyIcon;
           }
@@ -193,12 +202,10 @@ const Pioneer = () => {
             setNativePaired(true);
           }
           wallet.paired = true;
-          walletDescriptions[i] = wallet;
+          wallets[i] = wallet;
         }
         // eslint-disable-next-line no-console
-        console.log("walletDescriptions: ", walletDescriptions);
-        // setWalletsAvailable(walletsAvailable);
-        setWalletDescriptions(walletDescriptions);
+        console.log("wallets: ", wallets);
         if (balances) {
           setBalances(balances);
         }
@@ -206,12 +213,12 @@ const Pioneer = () => {
         // eslint-disable-next-line no-console
         // console.log("pubkeys: ", pubkeys);
         const newPubkeys: any = [];
-        console.log("walletDescriptions: ", user.walletDescriptions);
+        console.log("walletDescriptions: ", wallets);
         for (let i = 0; i < pubkeys.length; i++) {
           const pubkey = pubkeys[i];
           const { context } = pubkey;
           // console.log("context: ", context);
-          const walletType = walletDescriptions.filter(
+          const walletType = wallets.filter(
             (wallet: { context: any }) => wallet.context === context
           )[0]?.type;
           // console.log("walletType: ", walletType);
@@ -262,7 +269,25 @@ const Pioneer = () => {
 
   useEffect(() => {
     setUser();
-  }, [user]); // once on startup
+  }, [app, app?.wallets, app?.walletDescriptions]); // once on startup
+
+  useEffect(() => {
+    setContext(app?.context);
+  }, [app?.context]); // once on startup
+
+  useEffect(() => {
+    setAssetContext(app?.assetContext?.name);
+  }, [app?.assetContext?.name]); // once on startup
+
+  useEffect(() => {
+    setBlockchainContext(app?.blockchainContext?.name);
+  }, [app?.blockchainContext?.name]); // once on startup
+
+  useEffect(() => {
+    setPubkeyContext(app?.pubkeyContext?.master || app?.pubkeyContext?.pubkey);
+  }, [app?.pubkeyContext?.pubkey]); // once on startup
+  
+
 
   const avatarContent = api ? (
     getWalletBadgeContent(walletType)
@@ -304,7 +329,7 @@ const Pioneer = () => {
               }
             >
               <small>
-                <MiddleEllipsis text={app?.context} />
+                <MiddleEllipsis text={context} />
               </small>
             </Button>
             <IconButton
@@ -316,13 +341,29 @@ const Pioneer = () => {
             <SettingsModal isOpen={isOpen} onClose={onClose} />
           </HStack>
         </Box>
-        <MenuItem>
-          Asset: {app?.asset}
-          <br></br>
-          blockchain: {app?.blockchain}
-            <br></br>
-          Pubkey: {app?.pubkey}
-        </MenuItem>
+        <Box
+            borderWidth="1px"
+            borderRadius="md"
+            p="4"
+            textAlign="left"
+            maxWidth="300px"
+            width="100%"
+        >
+          <Flex justifyContent="space-between">
+            <Box fontWeight="bold">Asset:</Box>
+            <Box textAlign="right">{assetContext}</Box>
+          </Flex>
+          <Flex justifyContent="space-between">
+            <Box fontWeight="bold">Blockchain:</Box>
+            <Box textAlign="right">{blockchainContext}</Box>
+          </Flex>
+          <Flex justifyContent="space-between">
+            <Box fontWeight="bold">Pubkey:</Box>
+            <Box textAlign="right">
+              <MiddleEllipsis text={pubkeyContext} />
+            </Box>
+          </Flex>
+        </Box>
         <MenuItem>
           <SimpleGrid columns={3} row={1}>
             <Card align="center" onClick={() => setContextWallet("native")}>

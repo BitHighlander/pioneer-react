@@ -71,11 +71,34 @@ const getWalletBadgeContent = (walletType: string) => {
 
 export default function Balances({ balances }: { balances: Balance[] }) {
   const { state, dispatch } = usePioneer();
-  const { user } = state;
+  const { api, app, user } = state;
   const [selectedBalance, setSelectedBalance] = useState<Balance | null>(null);
   const [selectedAction, setSelectedAction] = useState<string | null>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSelectClick = async (balance: Balance) => {
+    try{
+      //
+      console.log("balance: ", balance);
+
+      //set Balance
+      let assetFromPioneer = await api.GetAsset({symbol:balance.symbol});
+      assetFromPioneer = assetFromPioneer.data[0];
+      let blockchainFromPioneer = await api.GetBlockchain({symbol:balance.symbol});
+      blockchainFromPioneer = blockchainFromPioneer.data[0]
+      console.log("assetFromPioneer: ", balance);
+      //set Blockchain
+      await app.setBlockchainContext(blockchainFromPioneer)
+      await app.setAssetContext(assetFromPioneer)
+      //set pubkey
+      // await app.setPubkeyContext(balance.context)
+      console.log("app.assetContext: ",app.assetContext)
+      console.log("app.blockchainContext: ",app.blockchainContext)
+    }catch(e){
+      console.error(e)
+    }
+  };
 
   const handleSendClick = (balance: Balance) => {
     setSelectedBalance(balance);
@@ -172,24 +195,31 @@ export default function Balances({ balances }: { balances: Balance[] }) {
                   <Button
                       size="sm"
                       variant="outline"
-                      onClick={() => handleSendClick(balance)}
+                      onClick={() => handleSelectClick(balance)}
                   >
-                    Send
+                    Select
                   </Button>
-                  <Button
-                      size="sm"
-                      variant="outline"
-                      onClick={() => handleReceiveClick(balance)}
-                  >
-                    Receive
-                  </Button>
-                  <Button
-                      size="sm"
-                      variant="outline"
-                      onClick={() => handleViewClick(balance)}
-                  >
-                    View
-                  </Button>
+                  {/*<Button*/}
+                  {/*    size="sm"*/}
+                  {/*    variant="outline"*/}
+                  {/*    onClick={() => handleSendClick(balance)}*/}
+                  {/*>*/}
+                  {/*  Send*/}
+                  {/*</Button>*/}
+                  {/*<Button*/}
+                  {/*    size="sm"*/}
+                  {/*    variant="outline"*/}
+                  {/*    onClick={() => handleReceiveClick(balance)}*/}
+                  {/*>*/}
+                  {/*  Receive*/}
+                  {/*</Button>*/}
+                  {/*<Button*/}
+                  {/*    size="sm"*/}
+                  {/*    variant="outline"*/}
+                  {/*    onClick={() => handleViewClick(balance)}*/}
+                  {/*>*/}
+                  {/*  View*/}
+                  {/*</Button>*/}
                 </HStack>
               </Box>
           ))}

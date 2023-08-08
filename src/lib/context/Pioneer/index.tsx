@@ -60,9 +60,10 @@ export enum WalletActions {
   SET_STATUS = "SET_STATUS",
   SET_USERNAME = "SET_USERNAME",
   SET_USER = "SET_WALLETS",
-  SET_CONTEXT = "SET_CONTEXT",
-  SET_BLOCKCHAIN = "SET_BLOCKCHAIN",
-  SET_ASSET = "SET_ASSET",
+  // SET_WALLET_CONTEXT = "SET_WALLET_CONTEXT",
+  // SET_BLOCKCHAIN_CONTEXT = "SET_BLOCKCHAIN_CONTEXT",
+  // SET_ASSET_CONTEXT = "SET_ASSET_CONTEXT",
+  // SET_PUBKEY_CONTEXT = "SET_PUBKEY_CONTEXT",
   // SET_WALLETS = "SET_WALLETS",
   // SET_WALLET_DESCRIPTIONS = "SET_WALLET_DESCRIPTIONS",
   // INIT_PIONEER = "INIT_PIONEER",
@@ -81,6 +82,9 @@ export interface InitialState {
   serviceKey: string;
   queryKey: string;
   context: string;
+  asset: string;
+  blockchain: string;
+  pubkey: string;
   balances: any[];
   pubkeys: any[];
   wallets: any[];
@@ -100,6 +104,9 @@ const initialState: InitialState = {
   serviceKey: "",
   queryKey: "",
   context: "",
+  asset: "",
+  blockchain: "",
+  pubkey: "",
   balances: [],
   pubkeys: [],
   wallets: [],
@@ -119,7 +126,7 @@ export interface IPioneerContext {
   status: string | null;
   totalValueUsd: number | null;
   user: any;
-  wallet: any;
+  // wallet: any;
   app: any;
   api: any;
 }
@@ -127,12 +134,15 @@ export interface IPioneerContext {
 export type ActionTypes =
   | { type: WalletActions.SET_STATUS; payload: any }
   | { type: WalletActions.SET_USERNAME; payload: string }
-  | { type: WalletActions.SET_WALLET; payload: any }
-  | { type: WalletActions.SET_WALLET_DESCRIPTIONS; payload: any }
+  // | { type: WalletActions.SET_BLOCKCHAIN_CONTEXT; payload: string }
+  // | { type: WalletActions.SET_ASSET_CONTEXT; payload: string }
+  // | { type: WalletActions.SET_PUBKEY_CONTEXT; payload: string }
+  // | { type: WalletActions.SET_WALLET; payload: any }
+  // | { type: WalletActions.SET_WALLET_DESCRIPTIONS; payload: any }
   | { type: WalletActions.SET_APP; payload: any }
   | { type: WalletActions.SET_API; payload: any }
   | { type: WalletActions.SET_USER; payload: any }
-  | { type: WalletActions.SET_CONTEXT; payload: any }
+  // | { type: WalletActions.SET_WALLET_CONTEXT; payload: any }
   | { type: WalletActions.ADD_WALLET; payload: any }
   // | { type: WalletActions.SET_WALLET_DESCRIPTIONS; payload: any }
   // | { type: WalletActions.INIT_PIONEER; payload: boolean }
@@ -142,16 +152,22 @@ const reducer = (state: InitialState, action: ActionTypes) => {
   switch (action.type) {
     case WalletActions.SET_STATUS:
       return { ...state, status: action.payload };
-    case WalletActions.SET_CONTEXT:
-      return { ...state, context: action.payload };
     case WalletActions.SET_USERNAME:
       return { ...state, username: action.payload };
-    case WalletActions.SET_WALLET:
-      return { ...state, wallet: action.payload };
-    case WalletActions.SET_WALLET_DESCRIPTIONS:
-      return { ...state, walletDescriptions: action.payload };
-    case WalletActions.ADD_WALLET:
-      return { ...state, wallets: [...state.wallets, action.payload] };
+    // case WalletActions.SET_WALLET_CONTEXT:
+    //   return { ...state, context: action.payload };
+    // case WalletActions.SET_ASSET_CONTEXT:
+    //   return { ...state, asset: action.payload };
+    // case WalletActions.SET_PUBKEY_CONTEXT:
+    //   return { ...state, pubkey: action.payload };
+    // case WalletActions.SET_BLOCKCHAIN_CONTEXT:
+    //   return { ...state, blockchain: action.payload };
+    // case WalletActions.SET_WALLET:
+    //   return { ...state, wallet: action.payload };
+    // case WalletActions.SET_WALLET_DESCRIPTIONS:
+    //   return { ...state, walletDescriptions: action.payload };
+    // case WalletActions.ADD_WALLET:
+    //   return { ...state, wallets: [...state.wallets, action.payload] };
     case WalletActions.SET_APP:
       return { ...state, app: action.payload };
     case WalletActions.SET_API:
@@ -400,6 +416,8 @@ export const PioneerProvider = ({
           // @ts-ignore
           dispatch({ type: WalletActions.SET_API, payload: api });
 
+
+
           // @ts-ignore
           const user = await api.User();
           // eslint-disable-next-line no-console
@@ -444,9 +462,61 @@ export const PioneerProvider = ({
           if (user.data.walletDescriptions)
             setWalletDescriptions(user.data.walletDescriptions);
 
-          if (user.data.blockchainContext)
-            setBlockchainContext(user.data.blockchainContext);
-          if (user.data.assetContext) setAssetContext(user.data.assetContext);
+          if (user.data.assetContext) {
+            console.log("blockchainContext: ", user.data.blockchainContext);
+            //setAssetContext(user.data.assetContext);
+          }
+          if (user.data.blockchainContext){
+            console.log("blockchainContext: ", user.data.blockchainContext);
+            // @ts-ignore
+            //dispatch({ type: WalletActions.SET_BLOCKCHAIN_CONTEXT, payload: user.data.blockchainContext });
+          }
+
+          //DEFAULT TO ETH ON LOAD
+          setAssetContext("ETH");
+          // @ts-ignore
+          dispatch({ type: WalletActions.SET_ASSET_CONTEXT, payload: "ETH" });
+          // @ts-ignore
+          dispatch({ type: WalletActions.SET_BLOCKCHAIN_CONTEXT, payload: "ethereum" });
+          //set pubkey for chain on context
+          const addressInfo = {
+            addressNList: [2147483692, 2147483708, 2147483648, 0, 0],
+            coin: "Ethereum",
+            scriptType: "ethereum",
+            showDisplay: false,
+          };
+          // @ts-ignore
+          const address = await walletPreferred.ethGetAddress(addressInfo);
+          console.log("address: ", address);
+          // @ts-ignore
+          dispatch({ type: WalletActions.SET_PUBKEY_CONTEXT, payload: address });
+
+          // if (user.data.blockchainContext){
+          //   console.log("blockchainContext: ", user.data.blockchainContext);
+          //   // @ts-ignore
+          //   dispatch({ type: WalletActions.SET_BLOCKCHAIN_CONTEXT, payload: user.data.blockchainContext });
+          // } else {
+          //   // @ts-ignore
+          //   dispatch({ type: WalletActions.SET_BLOCKCHAIN_CONTEXT, payload: "ethereum" });
+          //
+          //   //set pubkey for chain on context
+          //   const addressInfo = {
+          //     addressNList: [2147483692, 2147483708, 2147483648, 0, 0],
+          //     coin: "Ethereum",
+          //     scriptType: "ethereum",
+          //     showDisplay: false,
+          //   };
+          //   // @ts-ignore
+          //   const address = await state.wallet.ethGetAddress(addressInfo);
+          //   console.log("address: ", address);
+          //   // @ts-ignore
+          //   dispatch({ type: WalletActions.SET_PUBKEY_CONTEXT, payload: "address" });
+          // }
+
+
+
+
+
           if (user.data.context) setContext(user.data.context);
           // eslint-disable-next-line no-console
           // //console.log("user: ", user);

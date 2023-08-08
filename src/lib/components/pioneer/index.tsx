@@ -111,7 +111,7 @@ const getWalletSettingsContent = (walletType: string) => {
 
 const Pioneer = () => {
   const { state, dispatch } = usePioneer();
-  const { api, app, user, context, wallets } = state;
+  const { api, app, user } = state;
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   // local
@@ -147,14 +147,14 @@ const Pioneer = () => {
     try {
       console.log("setContextWallet: ", wallet);
       // eslint-disable-next-line no-console
-      console.log("wallets: ", wallets);
-      const matchedWallet = wallets.find(
+      console.log("wallets: ", app.wallets);
+      const matchedWallet = app.wallets.find(
         (w: { type: string }) => w.type === wallet
       );
       console.log("matchedWallet: ", matchedWallet);
       if (matchedWallet) {
         setWalletType(matchedWallet.type);
-        const context = await app.setContext(matchedWallet);
+        const context = await app.setContext(matchedWallet.wallet);
         dispatch({ type: "SET_CONTEXT", payload: context });
         dispatch({ type: "SET_WALLET", payload: wallet });
       } else {
@@ -235,6 +235,19 @@ const Pioneer = () => {
           // TODO register new pubkeys
           const walletsPaired = app.wallets;
           console.log("walletsPaired: ", walletsPaired);
+          console.log("context: ", app?.context);
+          //if context is metamask
+          if(app?.context === 'metamask.wallet.json'){
+            console.log("MetaMask is in context")
+            let addressMetaMask = accounts[0];
+            console.log("addressMetaMask: ", addressMetaMask);
+            if(addressMetaMask !== app.pubkey){
+              //push event
+              dispatch({ type: "SET_PUBKEY_CONTEXT", payload: addressMetaMask });
+            }
+          }
+          //if address[0] !== pubkey
+          
           // re-register metamask with more pubkeys
         });
       }
@@ -303,6 +316,13 @@ const Pioneer = () => {
             <SettingsModal isOpen={isOpen} onClose={onClose} />
           </HStack>
         </Box>
+        <MenuItem>
+          Asset: {app?.asset}
+          <br></br>
+          blockchain: {app?.blockchain}
+            <br></br>
+          Pubkey: {app?.pubkey}
+        </MenuItem>
         <MenuItem>
           <SimpleGrid columns={3} row={1}>
             <Card align="center" onClick={() => setContextWallet("native")}>

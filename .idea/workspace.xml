@@ -2,34 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="begin settings">
-      <change beforePath="$PROJECT_DIR$/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintrc.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/components/modals/AssetModal.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/modals/BlockchainsModal.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/components/modals/SettingsModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/modals/SettingsModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/modals/WalletModal.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/modals/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Balances.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Balances.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/MiddleEllipsis.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/MiddleEllipsis.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Pubkey.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Pubkey.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Receive.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Receive.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Send.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Send.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/View.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/View.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Wallets.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Wallets.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/components/pioneer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/pioneer/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/utils/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/utils/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/layout/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/layout/Header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/layout/HeaderOld.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/layout/HeaderOld.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/layout/Pioneer/Balances.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/layout/Pioneer/Balances.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/layout/Pioneer/MiddleEllipsis.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/layout/Pioneer/MiddleEllipsis.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/layout/Pioneer/Pubkey.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/layout/Pioneer/Pubkey.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/layout/Pioneer/Receive.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/layout/Pioneer/Receive.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/layout/Pioneer/Send.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/layout/Pioneer/Send.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/layout/Pioneer/View.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/layout/Pioneer/View.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/layout/Pioneer/Wallets.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/layout/Pioneer/Wallets.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/pages/home/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/pages/home/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,12 +26,12 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/App.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/index.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/package.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/.gitignore" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/lib/pages/home/index.tsx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/index.tsx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/vercel.json" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/package.json" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -71,7 +49,9 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/lib/components/modals" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path" value="$USER_HOME$/.nvm/versions/node/v20.1.0/bin/node" />
     <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="settings.editor.selected.configurable" value="settings.nodejs" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -197,6 +177,7 @@
       <workItem from="1691364529102" duration="5248000" />
       <workItem from="1691373384952" duration="4632000" />
       <workItem from="1691422264748" duration="15601000" />
+      <workItem from="1691444510581" duration="4379000" />
     </task>
     <task id="LOCAL-00005" summary="debug node">
       <created>1684897061370</created>

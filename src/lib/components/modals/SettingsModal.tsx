@@ -57,23 +57,23 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
         <ModalBody>
           <Tabs>
             <TabList>
-              <Tab>NFTS</Tab>
+              {/*<Tab>NFTS</Tab>*/}
               <Tab>Balances</Tab>
-              <Tab>History</Tab>
+              {/*<Tab>History</Tab>*/}
             </TabList>
 
             <TabPanels>
-              <TabPanel>
-                <Card>
-                  <CardBody>
-                    <Wallets wallets={walletDescriptions} />
-                  </CardBody>
-                </Card>
-              </TabPanel>
+              {/*<TabPanel>*/}
+              {/*  <Card>*/}
+              {/*    <CardBody>*/}
+              {/*      <Wallets wallets={walletDescriptions} />*/}
+              {/*    </CardBody>*/}
+              {/*  </Card>*/}
+              {/*</TabPanel>*/}
               <TabPanel>
                 <Balances balances={balances} />
               </TabPanel>
-              <TabPanel />
+              {/*<TabPanel />*/}
             </TabPanels>
           </Tabs>
         </ModalBody>
@@ -81,7 +81,6 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
           <Button colorScheme="blue" mr={3} onClick={onClose}>
             Close
           </Button>
-          <Button variant="ghost">Secondary Action</Button>
         </ModalFooter>
       </ModalContent>
     </Modal>

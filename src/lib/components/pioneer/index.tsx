@@ -246,7 +246,7 @@ const Pioneer = () => {
           console.log("walletsPaired: ", walletsPaired);
           console.log("context: ", app?.context);
           //if context is metamask
-          if(app?.context === 'metamask.wallet.json'){
+          if(app?.context === 'metamask.wallet'){
             console.log("MetaMask is in context")
             let addressMetaMask = accounts[0];
             console.log("addressMetaMask: ", addressMetaMask);

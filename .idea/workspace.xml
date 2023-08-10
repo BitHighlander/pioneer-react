@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="bump">
+    <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="checkpoint pubkey context switching working!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/pioneer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/pioneer/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/pages/home/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/pages/home/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +22,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/App.tsx" root0="FORCE_HIGHLIGHTING" />
@@ -172,14 +184,7 @@
       <workItem from="1691364529102" duration="5248000" />
       <workItem from="1691373384952" duration="4632000" />
       <workItem from="1691422264748" duration="15601000" />
-      <workItem from="1691444510581" duration="13910000" />
-    </task>
-    <task id="LOCAL-00008" summary="debug node">
-      <created>1684898148664</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1684898148664</updated>
+      <workItem from="1691444510581" duration="27647000" />
     </task>
     <task id="LOCAL-00009" summary="debug build">
       <created>1684898164600</created>
@@ -517,7 +522,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691464946832</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="checkpoint pubkey context switching working!">
+      <created>1691467012026</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1691467012026</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -537,7 +549,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="pioneer-sdk no pollyfill! WORKING" />
     <MESSAGE value="pioneer-sdk no pollyfill! WORKING FOREAL" />
     <MESSAGE value="begin native" />
     <MESSAGE value="add all wallets begin" />
@@ -562,6 +573,7 @@
     <MESSAGE value="context switching begin rebuild" />
     <MESSAGE value="context work" />
     <MESSAGE value="bump" />
-    <option name="LAST_COMMIT_MESSAGE" value="bump" />
+    <MESSAGE value="checkpoint pubkey context switching working!" />
+    <option name="LAST_COMMIT_MESSAGE" value="checkpoint pubkey context switching working!" />
   </component>
 </project>

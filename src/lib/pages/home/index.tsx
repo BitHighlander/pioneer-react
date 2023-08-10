@@ -1,31 +1,26 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
 import { usePioneer } from "lib/context/Pioneer";
-
-import CTASection from "./components/CTASection";
-import SomeImage from "./components/SomeImage";
-import SomeText from "./components/SomeText";
 
 const Home = () => {
   const { state } = usePioneer();
-  const { api, wallet, app } = state;
+  const { api, app, context, assetContext, blockchainContext, pubkeyContext } = state;
+  const [address, setAddress] = useState("");
 
-  const onStart = async function () {
-    try {
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  // useEffect(() => {
-  //     onStart();
-  // }, [api]);
-
-  return (
+  useEffect(() => {
+      console.log("pubkeyContext: ", pubkeyContext);
+      setAddress(pubkeyContext.master || pubkeyContext.pubkey);
+  }, [pubkeyContext]);
+    
+    return (
     <div>
-      <SomeText />
-      <SomeImage />
-      <CTASection />
+        Context: {context}
+        <br />
+        Asset Context: {assetContext?.name}
+        <br />
+        Blockchain Context: {blockchainContext?.name}
+        <br />
+        Address: {pubkeyContext?.master || pubkeyContext?.pubkey}
+        <br />
     </div>
   );
 };

@@ -157,13 +157,15 @@ const Pioneer = () => {
       if (matchedWallet) {
         setWalletType(matchedWallet.type);
         const context = await app.setContext(matchedWallet.wallet);
-        console.log("context: ", context);
+        console.log("result change: ", context);
         console.log("app.context: ", app.context);
         setContext(app.context)
         console.log("app.pubkeyContext: ", app.pubkeyContext.master || app.pubkeyContext.pubkey);
-        setPubkeyContext(app.pubkeyContext.master || app.pubkeyContext.pubkey)
-        dispatch({ type: "SET_CONTEXT", payload: context });
-        dispatch({ type: "SET_WALLET", payload: wallet });
+        let pubkeyContext = app.pubkeyContext.master || app.pubkeyContext.pubkey;
+        setPubkeyContext(pubkeyContext)
+        dispatch({ type: "SET_CONTEXT", payload: app.context });
+        dispatch({ type: "SET_PUBKEY_CONTEXT", payload: app.pubkeyContext });
+        // dispatch({ type: "SET_WALLET", payload: wallet });
       } else {
         console.log("No wallet matched the type of the context");
       }
@@ -244,7 +246,7 @@ const Pioneer = () => {
           // TODO register new pubkeys
           const walletsPaired = app.wallets;
           console.log("walletsPaired: ", walletsPaired);
-          console.log("context: ", app?.context);
+          console.log("pioneer context: ", app?.context);
           //if context is metamask
           if(app?.context === 'metamask.wallet'){
             console.log("MetaMask is in context")
@@ -253,7 +255,11 @@ const Pioneer = () => {
             setPubkeyContext(addressMetaMask);
             if(addressMetaMask !== app.pubkey){
               //push event
-              dispatch({ type: "SET_PUBKEY_CONTEXT", payload: addressMetaMask });
+              let pubkeyContext = app.pubkeyContext
+              pubkeyContext.pubkey = addressMetaMask;
+              pubkeyContext.master = addressMetaMask;
+              pubkeyContext.address = addressMetaMask;
+              dispatch({ type: "SET_PUBKEY_CONTEXT", payload: pubkeyContext });
             }
           }
           //if address[0] !== pubkey
@@ -275,18 +281,22 @@ const Pioneer = () => {
   }, [app, app?.wallets, app?.walletDescriptions]); // once on startup
 
   useEffect(() => {
+    dispatch({ type: "SET_CONTEXT", payload: context });
     setContext(app?.context);
   }, [app?.context]); // once on startup
 
   useEffect(() => {
+    dispatch({ type: "SET_ASSET_CONTEXT", payload: app?.assetContext });
     setAssetContext(app?.assetContext?.name);
   }, [app?.assetContext?.name]); // once on startup
 
   useEffect(() => {
+    dispatch({ type: "SET_BLOCKCHAIN_CONTEXT", payload: app?.blockchainContext });
     setBlockchainContext(app?.blockchainContext?.name);
   }, [app?.blockchainContext?.name]); // once on startup
 
   useEffect(() => {
+    dispatch({ type: "SET_PUBKEYS_CONTEXT", payload: app?.pubkeyContext });
     setPubkeyContext(app?.pubkeyContext?.master || app?.pubkeyContext?.pubkey);
   }, [app?.pubkeyContext?.pubkey]); // once on startup
   

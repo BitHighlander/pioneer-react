@@ -288,11 +288,11 @@ export const PioneerProvider = ({
             KkRestAdapter.useKeyring(keyring).pairDevice(sdkKeepKey),
             timeout(30000),
           ]);
-          // pair keepkey
-          const successKeepKey = await appInit.pairWallet(walletKeepKey);
-          console.log("successKeepKey: ", successKeepKey);
-          //@ts-ignore
-          dispatch({ type: WalletActions.ADD_WALLET, payload: walletKeepKey });
+          // // pair keepkey
+          // const successKeepKey = await appInit.pairWallet(walletKeepKey);
+          // console.log("successKeepKey: ", successKeepKey);
+          // //@ts-ignore
+          // dispatch({ type: WalletActions.ADD_WALLET, payload: walletKeepKey });
         } catch (error) {
           //@ts-ignore
           console.error("Error or Timeout:", error.message);
@@ -378,7 +378,9 @@ export const PioneerProvider = ({
         dispatch({ type: WalletActions.SET_WALLET, payload: walletPreferred });
 
         // @ts-ignore
-        const api = await appInit.init(walletPreferred);
+        console.log("***** walletMetaMask: ", walletMetaMask);
+        const api = await appInit.init(walletMetaMask);
+        console.log("api: ",api)
         //@ts-ignore
         if (api) {
           // @ts-ignore
@@ -390,7 +392,7 @@ export const PioneerProvider = ({
           // @ts-ignore
           const user = await api.User();
           // eslint-disable-next-line no-console
-          // console.log("user: ", user.data);
+          console.log("user: ", user.data);
 
           if (walletMetaMask) {
             console.log("walletMetaMask found: ", walletMetaMask);

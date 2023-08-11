@@ -126,7 +126,7 @@ export default function Wallets({ wallets }: { wallets: Wallet[] }) {
 
   return (
     <Stack spacing={4}>
-      {/* <Text fontSize='xl'>Wallets Tracked</Text> */}
+       <Text fontSize='xl'>All paired wallets</Text>
       {currentWallets.map((wallet: Wallet, index: number) => (
         <Box key={index}>
           <HStack spacing={4} alignItems="center">
@@ -136,11 +136,11 @@ export default function Wallets({ wallets }: { wallets: Wallet[] }) {
                 Context: <MiddleEllipsis text={wallet?.context} />
               </small>
               <br />
-              <small>Type: {wallet.type}</small>
+              <small>Type: {wallet?.type}</small>
               <br />
-              <small>Value (USD): {wallet.valueUsdContext}</small>
+              <small>Value (USD): {wallet?.valueUsdContext}</small>
               <br />
-              <small>Paired: {wallet.paired ? "Yes" : "No"}</small>
+              <small>Paired: {wallet?.paired ? "Yes" : "No"}</small>
               <br />
             </Box>
           </HStack>

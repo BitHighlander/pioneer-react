@@ -2,11 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="checkpoint pubkey context switching working!">
+      <change afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Paths.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Pubkeys.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/pioneer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/pioneer/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/modals/AssetModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/modals/AssetModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/modals/SettingsModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/modals/SettingsModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Wallets.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Wallets.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/pages/home/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/pages/home/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,14 +187,8 @@
       <workItem from="1691364529102" duration="5248000" />
       <workItem from="1691373384952" duration="4632000" />
       <workItem from="1691422264748" duration="15601000" />
-      <workItem from="1691444510581" duration="27647000" />
-    </task>
-    <task id="LOCAL-00009" summary="debug build">
-      <created>1684898164600</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1684898164600</updated>
+      <workItem from="1691444510581" duration="29880000" />
+      <workItem from="1691712352419" duration="8787000" />
     </task>
     <task id="LOCAL-00010" summary="dark mode">
       <created>1684898655138</created>
@@ -529,7 +526,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691467012026</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="checkpoint pubkey context switching working!">
+      <created>1691629580923</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1691629580923</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -47,7 +47,7 @@ const AssetModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
     }, [user]); // once on startup
 
     return (
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal isOpen={isOpen} onClose={onClose} size="xl">
             <ModalOverlay />
             <ModalContent>
                 <ModalHeader>Asset Select</ModalHeader>

@@ -52,7 +52,7 @@ import {
 } from "@chakra-ui/react";
 import { SetStateAction, useContext, useEffect, useState } from "react";
 import { FaCog } from "react-icons/fa";
-
+import { Img } from "react-image";
 import { KeepKeyIcon } from "lib/assets/Icons/KeepKeyIcon";
 // @ts-ignore
 import KEEPKEY_ICON from "lib/assets/png/keepkey.png";
@@ -287,12 +287,14 @@ const Pioneer = () => {
 
   useEffect(() => {
     dispatch({ type: "SET_ASSET_CONTEXT", payload: app?.assetContext });
-    setAssetContext(app?.assetContext?.name);
+    setAssetContext(app?.assetContext?.symbol);
+    console.log(app?.assetContext)
   }, [app?.assetContext?.name]); // once on startup
 
   useEffect(() => {
     dispatch({ type: "SET_BLOCKCHAIN_CONTEXT", payload: app?.blockchainContext });
     setBlockchainContext(app?.blockchainContext?.name);
+    console.log(app?.blockchainContext)
   }, [app?.blockchainContext?.name]); // once on startup
 
   useEffect(() => {
@@ -362,21 +364,91 @@ const Pioneer = () => {
             maxWidth="300px"
             width="100%"
         >
-          <Flex justifyContent="space-between">
-            <Box fontWeight="bold">Asset:</Box>
-            <Box textAlign="right">{assetContext}</Box>
-          </Flex>
-          <Flex justifyContent="space-between">
-            <Box fontWeight="bold">Blockchain:</Box>
-            <Box textAlign="right">{blockchainContext}</Box>
-          </Flex>
-          <Flex justifyContent="space-between">
-            <Box fontWeight="bold">Pubkey:</Box>
-            <Box textAlign="right">
-              <MiddleEllipsis text={pubkeyContext} />
-            </Box>
-          </Flex>
+          <div>
+            {/* Asset Card */}
+            <Card p={2} borderRadius="md" boxShadow="sm" mb={2} className="caip">
+              <Flex justifyContent="space-between" alignItems="center">
+                <Flex alignItems="center">
+                  <Avatar size="md" src={app?.assetContext?.image} mr={2} />
+                  <Box fontSize="sm" fontWeight="bold">
+                    Asset:
+                  </Box>
+                </Flex>
+                <Box fontSize="sm" textAlign="right">
+                  {app?.assetContext?.symbol}
+                </Box>
+              </Flex>
+              <Flex justifyContent="space-between">
+                <Box fontSize="xs"></Box>
+                <Box fontSize="xs" textAlign="right">
+                  caip: {app?.assetContext?.caip}
+                </Box>
+              </Flex>
+            </Card>
+
+            {/* Blockchain Card */}
+            <Card p={2} borderRadius="md" boxShadow="sm" mb={2} className="caip">
+              <Flex justifyContent="space-between" alignItems="center">
+                <Flex alignItems="center">
+                  <Avatar size="md" src={app?.blockchainContext?.image} mr={2} />
+                  <Box fontSize="sm" fontWeight="bold">
+                    Blockchain:
+                  </Box>
+                </Flex>
+                <Box fontSize="sm" textAlign="right">
+                  {app?.blockchainContext?.name}
+                </Box>
+              </Flex>
+              <Flex justifyContent="space-between">
+                <Box fontSize="xs"></Box>
+                <Box fontSize="xs" textAlign="right">
+                  caip:{app?.blockchainContext?.caip}
+                </Box>
+              </Flex>
+            </Card>
+
+            {/* Pubkey Card */}
+            <Card p={2} borderRadius="md" boxShadow="sm" className="caip">
+              <Flex justifyContent="space-between" alignItems="center">
+                <Flex alignItems="center">
+                  <Img
+                      src={[app?.pubkeyContext?.walletImage]}
+                      //@ts-ignore
+                      loader={({ src }) => <Avatar size="md" src={src} />} // Make sure <Avatar /> returns an Element
+                      //@ts-ignore
+                      unloader={({ src }) => <Avatar size="md" src={src} />} // Make sure <Avatar /> returns an Element
+                      container={(children) => (
+                          <div
+                              style={{
+                                width: '32px',
+                                height: '32px',
+                                borderRadius: '50%',
+                                overflow: 'hidden',
+                              }}
+                          >
+                            {children}
+                          </div>
+                      )}
+                  />
+                  <Box fontSize="sm" fontWeight="bold">
+                    Pubkey Path:
+                  </Box>
+                </Flex>
+                <Box fontSize="sm" textAlign="right">
+                  <MiddleEllipsis text={app?.pubkeyContext?.path} />
+                </Box>
+              </Flex>
+              <Flex justifyContent="space-between">
+                <Box fontSize="xs">Pubkey:</Box>
+                <Box fontSize="xs" textAlign="right">
+                  <MiddleEllipsis text={app?.pubkeyContext?.pubkey} />
+                </Box>
+              </Flex>
+            </Card>
+          </div>
         </Box>
+
+
         <MenuItem>
           <SimpleGrid columns={3} row={1}>
             <Card align="center" onClick={() => setContextWallet("native")}>

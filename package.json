@@ -1,6 +1,6 @@
 {
   "name": "pioneer-react",
-  "version": "0.2.23",
+  "version": "0.2.24",
   "author": "highlander",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -46,6 +46,7 @@
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
     "react-icons": "^4.8.0",
+    "react-image": "^4.1.0",
     "react-qr-code": "^2.0.11",
     "react-router-dom": "^6.10.0",
     "rollup-plugin-node-polyfills": "^0.2.1",

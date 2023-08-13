@@ -319,7 +319,7 @@ const Pioneer = () => {
         rounded="full"
         variant="link"
         cursor="pointer"
-        minW={300}
+        minW={100}
       >
         <Avatar size="lg">
           {isPioneer ? (

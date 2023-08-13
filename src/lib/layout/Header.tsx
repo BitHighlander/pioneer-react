@@ -15,6 +15,7 @@ const HeaderNew = () => {
       width="full"
       alignSelf="flex-start"
       gridGap={2}
+      justifyContent={"space-between"}
       alignItems="center"
       p={5}
       bg="gray.900" // change background color

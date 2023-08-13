@@ -257,7 +257,11 @@ export const PioneerProvider = ({
         paths,
       };
       const appInit = new SDK(spec, configPioneer);
-
+      let api = await appInit.init();
+      // @ts-ignore
+      dispatch({ type: WalletActions.SET_API, payload: api });
+      // @ts-ignore
+      dispatch({ type: WalletActions.SET_APP, payload: appInit });
       // Example usage
       let walletMetaMask: metaMask.MetaMaskHDWallet | undefined;
       if (isMetaMaskAvailable()) {
@@ -276,8 +280,9 @@ export const PioneerProvider = ({
           console.log("accounts: ", accounts);
           //@ts-ignore
           walletMetaMask.accounts = accounts;
-          //@ts-ignore
-          dispatch({ type: WalletActions.ADD_WALLET, payload: walletMetaMask });
+
+          const successMetaMask = await appInit.pairWallet(walletMetaMask);
+          console.log('successMetaMask: ', successMetaMask);
         }
       } else {
         console.log("MetaMask is not available");
@@ -355,75 +360,6 @@ export const PioneerProvider = ({
         const successSoftware = await appInit.pairWallet(walletSoftware);
         console.log('successSoftware: ', successSoftware);
 
-      }
-
-      // if NO metamask AND NO KeepKey then generate new seed
-      // @ts-ignore
-      if (!walletMetaMask && !isKeepkeyAvailable && !walletSoftware) {
-        // generate new seed
-        // @TODO
-        alert("No wallets found! unable to continue");
-      } else {
-        const walletPreferred =
-            //@ts-ignore
-          walletKeepKey || walletMetaMask || walletSoftware;
-        //@ts-ignore
-        console.log("walletPreferred: ", walletPreferred.type);
-
-        //@ts-ignore
-        dispatch({
-          //@ts-ignore
-          type: WalletActions.SET_CONTEXT,
-          // @ts-ignore
-          payload: walletPreferred.type,
-        });
-        //@ts-ignore
-        dispatch({ type: WalletActions.SET_WALLET, payload: walletPreferred });
-
-        // @ts-ignore
-        console.log("***** walletMetaMask: ", walletMetaMask);
-        const api = await appInit.init(walletMetaMask);
-        console.log("api: ",api)
-        //@ts-ignore
-        if (api) {
-          // @ts-ignore
-          dispatch({ type: WalletActions.SET_APP, payload: appInit });
-          // @ts-ignore
-          dispatch({ type: WalletActions.SET_API, payload: api });
-          
-
-          // @ts-ignore
-          const user = await api.User();
-          // eslint-disable-next-line no-console
-          console.log("user: ", user.data);
-
-          if (walletMetaMask) {
-            console.log("walletMetaMask found: ", walletMetaMask);
-            const successMetaMask = await appInit.pairWallet(walletMetaMask);
-            console.log("successMetaMask: ", successMetaMask);
-          }
-          // // @ts-ignore
-          // if (walletSoftware) {
-          //   const successnative = await appInit.pairWallet(walletSoftware);
-          //   //console.log("successnative: ", successnative);
-          // }
-
-          const events = await appInit.startSocket();
-          // console.log("events: ", events);
-
-          events.on("message", (event: any) => {
-            // console.log("event: ", event);
-          });
-
-          events.on("blocks", (event: any) => {
-            // console.log("event: ", event);
-          });
-
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          dispatch({ type: WalletActions.SET_USER, payload: user.data });
-          // setUsername(localStorage.getItem("username"));
-        }
       }
     } catch (e) {
       // eslint-disable-next-line no-console

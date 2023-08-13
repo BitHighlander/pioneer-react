@@ -31,6 +31,10 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
 
   useEffect(() => {
     console.log("app: ", app);
+  }, [activeTab]);
+
+  useEffect(() => {
+    console.log("app: ", app);
   }, [app, app?.wallets]);
 
   return (

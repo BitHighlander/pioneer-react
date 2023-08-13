@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="checkpoint pubkey context switching working!">
+    <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="style stuffs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/pioneer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/pioneer/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/modals/SettingsModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/modals/SettingsModal.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -184,14 +184,9 @@
       <workItem from="1691373384952" duration="4632000" />
       <workItem from="1691422264748" duration="15601000" />
       <workItem from="1691444510581" duration="29880000" />
-      <workItem from="1691712352419" duration="13497000" />
-    </task>
-    <task id="LOCAL-00011" summary="debug build">
-      <created>1684899104473</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1684899104473</updated>
+      <workItem from="1691712352419" duration="14553000" />
+      <workItem from="1691899003561" duration="1306000" />
+      <workItem from="1691948612662" duration="5100000" />
     </task>
     <task id="LOCAL-00012" summary="debug build">
       <created>1684960973121</created>
@@ -529,7 +524,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691776004864</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="style stuffs">
+      <created>1691806249324</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1691806249324</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -549,7 +551,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="pioneer-sdk no pollyfill! WORKING FOREAL" />
     <MESSAGE value="begin native" />
     <MESSAGE value="add all wallets begin" />
     <MESSAGE value="Template cleanup" />
@@ -574,6 +575,7 @@
     <MESSAGE value="context work" />
     <MESSAGE value="bump" />
     <MESSAGE value="checkpoint pubkey context switching working!" />
-    <option name="LAST_COMMIT_MESSAGE" value="checkpoint pubkey context switching working!" />
+    <MESSAGE value="style stuffs" />
+    <option name="LAST_COMMIT_MESSAGE" value="style stuffs" />
   </component>
 </project>

@@ -111,7 +111,7 @@ const getWalletSettingsContent = (walletType: string) => {
 
 const Pioneer = () => {
   const { state, dispatch } = usePioneer();
-  const { api, app, user } = state;
+  const { api, app, user, status } = state;
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   // local
@@ -185,14 +185,10 @@ const Pioneer = () => {
         setAssetContext(assetContext);
         setBlockchainContext(blockchainContext);
         if(pubkeyContext?.master || pubkeyContext?.pubkey)setPubkeyContext(pubkeyContext?.master || pubkeyContext?.pubkey);
-        // if (user.isPioneer) {
-        //   console.log();
-        //   setIsPioneer(true);
-        //   setPioneerImage(user.pioneerImage);
-        // }
 
         for (let i = 0; i < wallets.length; i++) {
           const wallet = wallets[i];
+          console.log("wallet: ",wallet)
           if (wallet.type === "keepkey") {
             wallet.icon = KeepKeyIcon;
           }
@@ -213,31 +209,6 @@ const Pioneer = () => {
         if (balances) {
           setBalances(balances);
         }
-
-        // eslint-disable-next-line no-console
-        // console.log("pubkeys: ", pubkeys);
-        const newPubkeys: any = [];
-        console.log("walletDescriptions: ", wallets);
-        for (let i = 0; i < pubkeys.length; i++) {
-          const pubkey = pubkeys[i];
-          const { context } = pubkey;
-          // console.log("context: ", context);
-          const walletType = wallets.filter(
-            (wallet: { context: any }) => wallet.context === context
-          )[0]?.type;
-          // console.log("walletType: ", walletType);
-          const icons: any = {
-            metamask: METAMASK_ICON,
-            keepkey: KEEPKEY_ICON,
-            native: PIONEER_ICON,
-          };
-          // @ts-ignore
-          const walletImage = icons[walletType];
-          // console.log("walletImage: ", walletImage);
-          pubkey.walletImage = walletImage;
-          newPubkeys.push(pubkey);
-        }
-        setPubkeys(newPubkeys);
 
         // @ts-ignore
         window.ethereum.on("accountsChanged", async function (accounts: any) {
@@ -278,7 +249,7 @@ const Pioneer = () => {
 
   useEffect(() => {
     setUser();
-  }, [app, app?.wallets, app?.walletDescriptions]); // once on startup
+  }, [status, app, app?.wallets, app?.context, app?.assetContext, app?.blockchainConext, app?.pubkeyContext]);
 
   useEffect(() => {
     dispatch({ type: "SET_CONTEXT", payload: context });
@@ -365,7 +336,9 @@ const Pioneer = () => {
             width="100%"
         >
           <div>
-            {/* Asset Card */}
+            <Flex alignItems="center">
+              <small>status: {status}</small>
+            </Flex>
             <Card p={2} borderRadius="md" boxShadow="sm" mb={2} className="caip">
               <Flex justifyContent="space-between" alignItems="center">
                 <Flex alignItems="center">

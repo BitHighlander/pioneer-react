@@ -133,7 +133,7 @@ export type ActionTypes =
 const reducer = (state: InitialState, action: ActionTypes) => {
   switch (action.type) {
     case WalletActions.SET_STATUS:
-      //eventEmitter.emit("SET_STATUS", action.payload);
+      eventEmitter.emit("SET_STATUS", action.payload);
       return { ...state, status: action.payload };
     case WalletActions.SET_CONTEXT:
       //eventEmitter.emit("SET_CONTEXT", action.payload);
@@ -283,6 +283,8 @@ export const PioneerProvider = ({
 
           const successMetaMask = await appInit.pairWallet(walletMetaMask);
           console.log('successMetaMask: ', successMetaMask);
+          // @ts-ignore
+          dispatch({ type: WalletActions.SET_STATUS, payload: "MetaMask connected!" });
         }
       } else {
         console.log("MetaMask is not available");
@@ -319,6 +321,8 @@ export const PioneerProvider = ({
           console.log("successKeepKey: ", successKeepKey);
           //@ts-ignore
           dispatch({ type: WalletActions.ADD_WALLET, payload: walletKeepKey });
+          // @ts-ignore
+          dispatch({ type: WalletActions.SET_STATUS, payload: "KeepKey connected!" });
         } catch (error) {
           //@ts-ignore
           console.error("Error or Timeout:", error.message);
@@ -359,6 +363,19 @@ export const PioneerProvider = ({
         await walletSoftware.loadDevice({ mnemonic });
         const successSoftware = await appInit.pairWallet(walletSoftware);
         console.log('successSoftware: ', successSoftware);
+
+        //events!
+        let events = await appInit.startSocket()
+
+        events.on('message', (event:any) => {
+          console.log("message: ",event)
+        });
+
+        events.on('blocks', (event:any) => {
+          console.log("blocks: ",event)
+          // @ts-ignore
+          dispatch({ type: WalletActions.SET_STATUS, payload: "Block Scanned!" });
+        });
 
       }
     } catch (e) {

@@ -2229,15 +2229,6 @@
     "@babel/runtime" "^7.19.0"
     axios "0.27.2"
 
-"@pioneer-platform/loggerdog@8.1.27":
-  version "8.1.27"
-  resolved "https://registry.yarnpkg.com/@pioneer-platform/loggerdog/-/loggerdog-8.1.27.tgz#a8224c0ed6cee3457a79884a56c95659bffb5b6f"
-  integrity sha512-AJpcEwCav1SZC9aB4xY1NogonmQUvypTwFJJ3pi4MFDp9giBwxH3J+llgHyXKQracstinX1Ezwbum7RCEMJC2Q==
-  dependencies:
-    os "^0.1.1"
-    ts-node "^10.9.1"
-    typescript "^5.0.2"
-
 "@pioneer-platform/loggerdog@^8.0.1", "@pioneer-platform/loggerdog@^8.1.27":
   version "8.1.29"
   resolved "https://registry.yarnpkg.com/@pioneer-platform/loggerdog/-/loggerdog-8.1.29.tgz#62bc928e017b8d1486755d2242c7db13097b218d"
@@ -2247,12 +2238,20 @@
     ts-node "^10.9.1"
     typescript "^5.0.2"
 
-"@pioneer-platform/pioneer-client@9.0.9":
-  version "9.0.9"
-  resolved "https://registry.yarnpkg.com/@pioneer-platform/pioneer-client/-/pioneer-client-9.0.9.tgz#c5aac63264067d29e80f7c515d667556ee9a13d2"
-  integrity sha512-1AfjdMSq7lbLkg9SEjihZ4qO4lnjmutV1Rb9JjSZtR0KLM9LOx/C3n7bg0U3I+9BBhyOmQsFGyRGI+5aYi1Krg==
+"@pioneer-platform/loggerdog@^8.1.31":
+  version "8.1.31"
+  resolved "https://registry.yarnpkg.com/@pioneer-platform/loggerdog/-/loggerdog-8.1.31.tgz#1bf091f58cbaeb29527f94ed15665e3c16d31fc7"
+  integrity sha512-6YtaAD6avWjhodX6hKtgUG2kZdVNbMXBYbl9ous4V/hht0CRHJxkHYpHo6nzDpD947sR0e03rpvQO/eCBo2mxA==
   dependencies:
-    eth_mnemonic_signer "^1.0.9"
+    os "^0.1.1"
+    ts-node "^10.9.1"
+    typescript "^5.0.2"
+
+"@pioneer-platform/pioneer-client@^9.0.18":
+  version "9.0.18"
+  resolved "https://registry.yarnpkg.com/@pioneer-platform/pioneer-client/-/pioneer-client-9.0.18.tgz#0c0cad58729307350e50d42248909e96cb2b2b51"
+  integrity sha512-cy/oaPSbz8xnbHaQ5HjuVCbg/Js7vhOxo7alPklJfPyjGcE8vCTVF5FbQCpJhUyQKuzjr4KyHRe9dIvpcsSECA==
+  dependencies:
     swagger-client "^3.19.8"
 
 "@pioneer-platform/pioneer-client@^9.0.6":
@@ -2263,7 +2262,7 @@
     eth_mnemonic_signer "^1.0.9"
     swagger-client "^3.19.8"
 
-"@pioneer-platform/pioneer-coins@8.1.72", "@pioneer-platform/pioneer-coins@^8.1.19", "@pioneer-platform/pioneer-coins@^8.1.68":
+"@pioneer-platform/pioneer-coins@^8.1.19", "@pioneer-platform/pioneer-coins@^8.1.68":
   version "8.1.72"
   resolved "https://registry.yarnpkg.com/@pioneer-platform/pioneer-coins/-/pioneer-coins-8.1.72.tgz#2dacb3ccd78bf5ae84155aa39e90ebeff2bb0534"
   integrity sha512-Jhf5J0lvHbjWhcaa6IKqvQtHiYYR0l7kDDmN/RI6N+d+nm8/YitvUB/UzbODKAfbpaLenbdKoJ8uc4MyLkEX3Q==
@@ -2283,10 +2282,30 @@
     neo-regex "^1.0.7"
     ripple-regex "^1.1.8"
 
-"@pioneer-platform/pioneer-events@8.1.49":
-  version "8.1.49"
-  resolved "https://registry.yarnpkg.com/@pioneer-platform/pioneer-events/-/pioneer-events-8.1.49.tgz#7fe40631ecccf29b7f5fb02960209628dec066b3"
-  integrity sha512-6TGFUqlefReyVE/QD2Qy+5EhNGKZAwYo8FKmf9ksgKksglgWYbzL4Yca96Z1JeG7+saeB5piM7knT71xTTTtWA==
+"@pioneer-platform/pioneer-coins@^8.1.72":
+  version "8.1.74"
+  resolved "https://registry.yarnpkg.com/@pioneer-platform/pioneer-coins/-/pioneer-coins-8.1.74.tgz#474bb337796791f3fe83ba592a7379a7ca856fde"
+  integrity sha512-HznMC3n9jEuiG3u4LmU9yZGBlQskQntMnnZqFEBSYK50Lq8vMEDl6HuoDthTI86YPnO47krJk0OEAdILGIKDgw==
+  dependencies:
+    bech32 "^1.1.4"
+    bignumber.js "^9.0.1"
+    bitcoin-regex "^2.0.0"
+    bitcoincash-regex "^1.1.8"
+    bs58check "^3.0.1"
+    crypto-js "^4.0.0"
+    dash-regex "^1.0.10"
+    dogecoin-regex "^1.0.9"
+    ethereum-regex "^1.1.12"
+    ethereum-tx-decoder "^3.0.0"
+    litecoin-regex "^1.0.8"
+    monero-regex "^1.0.8"
+    neo-regex "^1.0.7"
+    ripple-regex "^1.1.8"
+
+"@pioneer-platform/pioneer-events@^8.1.49":
+  version "8.1.52"
+  resolved "https://registry.yarnpkg.com/@pioneer-platform/pioneer-events/-/pioneer-events-8.1.52.tgz#b24c8c1ccc29eeba7e7ed9aa60e2c493bf2b918b"
+  integrity sha512-BqGYJN2rI13nbZ8YUhzLxicLfA/RVBz/O7VJirG6X8S6+e4B9m+UKcBAgMkp5J7ZM/tyKrBV6ZYvqI5DlU6FlQ==
   dependencies:
     "@pioneer-platform/pioneer-types" "^8.1.55"
     "@types/node" "^18.15.11"
@@ -2296,26 +2315,19 @@
     typescript "^5.0.2"
     wait-promise "^0.4.1"
 
-"@pioneer-platform/pioneer-invoke@8.1.43":
-  version "8.1.43"
-  resolved "https://registry.yarnpkg.com/@pioneer-platform/pioneer-invoke/-/pioneer-invoke-8.1.43.tgz#18d89d07921b3734dc95e8797c95bfb4e54daeb3"
-  integrity sha512-Aw4jAVv8PJewO5KvqV5Zpo+/cAGfuPUyjN/NyQnDpCpnTLTOqkRjx3KBZJCN635Cf7mtJpBhCBK5OzmeUjedcw==
+"@pioneer-platform/pioneer-invoke@^8.1.43":
+  version "8.1.50"
+  resolved "https://registry.yarnpkg.com/@pioneer-platform/pioneer-invoke/-/pioneer-invoke-8.1.50.tgz#c51a9051af7e9794716b2adf3e04039db1033610"
+  integrity sha512-fRZA8erdGrVwGLmaf5WXqTs5gex0hTFgRqJI7RFrnNjH8hyN4eKQY6ziM4bmNc3JRYicPJtGWQnZUeyoqMX+jA==
   dependencies:
-    "@pioneer-platform/loggerdog" "8.1.27"
-    "@pioneer-platform/pioneer-client" "^9.0.6"
-    "@pioneer-platform/pioneer-types" "^8.1.51"
+    "@pioneer-platform/loggerdog" "^8.1.31"
+    "@pioneer-platform/pioneer-client" "^9.0.18"
+    "@pioneer-platform/pioneer-types" "^8.1.55"
     "@types/node" "^18.15.11"
     dotenv "^8.2.0"
     openapi-client-axios "^6.0.0"
     ts-node "^8.10.2"
     typescript "^5.0.2"
-
-"@pioneer-platform/pioneer-types@^8.1.51", "@pioneer-platform/pioneer-types@^8.1.53":
-  version "8.1.53"
-  resolved "https://registry.yarnpkg.com/@pioneer-platform/pioneer-types/-/pioneer-types-8.1.53.tgz#f0d70d2194c0f5c8554bcb355566862dd7a4ee41"
-  integrity sha512-3ZE1YfRPJfZkNKmTKmLlmrsHc8wE7k/j2u0Y5jZ+s7GmYzNPd1odRjtJ0h3mOzsE5qZc03lRdT/uNOtiJYbNYg==
-  dependencies:
-    "@pioneer-platform/pioneer-types" "^8.1.53"
 
 "@pioneer-platform/pioneer-types@^8.1.55":
   version "8.1.55"
@@ -2324,23 +2336,23 @@
   dependencies:
     "@pioneer-platform/pioneer-types" "^8.1.55"
 
-"@pioneer-sdk/sdk@1.1.156":
-  version "1.1.156"
-  resolved "https://registry.yarnpkg.com/@pioneer-sdk/sdk/-/sdk-1.1.156.tgz#d432ae269211f96d1ece1d67282dab4fb8e5ee02"
-  integrity sha512-T1JW4YXcduX9eYBaKvYWbzwJgpPS104I2aWj6TrL+o94lFlkWCTwSNqROmcP+gWAcQI0N3gv3FTUpgGdP3/b5A==
+"@pioneer-sdk/sdk@1.1.157":
+  version "1.1.157"
+  resolved "https://registry.yarnpkg.com/@pioneer-sdk/sdk/-/sdk-1.1.157.tgz#adb4a4b68bef4ce6a478baf7aac0760fde36e5d9"
+  integrity sha512-52g1IFc75y7H39QNyBMEibDtBuO85ipBlhuCqvrjutK+TRmRa86Vjs0VCcwFYm39DCHFYs4orQLXEnKXFf9pvA==
   dependencies:
     "@keepkey/keepkey-sdk" "^0.2.25"
     "@pioneer-platform/loggerdog" "^8.1.27"
-    "@pioneer-platform/pioneer-client" "9.0.9"
-    "@pioneer-platform/pioneer-coins" "8.1.72"
-    "@pioneer-platform/pioneer-events" "8.1.49"
-    "@pioneer-platform/pioneer-invoke" "8.1.43"
-    "@pioneer-sdk/tx-builder" "1.0.18"
+    "@pioneer-platform/pioneer-client" "^9.0.18"
+    "@pioneer-platform/pioneer-coins" "^8.1.72"
+    "@pioneer-platform/pioneer-events" "^8.1.49"
+    "@pioneer-platform/pioneer-invoke" "^8.1.43"
+    "@pioneer-sdk/tx-builder" "^1.0.18"
     rango-sdk "^0.1.30"
     stable "^0.1.8"
     typescript "4.6.4"
 
-"@pioneer-sdk/tx-builder@1.0.18":
+"@pioneer-sdk/tx-builder@^1.0.18":
   version "1.0.18"
   resolved "https://registry.yarnpkg.com/@pioneer-sdk/tx-builder/-/tx-builder-1.0.18.tgz#5bbb367ffdee5acea83146d659c2431cad278048"
   integrity sha512-h+YSP3TDnUpBCztMl3nxygs6GQq5Js9foQVmeofQZLa5ye0EsQQhgv9eJzse3vDL4V17r5Ir80iqngbx67ohPg==

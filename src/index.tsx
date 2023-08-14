@@ -8,7 +8,7 @@ import "@fontsource/plus-jakarta-sans/latin.css";
 import Pioneer from "lib/components/pioneer";
 import { PioneerProvider, usePioneer } from "lib/context/Pioneer";
 import { theme } from "lib/styles/theme";
-
+import Balances from "lib/components/pioneer/Pioneer/Balances";
 import App from "./App";
 
 // To publish as lib uncomment
@@ -24,4 +24,4 @@ root.render(
     <App />
   </>
 );
-export { Pioneer, PioneerProvider, usePioneer };
+export { Pioneer, PioneerProvider, usePioneer, Balances };

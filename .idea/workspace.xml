@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="style stuffs">
+    <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="bump">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/modals/SettingsModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/modals/SettingsModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/pioneer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/pioneer/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -187,13 +189,7 @@
       <workItem from="1691712352419" duration="14553000" />
       <workItem from="1691899003561" duration="1306000" />
       <workItem from="1691948612662" duration="5100000" />
-    </task>
-    <task id="LOCAL-00012" summary="debug build">
-      <created>1684960973121</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1684960973121</updated>
+      <workItem from="1692027123426" duration="3398000" />
     </task>
     <task id="LOCAL-00013" summary="debug build">
       <created>1684961363229</created>
@@ -531,7 +527,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691806249324</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="bump">
+      <created>1691967392390</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1691967392390</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -573,9 +576,9 @@
     <MESSAGE value="begin settings" />
     <MESSAGE value="context switching begin rebuild" />
     <MESSAGE value="context work" />
-    <MESSAGE value="bump" />
     <MESSAGE value="checkpoint pubkey context switching working!" />
     <MESSAGE value="style stuffs" />
-    <option name="LAST_COMMIT_MESSAGE" value="style stuffs" />
+    <MESSAGE value="bump" />
+    <option name="LAST_COMMIT_MESSAGE" value="bump" />
   </component>
 </project>

@@ -159,14 +159,17 @@ const Pioneer = () => {
         const context = await app.setContext(matchedWallet.wallet);
         console.log("result change: ", context);
         console.log("app.context: ", app.context);
-        setContext(app.context)
-        console.log("app.pubkeyContext: ", app.pubkeyContext.master || app.pubkeyContext.pubkey);
-        let pubkeyContext = app.pubkeyContext.master || app.pubkeyContext.pubkey;
-        setPubkeyContext(pubkeyContext)
+        setContext(app.context);
+        console.log(
+          "app.pubkeyContext: ",
+          app.pubkeyContext.master || app.pubkeyContext.pubkey
+        );
+        const pubkeyContext =
+          app.pubkeyContext.master || app.pubkeyContext.pubkey;
+        setPubkeyContext(pubkeyContext);
         dispatch({ type: "SET_CONTEXT", payload: app.context });
         dispatch({ type: "SET_PUBKEY_CONTEXT", payload: app.pubkeyContext });
         // dispatch({ type: "SET_WALLET", payload: wallet });
-        
       } else {
         console.log("No wallet matched the type of the context");
       }
@@ -178,18 +181,29 @@ const Pioneer = () => {
   const setUser = async function () {
     try {
       if (app && app.wallets) {
-        const { wallets, balances, pubkeys, pubkeyContext, assetContext, blockchainContext } = app;
+        const {
+          wallets,
+          balances,
+          pubkeys,
+          pubkeyContext,
+          assetContext,
+          blockchainContext,
+        } = app;
         // eslint-disable-next-line no-console
         console.log("wallets: ", wallets);
-        console.log("pubkeyContext: ", pubkeyContext?.master || pubkeyContext?.pubkey);
+        console.log(
+          "pubkeyContext: ",
+          pubkeyContext?.master || pubkeyContext?.pubkey
+        );
         console.log("blockchainContext: ", blockchainContext);
         setAssetContext(assetContext);
         setBlockchainContext(blockchainContext);
-        if(pubkeyContext?.master || pubkeyContext?.pubkey)setPubkeyContext(pubkeyContext?.master || pubkeyContext?.pubkey);
+        if (pubkeyContext?.master || pubkeyContext?.pubkey)
+          setPubkeyContext(pubkeyContext?.master || pubkeyContext?.pubkey);
 
         for (let i = 0; i < wallets.length; i++) {
           const wallet = wallets[i];
-          console.log("wallet: ",wallet)
+          console.log("wallet: ", wallet);
           if (wallet.type === "keepkey") {
             wallet.icon = KeepKeyIcon;
           }
@@ -220,14 +234,14 @@ const Pioneer = () => {
           console.log("walletsPaired: ", walletsPaired);
           console.log("pioneer context: ", app?.context);
           //if context is metamask
-          if(app?.context === 'metamask.wallet'){
-            console.log("MetaMask is in context")
-            let addressMetaMask = accounts[0];
+          if (app?.context === "metamask.wallet") {
+            console.log("MetaMask is in context");
+            const addressMetaMask = accounts[0];
             console.log("addressMetaMask: ", addressMetaMask);
             setPubkeyContext(addressMetaMask);
-            if(addressMetaMask !== app.pubkey){
+            if (addressMetaMask !== app.pubkey) {
               //push event
-              let pubkeyContext = app.pubkeyContext
+              const pubkeyContext = app.pubkeyContext;
               pubkeyContext.pubkey = addressMetaMask;
               pubkeyContext.master = addressMetaMask;
               pubkeyContext.address = addressMetaMask;
@@ -235,7 +249,7 @@ const Pioneer = () => {
             }
           }
           //if address[0] !== pubkey
-          
+
           // re-register metamask with more pubkeys
         });
       }
@@ -250,7 +264,15 @@ const Pioneer = () => {
 
   useEffect(() => {
     setUser();
-  }, [status, app, app?.wallets, app?.context, app?.assetContext, app?.blockchainConext, app?.pubkeyContext]);
+  }, [
+    status,
+    app,
+    app?.wallets,
+    app?.context,
+    app?.assetContext,
+    app?.blockchainConext,
+    app?.pubkeyContext,
+  ]);
 
   useEffect(() => {
     dispatch({ type: "SET_CONTEXT", payload: context });
@@ -260,21 +282,22 @@ const Pioneer = () => {
   useEffect(() => {
     dispatch({ type: "SET_ASSET_CONTEXT", payload: app?.assetContext });
     setAssetContext(app?.assetContext?.symbol);
-    console.log(app?.assetContext)
+    console.log(app?.assetContext);
   }, [app?.assetContext?.name]); // once on startup
 
   useEffect(() => {
-    dispatch({ type: "SET_BLOCKCHAIN_CONTEXT", payload: app?.blockchainContext });
+    dispatch({
+      type: "SET_BLOCKCHAIN_CONTEXT",
+      payload: app?.blockchainContext,
+    });
     setBlockchainContext(app?.blockchainContext?.name);
-    console.log(app?.blockchainContext)
+    console.log(app?.blockchainContext);
   }, [app?.blockchainContext?.name]); // once on startup
 
   useEffect(() => {
     dispatch({ type: "SET_PUBKEYS_CONTEXT", payload: app?.pubkeyContext });
     setPubkeyContext(app?.pubkeyContext?.master || app?.pubkeyContext?.pubkey);
   }, [app?.pubkeyContext?.pubkey]); // once on startup
-  
-
 
   const avatarContent = api ? (
     getWalletBadgeContent(walletType)
@@ -320,27 +343,33 @@ const Pioneer = () => {
               </small>
             </Button>
             <IconButton
-                icon={<FaCog />}
-                isRound
-                onClick={() => settingsSelected()}
-                aria-label="Settings"
+              icon={<FaCog />}
+              isRound
+              onClick={() => settingsSelected()}
+              aria-label="Settings"
             />
             <SettingsModal isOpen={isOpen} onClose={onClose} />
           </HStack>
         </Box>
         <Box
-            borderWidth="1px"
-            borderRadius="md"
-            p="4"
-            textAlign="left"
-            maxWidth="300px"
-            width="100%"
+          borderWidth="1px"
+          borderRadius="md"
+          p="4"
+          textAlign="left"
+          maxWidth="300px"
+          width="100%"
         >
           <div>
             <Flex alignItems="center">
               <small>status: {status}</small>
             </Flex>
-            <Card p={2} borderRadius="md" boxShadow="sm" mb={2} className="caip">
+            <Card
+              p={2}
+              borderRadius="md"
+              boxShadow="sm"
+              mb={2}
+              className="caip"
+            >
               <Flex justifyContent="space-between" alignItems="center">
                 <Flex alignItems="center">
                   <Avatar size="md" src={app?.assetContext?.image} mr={2} />
@@ -355,16 +384,27 @@ const Pioneer = () => {
               <Flex justifyContent="space-between">
                 <Box fontSize="xs"></Box>
                 <Box fontSize="xs" textAlign="right">
-                  caip:<MiddleEllipsis text={app?.assetContext?.caip} />
+                  caip:
+                  <MiddleEllipsis text={app?.assetContext?.caip} />
                 </Box>
               </Flex>
             </Card>
 
             {/* Blockchain Card */}
-            <Card p={2} borderRadius="md" boxShadow="sm" mb={2} className="caip">
+            <Card
+              p={2}
+              borderRadius="md"
+              boxShadow="sm"
+              mb={2}
+              className="caip"
+            >
               <Flex justifyContent="space-between" alignItems="center">
                 <Flex alignItems="center">
-                  <Avatar size="md" src={app?.blockchainContext?.image} mr={2} />
+                  <Avatar
+                    size="md"
+                    src={app?.blockchainContext?.image}
+                    mr={2}
+                  />
                   <Box fontSize="sm" fontWeight="bold">
                     Blockchain:
                   </Box>
@@ -376,7 +416,8 @@ const Pioneer = () => {
               <Flex justifyContent="space-between">
                 <Box fontSize="xs"></Box>
                 <Box fontSize="xs" textAlign="right">
-                  caip:<MiddleEllipsis text={app?.blockchainContext?.caip} />
+                  caip:
+                  <MiddleEllipsis text={app?.blockchainContext?.caip} />
                 </Box>
               </Flex>
             </Card>
@@ -386,23 +427,23 @@ const Pioneer = () => {
               <Flex justifyContent="space-between" alignItems="center">
                 <Flex alignItems="center">
                   <Img
-                      src={[app?.pubkeyContext?.walletImage]}
-                      //@ts-ignore
-                      loader={({ src }) => <Avatar size="md" src={src} />} // Make sure <Avatar /> returns an Element
-                      //@ts-ignore
-                      unloader={({ src }) => <Avatar size="md" src={src} />} // Make sure <Avatar /> returns an Element
-                      container={(children) => (
-                          <div
-                              style={{
-                                width: '32px',
-                                height: '32px',
-                                borderRadius: '50%',
-                                overflow: 'hidden',
-                              }}
-                          >
-                            {children}
-                          </div>
-                      )}
+                    src={[app?.pubkeyContext?.walletImage]}
+                    //@ts-ignore
+                    loader={({ src }) => <Avatar size="md" src={src} />} // Make sure <Avatar /> returns an Element
+                    //@ts-ignore
+                    unloader={({ src }) => <Avatar size="md" src={src} />} // Make sure <Avatar /> returns an Element
+                    container={(children) => (
+                      <div
+                        style={{
+                          width: "32px",
+                          height: "32px",
+                          borderRadius: "50%",
+                          overflow: "hidden",
+                        }}
+                      >
+                        {children}
+                      </div>
+                    )}
                   />
                   <Box fontSize="sm" fontWeight="bold">
                     Pubkey Path:
@@ -421,7 +462,6 @@ const Pioneer = () => {
             </Card>
           </div>
         </Box>
-
 
         <MenuItem>
           <SimpleGrid columns={3} row={1}>

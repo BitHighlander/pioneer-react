@@ -9,6 +9,11 @@ import Pioneer from "lib/components/pioneer";
 import { PioneerProvider, usePioneer } from "lib/context/Pioneer";
 import { theme } from "lib/styles/theme";
 import Balances from "lib/components/pioneer/Pioneer/Balances";
+import AssetSelect from "lib/components/AssetSelect";
+import WalletSelect from "lib/components/WalletSelect";
+import BlockchainSelect from "lib/components/AssetSelect";
+import MiddleEllipsis from "lib/components/MiddleEllipsis";
+
 import App from "./App";
 
 // To publish as lib uncomment
@@ -24,4 +29,13 @@ root.render(
     <App />
   </>
 );
-export { Pioneer, PioneerProvider, usePioneer, Balances };
+export {
+  Pioneer,
+  PioneerProvider,
+  usePioneer,
+  Balances,
+  BlockchainSelect,
+  WalletSelect,
+  AssetSelect,
+  MiddleEllipsis,
+};

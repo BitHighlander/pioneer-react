@@ -63,9 +63,9 @@ const getWalletBadgeContent = (walletType: string) => {
   }
 
   return (
-      <AvatarBadge boxSize="1.25em" bg="green.500">
-        <Image rounded="full" src={icon} />
-      </AvatarBadge>
+    <AvatarBadge boxSize="1.25em" bg="green.500">
+      <Image rounded="full" src={icon} />
+    </AvatarBadge>
   );
 };
 
@@ -78,25 +78,27 @@ export default function Balances({ balances }: { balances: Balance[] }) {
   const [searchQuery, setSearchQuery] = useState("");
 
   const handleSelectClick = async (balance: Balance) => {
-    try{
+    try {
       //
       console.log("balance: ", balance);
 
       //set Balance
-      let assetFromPioneer = await api.GetAsset({symbol:balance.symbol});
+      let assetFromPioneer = await api.GetAsset({ symbol: balance.symbol });
       assetFromPioneer = assetFromPioneer.data[0];
-      let blockchainFromPioneer = await api.GetBlockchain({symbol:balance.symbol});
-      blockchainFromPioneer = blockchainFromPioneer.data[0]
+      let blockchainFromPioneer = await api.GetBlockchain({
+        symbol: balance.symbol,
+      });
+      blockchainFromPioneer = blockchainFromPioneer.data[0];
       console.log("assetFromPioneer: ", balance);
       //set Blockchain
-      await app.setBlockchainContext(blockchainFromPioneer)
-      await app.setAssetContext(assetFromPioneer)
+      await app.setBlockchainContext(blockchainFromPioneer);
+      await app.setAssetContext(assetFromPioneer);
       //set pubkey
       // await app.setPubkeyContext(balance.context)
-      console.log("app.assetContext: ",app.assetContext)
-      console.log("app.blockchainContext: ",app.blockchainContext)
-    }catch(e){
-      console.error(e)
+      console.log("app.assetContext: ", app.assetContext);
+      console.log("app.blockchainContext: ", app.blockchainContext);
+    } catch (e) {
+      console.error(e);
     }
   };
 
@@ -158,7 +160,7 @@ export default function Balances({ balances }: { balances: Balance[] }) {
   });
 
   const sortedBalances = filteredBalances.sort(
-      (a: Balance, b: Balance) => b.balance - a.balance
+    (a: Balance, b: Balance) => b.balance - a.balance
   );
 
   // CSS for the scrollable container
@@ -168,96 +170,96 @@ export default function Balances({ balances }: { balances: Balance[] }) {
   };
 
   return (
-      <Stack spacing={4}>
-        <InputGroup>
-          <InputLeftElement pointerEvents="none">
-            <Search2Icon color="gray.300" />
-          </InputLeftElement>
-          <Input
-              placeholder="Bitcoin..."
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-          />
-        </InputGroup>
-        <Box style={scrollContainerStyles}>
-          {sortedBalances.map((balance: Balance, index: number) => (
-              <Box key={index}>
-                <HStack spacing={4} alignItems="center">
-                  <Avatar src={balance.image} />
-                  <Box>
-                    <small>asset: {balance.symbol}</small>
-                    <br />
-                    <small>balance: {balance.balance}</small>
-                  </Box>
-                </HStack>
-                <HStack mt={2} spacing={2}>
-                  <Button
-                      size="sm"
-                      variant="outline"
-                      onClick={() => handleSelectClick(balance)}
-                  >
-                    Select
-                  </Button>
-                  {/*<Button*/}
-                  {/*    size="sm"*/}
-                  {/*    variant="outline"*/}
-                  {/*    onClick={() => handleSendClick(balance)}*/}
-                  {/*>*/}
-                  {/*  Send*/}
-                  {/*</Button>*/}
-                  {/*<Button*/}
-                  {/*    size="sm"*/}
-                  {/*    variant="outline"*/}
-                  {/*    onClick={() => handleReceiveClick(balance)}*/}
-                  {/*>*/}
-                  {/*  Receive*/}
-                  {/*</Button>*/}
-                  {/*<Button*/}
-                  {/*    size="sm"*/}
-                  {/*    variant="outline"*/}
-                  {/*    onClick={() => handleViewClick(balance)}*/}
-                  {/*>*/}
-                  {/*  View*/}
-                  {/*</Button>*/}
-                </HStack>
+    <Stack spacing={4}>
+      <InputGroup>
+        <InputLeftElement pointerEvents="none">
+          <Search2Icon color="gray.300" />
+        </InputLeftElement>
+        <Input
+          placeholder="Bitcoin..."
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </InputGroup>
+      <Box style={scrollContainerStyles}>
+        {sortedBalances.map((balance: Balance, index: number) => (
+          <Box key={index}>
+            <HStack spacing={4} alignItems="center">
+              <Avatar src={balance.image} />
+              <Box>
+                <small>asset: {balance.symbol}</small>
+                <br />
+                <small>balance: {balance.balance}</small>
               </Box>
-          ))}
-        </Box>
-
-        <Modal isOpen={isOpen} onClose={onClose} isCentered blockScrollOnMount>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>{selectedAction}</ModalHeader>
-            <ModalCloseButton />
-            {selectedAction === "send" && (
-                <div>
-                  <h3>Selected Action: Send</h3>
-                  <p>Selected Asset: {selectedBalance?.symbol}</p>
-                  <Send asset={selectedBalance} />
-                </div>
-            )}
-            {selectedAction === "receive" && (
-                <div>
-                  <h3>Selected Action: Receive</h3>
-                  <p>Selected Asset: {selectedBalance?.symbol}</p>
-                  <Receive />
-                </div>
-            )}
-            {selectedAction === "view" && (
-                <div>
-                  <h3>Selected Action: View</h3>
-                  <p>Selected Asset: {selectedBalance?.symbol}</p>
-                  <View />
-                </div>
-            )}
-            <ModalFooter>
-              <Button colorScheme="blue" onClick={onClose}>
-                Cancel
+            </HStack>
+            <HStack mt={2} spacing={2}>
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => handleSelectClick(balance)}
+              >
+                Select
               </Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
-      </Stack>
+              {/*<Button*/}
+              {/*    size="sm"*/}
+              {/*    variant="outline"*/}
+              {/*    onClick={() => handleSendClick(balance)}*/}
+              {/*>*/}
+              {/*  Send*/}
+              {/*</Button>*/}
+              {/*<Button*/}
+              {/*    size="sm"*/}
+              {/*    variant="outline"*/}
+              {/*    onClick={() => handleReceiveClick(balance)}*/}
+              {/*>*/}
+              {/*  Receive*/}
+              {/*</Button>*/}
+              {/*<Button*/}
+              {/*    size="sm"*/}
+              {/*    variant="outline"*/}
+              {/*    onClick={() => handleViewClick(balance)}*/}
+              {/*>*/}
+              {/*  View*/}
+              {/*</Button>*/}
+            </HStack>
+          </Box>
+        ))}
+      </Box>
+
+      <Modal isOpen={isOpen} onClose={onClose} isCentered blockScrollOnMount>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>{selectedAction}</ModalHeader>
+          <ModalCloseButton />
+          {selectedAction === "send" && (
+            <div>
+              <h3>Selected Action: Send</h3>
+              <p>Selected Asset: {selectedBalance?.symbol}</p>
+              <Send asset={selectedBalance} />
+            </div>
+          )}
+          {selectedAction === "receive" && (
+            <div>
+              <h3>Selected Action: Receive</h3>
+              <p>Selected Asset: {selectedBalance?.symbol}</p>
+              <Receive />
+            </div>
+          )}
+          {selectedAction === "view" && (
+            <div>
+              <h3>Selected Action: View</h3>
+              <p>Selected Asset: {selectedBalance?.symbol}</p>
+              <View />
+            </div>
+          )}
+          <ModalFooter>
+            <Button colorScheme="blue" onClick={onClose}>
+              Cancel
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </Stack>
   );
 }

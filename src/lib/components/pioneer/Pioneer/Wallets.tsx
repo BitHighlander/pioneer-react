@@ -126,7 +126,7 @@ export default function Wallets({ wallets }: { wallets: Wallet[] }) {
 
   return (
     <Stack spacing={4}>
-       <Text fontSize='xl'>All paired wallets</Text>
+      <Text fontSize="xl">All paired wallets</Text>
       {currentWallets.map((wallet: Wallet, index: number) => (
         <Box key={index}>
           <HStack spacing={4} alignItems="center">

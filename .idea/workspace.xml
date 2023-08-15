@@ -2,14 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="status to shake tree">
-      <change afterPath="$PROJECT_DIR$/src/lib/components/AssetSelect/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/BlockchainSelect/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/MiddleEllipsis/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/components/WalletSelect/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/AssetSelect/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/AssetSelect/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/BlockchainSelect/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/BlockchainSelect/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/MiddleEllipsis/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/MiddleEllipsis/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/WalletSelect/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/WalletSelect/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/modals/AssetModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/modals/AssetModal.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/components/modals/SettingsModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/modals/SettingsModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Balances.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Balances.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Paths.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Paths.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Pubkeys.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Pubkeys.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Wallets.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Wallets.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/components/pioneer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/pioneer/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/layout/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/layout/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/pages/home/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/pages/home/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -128,11 +136,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.lint:fix" />
         <item itemvalue="npm.dev" />
         <item itemvalue="npm.build:turbo" />
         <item itemvalue="npm.type-check" />
         <item itemvalue="npm.lint:turbo" />
-        <item itemvalue="npm.lint:fix" />
       </list>
     </recent_temporary>
   </component>
@@ -193,14 +201,7 @@
       <workItem from="1691712352419" duration="14553000" />
       <workItem from="1691899003561" duration="1306000" />
       <workItem from="1691948612662" duration="5100000" />
-      <workItem from="1692027123426" duration="14885000" />
-    </task>
-    <task id="LOCAL-00014" summary="debug build">
-      <created>1684961792452</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1684961792452</updated>
+      <workItem from="1692027123426" duration="15665000" />
     </task>
     <task id="LOCAL-00015" summary="debug build">
       <created>1684970724338</created>
@@ -538,7 +539,14 @@
       <option name="project" value="LOCAL" />
       <updated>1692039731018</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="status to shake tree">
+      <created>1692069029699</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1692069029699</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -199,7 +199,6 @@ export const PioneerProvider = ({
   //   hashStored = sig.signature;
   // }
 
-
   const onStart = async function () {
     try {
       // eslint-disable-next-line no-console
@@ -242,9 +241,9 @@ export const PioneerProvider = ({
       // @TODO add custom paths from localstorage
       const paths: any = [];
       const spec =
-          //@ts-ignore
+        //@ts-ignore
         import.meta.env.VITE_PIONEER_URL_SPEC ||
-          //@ts-ignore
+        //@ts-ignore
         "https://pioneers.dev/spec/swagger.json";
       //@ts-ignore
       const wss = import.meta.env.VITE_PIONEER_URL_WS || "wss://pioneers.dev";
@@ -257,7 +256,7 @@ export const PioneerProvider = ({
         paths,
       };
       const appInit = new SDK(spec, configPioneer);
-      let api = await appInit.init();
+      const api = await appInit.init();
       // @ts-ignore
       dispatch({ type: WalletActions.SET_API, payload: api });
       // @ts-ignore
@@ -282,9 +281,12 @@ export const PioneerProvider = ({
           walletMetaMask.accounts = accounts;
 
           const successMetaMask = await appInit.pairWallet(walletMetaMask);
-          console.log('successMetaMask: ', successMetaMask);
+          console.log("successMetaMask: ", successMetaMask);
           // @ts-ignore
-          dispatch({ type: WalletActions.SET_STATUS, payload: "MetaMask connected!" });
+          dispatch({
+            type: WalletActions.SET_STATUS,
+            payload: "MetaMask connected!",
+          });
         }
       } else {
         console.log("MetaMask is not available");
@@ -322,7 +324,10 @@ export const PioneerProvider = ({
           //@ts-ignore
           dispatch({ type: WalletActions.ADD_WALLET, payload: walletKeepKey });
           // @ts-ignore
-          dispatch({ type: WalletActions.SET_STATUS, payload: "KeepKey connected!" });
+          dispatch({
+            type: WalletActions.SET_STATUS,
+            payload: "KeepKey connected!",
+          });
         } catch (error) {
           //@ts-ignore
           console.error("Error or Timeout:", error.message);
@@ -336,7 +341,7 @@ export const PioneerProvider = ({
       let hash;
       const nativeAdapter = NativeAdapter.useKeyring(keyring);
       //is metamask available AND no KeepKey
-      hashStored = localStorage.getItem('hash');
+      hashStored = localStorage.getItem("hash");
 
       if (hashStored) {
         //generate software from metamask
@@ -351,32 +356,34 @@ export const PioneerProvider = ({
         // eslint-disable-next-line no-console
         //console.log('hash (trimmed): ', hash);
         // @ts-ignore
-        const hashBytes = hash.replace('0x', '');
+        const hashBytes = hash.replace("0x", "");
         //console.log('hashBytes', hashBytes);
         //console.log('hashBytes', hashBytes.length);
         mnemonic = entropyToMnemonic(hashBytes.toString(`hex`));
 
         // get walletSoftware
-        walletSoftware = await nativeAdapter.pairDevice('testid');
+        walletSoftware = await nativeAdapter.pairDevice("testid");
         await nativeAdapter.initialize();
         // @ts-ignore
         await walletSoftware.loadDevice({ mnemonic });
         const successSoftware = await appInit.pairWallet(walletSoftware);
-        console.log('successSoftware: ', successSoftware);
+        console.log("successSoftware: ", successSoftware);
 
         //events!
-        let events = await appInit.startSocket()
+        const events = await appInit.startSocket();
 
-        events.on('message', (event:any) => {
-          console.log("message: ",event)
+        events.on("message", (event: any) => {
+          console.log("message: ", event);
         });
 
-        events.on('blocks', (event:any) => {
-          console.log("blocks: ",event)
+        events.on("blocks", (event: any) => {
+          console.log("blocks: ", event);
           // @ts-ignore
-          dispatch({ type: WalletActions.SET_STATUS, payload: "Block Scanned!" });
+          dispatch({
+            type: WalletActions.SET_STATUS,
+            payload: "Block Scanned!",
+          });
         });
-
       }
     } catch (e) {
       // eslint-disable-next-line no-console

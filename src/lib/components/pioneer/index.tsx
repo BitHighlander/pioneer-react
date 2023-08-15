@@ -166,6 +166,7 @@ const Pioneer = () => {
         dispatch({ type: "SET_CONTEXT", payload: app.context });
         dispatch({ type: "SET_PUBKEY_CONTEXT", payload: app.pubkeyContext });
         // dispatch({ type: "SET_WALLET", payload: wallet });
+        
       } else {
         console.log("No wallet matched the type of the context");
       }
@@ -354,7 +355,7 @@ const Pioneer = () => {
               <Flex justifyContent="space-between">
                 <Box fontSize="xs"></Box>
                 <Box fontSize="xs" textAlign="right">
-                  caip: {app?.assetContext?.caip}
+                  caip:<MiddleEllipsis text={app?.assetContext?.caip} />
                 </Box>
               </Flex>
             </Card>
@@ -375,7 +376,7 @@ const Pioneer = () => {
               <Flex justifyContent="space-between">
                 <Box fontSize="xs"></Box>
                 <Box fontSize="xs" textAlign="right">
-                  caip:{app?.blockchainContext?.caip}
+                  caip:<MiddleEllipsis text={app?.blockchainContext?.caip} />
                 </Box>
               </Flex>
             </Card>

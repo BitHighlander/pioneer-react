@@ -1,3 +1,10 @@
+// If you defined MiddleEllipsisProps, make sure to export it
+export interface MiddleEllipsisProps {
+  text: string;
+  // ... other properties if they exist
+}
+
+// Existing code with exported interface
 export const checkKeepkeyAvailability = async () => {
   try {
     const response = await fetch("http://localhost:1646/spec/swagger.json");
@@ -18,7 +25,7 @@ export const timeout = (ms: number | undefined): Promise<void> => {
     }, ms);
   });
 };
-//@ts-ignore
+
 export const MiddleEllipsis: React.FC<MiddleEllipsisProps> = ({ text }) => {
   const maxLength = 20;
   const ellipsis = "...";
@@ -31,10 +38,10 @@ export const MiddleEllipsis: React.FC<MiddleEllipsisProps> = ({ text }) => {
   const backPart = text.slice(-10);
 
   return (
-    <span>
+      <span>
       {frontPart}
-      {ellipsis}
-      {backPart}
+        {ellipsis}
+        {backPart}
     </span>
   );
 };

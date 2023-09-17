@@ -80,7 +80,7 @@ export default function Pubkeys({ pubkeys }: { pubkeys: Pubkey[] }) {
   const handleSelectClick = async (pubkey: Pubkey) => {
     try {
       //
-      console.log("pubkey: ", pubkey);
+      //console.log("pubkey: ", pubkey);
 
       //set Pubkey
       let assetFromPioneer = await api.GetAsset({ symbol: pubkey.symbol });
@@ -89,14 +89,14 @@ export default function Pubkeys({ pubkeys }: { pubkeys: Pubkey[] }) {
         symbol: pubkey.symbol,
       });
       blockchainFromPioneer = blockchainFromPioneer.data[0];
-      console.log("assetFromPioneer: ", pubkey);
+      //console.log("assetFromPioneer: ", pubkey);
       //set Blockchain
       await app.setBlockchainContext(blockchainFromPioneer);
       await app.setAssetContext(assetFromPioneer);
       //set pubkey
       // await app.setPubkeyContext(pubkey.context)
-      console.log("app.assetContext: ", app.assetContext);
-      console.log("app.blockchainContext: ", app.blockchainContext);
+      //console.log("app.assetContext: ", app.assetContext);
+      //console.log("app.blockchainContext: ", app.blockchainContext);
     } catch (e) {
       console.error(e);
     }

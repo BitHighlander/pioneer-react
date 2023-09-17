@@ -27,11 +27,11 @@ interface SettingsModalProps {
 
 const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
   const { state } = usePioneer();
-  const { app } = state;
+  const { app, status } = state;
 
   useEffect(() => {
-    console.log("app: ", app);
-  }, [app]);
+    //console.log("app: ", app);
+  }, [app, app?.balances, app?.pubkeys, app?.wallets, app?.paths, status]);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} size={"xl"}>

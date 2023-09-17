@@ -138,7 +138,7 @@ const Pioneer = () => {
 
   const settingsSelected = async function () {
     try {
-      console.log("settingsSelected");
+      //console.log("settingsSelected");
       onOpen();
     } catch (e) {
       console.error(e);
@@ -147,23 +147,23 @@ const Pioneer = () => {
 
   const setContextWallet = async function (wallet: string) {
     try {
-      console.log("setContextWallet: ", wallet);
+      //console.log("setContextWallet: ", wallet);
       // eslint-disable-next-line no-console
-      console.log("wallets: ", app.wallets);
+      //console.log("wallets: ", app.wallets);
       const matchedWallet = app.wallets.find(
         (w: { type: string }) => w.type === wallet
       );
-      console.log("matchedWallet: ", matchedWallet);
+      //console.log("matchedWallet: ", matchedWallet);
       if (matchedWallet) {
         setWalletType(matchedWallet.type);
         const context = await app.setContext(matchedWallet.wallet);
-        console.log("result change: ", context);
-        console.log("app.context: ", app.context);
+        //console.log("result change: ", context);
+        //console.log("app.context: ", app.context);
         setContext(app.context);
-        console.log(
-          "app.pubkeyContext: ",
-          app.pubkeyContext.master || app.pubkeyContext.pubkey
-        );
+        //console.log(
+        //   "app.pubkeyContext: ",
+        //   app.pubkeyContext.master || app.pubkeyContext.pubkey
+        // );
         const pubkeyContext =
           app.pubkeyContext.master || app.pubkeyContext.pubkey;
         setPubkeyContext(pubkeyContext);
@@ -171,7 +171,7 @@ const Pioneer = () => {
         dispatch({ type: "SET_PUBKEY_CONTEXT", payload: app.pubkeyContext });
         // dispatch({ type: "SET_WALLET", payload: wallet });
       } else {
-        console.log("No wallet matched the type of the context");
+        //console.log("No wallet matched the type of the context");
       }
     } catch (e) {
       console.error("header e: ", e);
@@ -190,12 +190,12 @@ const Pioneer = () => {
           blockchainContext,
         } = app;
         // eslint-disable-next-line no-console
-        console.log("wallets: ", wallets);
-        console.log(
-          "pubkeyContext: ",
-          pubkeyContext?.master || pubkeyContext?.pubkey
-        );
-        console.log("blockchainContext: ", blockchainContext);
+        //console.log("wallets: ", wallets);
+        //console.log(
+        //   "pubkeyContext: ",
+        //   pubkeyContext?.master || pubkeyContext?.pubkey
+        // );
+        //console.log("blockchainContext: ", blockchainContext);
         setAssetContext(assetContext);
         setBlockchainContext(blockchainContext);
         if (pubkeyContext?.master || pubkeyContext?.pubkey)
@@ -203,7 +203,7 @@ const Pioneer = () => {
 
         for (let i = 0; i < wallets.length; i++) {
           const wallet = wallets[i];
-          console.log("wallet: ", wallet);
+          //console.log("wallet: ", wallet);
           if (wallet.type === "keepkey") {
             wallet.icon = KeepKeyIcon;
           }
@@ -220,7 +220,7 @@ const Pioneer = () => {
           wallets[i] = wallet;
         }
         // eslint-disable-next-line no-console
-        console.log("wallets: ", wallets);
+        //console.log("wallets: ", wallets);
         if (balances) {
           setBalances(balances);
         }
@@ -228,16 +228,16 @@ const Pioneer = () => {
         // @ts-ignore
         window.ethereum.on("accountsChanged", async function (accounts: any) {
           // Time to reload your interface with accounts[0]!
-          // console.log('accountsChanged: ', accounts);
+          // //console.log('accountsChanged: ', accounts);
           // TODO register new pubkeys
           const walletsPaired = app.wallets;
-          console.log("walletsPaired: ", walletsPaired);
-          console.log("pioneer context: ", app?.context);
+          //console.log("walletsPaired: ", walletsPaired);
+          //console.log("pioneer context: ", app?.context);
           //if context is metamask
           if (app?.context === "metamask.wallet") {
-            console.log("MetaMask is in context");
+            //console.log("MetaMask is in context");
             const addressMetaMask = accounts[0];
-            console.log("addressMetaMask: ", addressMetaMask);
+            //console.log("addressMetaMask: ", addressMetaMask);
             setPubkeyContext(addressMetaMask);
             if (addressMetaMask !== app.pubkey) {
               //push event
@@ -282,7 +282,7 @@ const Pioneer = () => {
   useEffect(() => {
     dispatch({ type: "SET_ASSET_CONTEXT", payload: app?.assetContext });
     setAssetContext(app?.assetContext?.symbol);
-    console.log(app?.assetContext);
+    //console.log(app?.assetContext);
   }, [app?.assetContext?.name]); // once on startup
 
   useEffect(() => {
@@ -291,7 +291,7 @@ const Pioneer = () => {
       payload: app?.blockchainContext,
     });
     setBlockchainContext(app?.blockchainContext?.name);
-    console.log(app?.blockchainContext);
+    //console.log(app?.blockchainContext);
   }, [app?.blockchainContext?.name]); // once on startup
 
   useEffect(() => {
@@ -307,6 +307,8 @@ const Pioneer = () => {
     </AvatarBadge>
   );
 
+  // @ts-ignore
+  // @ts-ignore
   return (
     <Menu>
       <MenuButton
@@ -426,25 +428,25 @@ const Pioneer = () => {
             <Card p={2} borderRadius="md" boxShadow="sm" className="caip">
               <Flex justifyContent="space-between" alignItems="center">
                 <Flex alignItems="center">
-                  <Img
-                    src={[app?.pubkeyContext?.walletImage]}
-                    //@ts-ignore
-                    loader={({ src }) => <Avatar size="md" src={src} />} // Make sure <Avatar /> returns an Element
-                    //@ts-ignore
-                    unloader={({ src }) => <Avatar size="md" src={src} />} // Make sure <Avatar /> returns an Element
-                    container={(children) => (
-                      <div
-                        style={{
-                          width: "32px",
-                          height: "32px",
-                          borderRadius: "50%",
-                          overflow: "hidden",
-                        }}
-                      >
-                        {children}
-                      </div>
-                    )}
-                  />
+                  {/*<Img*/}
+                  {/*    src={[app?.pubkeyContext?.walletImage]}*/}
+                  {/*    //@ts-ignore*/}
+                  {/*    loader={() => <Avatar size="md" src={app?.pubkeyContext?.walletImage} />} // Fixed: Make sure <Avatar /> returns an Element*/}
+                  {/*    //@ts-ignore*/}
+                  {/*    unloader={() => <Avatar size="md" src={app?.pubkeyContext?.walletImage} />} // Fixed: Make sure <Avatar /> returns an Element*/}
+                  {/*    container={(children) => (*/}
+                  {/*        <div*/}
+                  {/*            style={{*/}
+                  {/*              width: "32px",*/}
+                  {/*              height: "32px",*/}
+                  {/*              borderRadius: "50%",*/}
+                  {/*              overflow: "hidden",*/}
+                  {/*            }}*/}
+                  {/*        >*/}
+                  {/*          {children}*/}
+                  {/*        </div>*/}
+                  {/*    )}*/}
+                  {/*/>*/}
                   <Box fontSize="sm" fontWeight="bold">
                     Pubkey Path:
                   </Box>

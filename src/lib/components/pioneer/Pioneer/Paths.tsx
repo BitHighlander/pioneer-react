@@ -90,7 +90,7 @@ export default function Paths({ paths }: { paths: any[] }) {
   const handleSelectClick = async (path: Path) => {
     try {
       //
-      console.log("path: ", path);
+      //console.log("path: ", path);
 
       //set Path
       let assetFromPioneer = await api.GetAsset({ symbol: path.symbol });
@@ -99,14 +99,14 @@ export default function Paths({ paths }: { paths: any[] }) {
         symbol: path.symbol,
       });
       blockchainFromPioneer = blockchainFromPioneer.data[0];
-      console.log("assetFromPioneer: ", path);
+      //console.log("assetFromPioneer: ", path);
       //set Blockchain
       await app.setBlockchainContext(blockchainFromPioneer);
       await app.setAssetContext(assetFromPioneer);
       //set pubkey
       // await app.setPubkeyContext(path.context)
-      console.log("app.assetContext: ", app.assetContext);
-      console.log("app.blockchainContext: ", app.blockchainContext);
+      //console.log("app.assetContext: ", app.assetContext);
+      //console.log("app.blockchainContext: ", app.blockchainContext);
     } catch (e) {
       console.error(e);
     }

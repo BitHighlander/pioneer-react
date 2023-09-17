@@ -33,24 +33,24 @@ export default function WalletSelect({ onClose }) {
   const handleSelectClick = async (wallet: any) => {
     try {
       //
-      console.log("wallet selected! wallet: ", wallet.context);
-      console.log("setContextWallet: ", wallet);
+      //console.log("wallet selected! wallet: ", wallet.context);
+      //console.log("setContextWallet: ", wallet);
       // eslint-disable-next-line no-console
-      console.log("wallets: ", app.wallets);
+      //console.log("wallets: ", app.wallets);
       const matchedWallet = app.wallets.find(
         (w: { context: string }) => w.context === wallet.context
       );
-      console.log("matchedWallet: ", matchedWallet);
+      //console.log("matchedWallet: ", matchedWallet);
       if (matchedWallet) {
         setWalletType(matchedWallet.type);
         const context = await app.setContext(matchedWallet.wallet);
-        console.log("result change: ", context);
-        console.log("app.context: ", app.context);
+        //console.log("result change: ", context);
+        //console.log("app.context: ", app.context);
         setContext(app.context);
-        console.log(
-          "app.pubkeyContext: ",
-          app.pubkeyContext.master || app.pubkeyContext.pubkey
-        );
+        //console.log(
+        //   "app.pubkeyContext: ",
+        //   app.pubkeyContext.master || app.pubkeyContext.pubkey
+        // );
         const pubkeyContext =
           app.pubkeyContext.master || app.pubkeyContext.pubkey;
         setPubkeyContext(pubkeyContext);
@@ -59,7 +59,7 @@ export default function WalletSelect({ onClose }) {
         // dispatch({ type: "SET_WALLET", payload: wallet });
         onClose();
       } else {
-        console.log("No wallet matched the type of the context");
+        //console.log("No wallet matched the type of the context");
       }
     } catch (e) {
       console.error(e);
@@ -68,8 +68,8 @@ export default function WalletSelect({ onClose }) {
 
   const onRender = async () => {
     try {
-      console.log("context: ", app?.context);
-      console.log("wallets: ", app?.wallets);
+      //console.log("context: ", app?.context);
+      //console.log("wallets: ", app?.wallets);
       //
       dispatch({ type: "SET_CONTEXT", payload: context });
       setContext(app?.context);

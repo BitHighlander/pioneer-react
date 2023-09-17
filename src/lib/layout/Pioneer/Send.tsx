@@ -25,9 +25,9 @@ const Send = (Asset: any) => {
   const handleSend = async () => {
     try {
       setIsLoading(true);
-      // console.log("Asset: ", Asset.asset);
-      // console.log("Address: ", address);
-      // console.log("amount: ", amount);
+      //console.log("Asset: ", Asset.asset);
+      //console.log("Address: ", address);
+      //console.log("amount: ", amount);
       const ASSET = Asset.asset.symbol;
       if (!address) alert("Must set an address!");
       if (!amount) alert("Must set an amount!");

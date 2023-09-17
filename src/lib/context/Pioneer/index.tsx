@@ -202,7 +202,7 @@ export const PioneerProvider = ({
   const onStart = async function () {
     try {
       // eslint-disable-next-line no-console
-      console.log("onStart***** ");
+      //console.log("onStart***** ");
       const serviceKey: string | null = localStorage.getItem("serviceKey"); // KeepKey api key
       let queryKey: string | null = localStorage.getItem("queryKey");
       let username: string | null = localStorage.getItem("username");
@@ -264,24 +264,24 @@ export const PioneerProvider = ({
       // Example usage
       let walletMetaMask: metaMask.MetaMaskHDWallet | undefined;
       if (isMetaMaskAvailable()) {
-        // console.log("isMetaMaskAvailable ")
+        // //console.log("isMetaMaskAvailable ")
         walletMetaMask = await metaMaskAdapter.pairDevice();
         if (walletMetaMask) {
           // pair metamask
           await walletMetaMask.initialize();
-          console.log("walletMetaMask: ", walletMetaMask);
+          //console.log("walletMetaMask: ", walletMetaMask);
 
           // get all accounts
           //@ts-ignore
           const accounts = await window.ethereum.request({
             method: "eth_requestAccounts",
           });
-          console.log("accounts: ", accounts);
+          //console.log("accounts: ", accounts);
           //@ts-ignore
           walletMetaMask.accounts = accounts;
 
           const successMetaMask = await appInit.pairWallet(walletMetaMask);
-          console.log("successMetaMask: ", successMetaMask);
+          //console.log("successMetaMask: ", successMetaMask);
           // @ts-ignore
           dispatch({
             type: WalletActions.SET_STATUS,
@@ -289,11 +289,11 @@ export const PioneerProvider = ({
           });
         }
       } else {
-        console.log("MetaMask is not available");
+        //console.log("MetaMask is not available");
       }
 
       const isKeepkeyAvailable = await checkKeepkeyAvailability();
-      console.log("isKeepkeyAvailable: ", isKeepkeyAvailable);
+      //console.log("isKeepkeyAvailable: ", isKeepkeyAvailable);
 
       let walletKeepKey: core.HDWallet;
       if (isKeepkeyAvailable) {
@@ -320,7 +320,7 @@ export const PioneerProvider = ({
           ]);
           // pair keepkey
           const successKeepKey = await appInit.pairWallet(walletKeepKey);
-          console.log("successKeepKey: ", successKeepKey);
+          //console.log("successKeepKey: ", successKeepKey);
           //@ts-ignore
           dispatch({ type: WalletActions.ADD_WALLET, payload: walletKeepKey });
           // @ts-ignore
@@ -367,17 +367,17 @@ export const PioneerProvider = ({
         // @ts-ignore
         await walletSoftware.loadDevice({ mnemonic });
         const successSoftware = await appInit.pairWallet(walletSoftware);
-        console.log("successSoftware: ", successSoftware);
+        //console.log("successSoftware: ", successSoftware);
 
         //events!
         const events = await appInit.startSocket();
 
         events.on("message", (event: any) => {
-          console.log("message: ", event);
+          //console.log("message: ", event);
         });
 
         events.on("blocks", (event: any) => {
-          console.log("blocks: ", event);
+          //console.log("blocks: ", event);
           // @ts-ignore
           dispatch({
             type: WalletActions.SET_STATUS,

@@ -28,9 +28,9 @@ export default function BlockchainSelect({ onClose }) {
 
   const handleSelectClick = async (asset: any) => {
     try {
-      console.log("asset select: ", asset.name);
+      //console.log("asset select: ", asset.name);
       const changeAssetContext = await app.setAssetContext(asset);
-      console.log("changeAssetContext: ", changeAssetContext);
+      //console.log("changeAssetContext: ", changeAssetContext);
       onClose();
     } catch (e) {
       console.error(e);
@@ -43,7 +43,7 @@ export default function BlockchainSelect({ onClose }) {
         alert("Failed to init API!");
         return;
       }
-      console.log("searchQuery: ", searchQuery);
+      //console.log("searchQuery: ", searchQuery);
       const search = {
         limit: itemsPerPage,
         skip: currentPageIndex * itemsPerPage, // Use currentPageIndex for pagination

@@ -41,9 +41,9 @@ interface Balance {
   context?: string; // Added context field
 }
 
-const getWalletType = (user: { walletDescriptions: any[] }, context: any) => {
-  if (user && user.walletDescriptions) {
-    const wallet = user.walletDescriptions.find((w) => w.id === context);
+const getWalletType = (app: { wallets: any[] }, context: any) => {
+  if (app && app.wallets) {
+    const wallet = app.wallets.find((w) => w.id === context);
     return wallet ? wallet.type : null;
   }
   return null;
@@ -71,7 +71,7 @@ const getWalletBadgeContent = (walletType: string) => {
 
 export default function Balances({ balances }: { balances: Balance[] }) {
   const { state, dispatch } = usePioneer();
-  const { api, app, user } = state;
+  const { api, app } = state;
   const [selectedBalance, setSelectedBalance] = useState<Balance | null>(null);
   const [selectedAction, setSelectedAction] = useState<string | null>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -80,7 +80,7 @@ export default function Balances({ balances }: { balances: Balance[] }) {
   const handleSelectClick = async (balance: Balance) => {
     try {
       //
-      console.log("balance: ", balance);
+      // console.log("balance: ", balance);
 
       //set Balance
       let assetFromPioneer = await api.GetAsset({ symbol: balance.symbol });
@@ -89,14 +89,14 @@ export default function Balances({ balances }: { balances: Balance[] }) {
         symbol: balance.symbol,
       });
       blockchainFromPioneer = blockchainFromPioneer.data[0];
-      console.log("assetFromPioneer: ", balance);
+      // console.log("assetFromPioneer: ", balance);
       //set Blockchain
       await app.setBlockchainContext(blockchainFromPioneer);
       await app.setAssetContext(assetFromPioneer);
       //set pubkey
       // await app.setPubkeyContext(balance.context)
-      console.log("app.assetContext: ", app.assetContext);
-      console.log("app.blockchainContext: ", app.blockchainContext);
+      // console.log("app.assetContext: ", app.assetContext);
+      // console.log("app.blockchainContext: ", app.blockchainContext);
     } catch (e) {
       console.error(e);
     }
@@ -123,10 +123,11 @@ export default function Balances({ balances }: { balances: Balance[] }) {
   useEffect(() => {
     const setUser = async () => {
       try {
-        if (user && user.wallets) {
-          const { walletDescriptions, balances } = user;
+        console.log("balances: ",app.balances)
+        if (app && app.wallets) {
+          const { wallets, balances } = app;
           const updatedBalances = balances.map((balance: Balance) => {
-            const walletType = getWalletType(user, balance.context);
+            const walletType = getWalletType(app, balance.context);
             const badgeContent = getWalletBadgeContent(walletType);
             return {
               //@ts-ignore
@@ -146,7 +147,7 @@ export default function Balances({ balances }: { balances: Balance[] }) {
     };
 
     setUser();
-  }, [user]);
+  }, [app, app?.balances, app?.pubkeys, app?.wallets, app?.paths, status]);
 
   // Filter and sort balances based on search query
   const filteredBalances = balances.filter((balance: Balance) => {

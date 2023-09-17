@@ -1,6 +1,6 @@
 {
   "name": "pioneer-react",
-  "version": "0.2.29",
+  "version": "0.2.30",
   "author": "highlander",
   "main": "dist/index.js",
   "module": "dist/index.js",

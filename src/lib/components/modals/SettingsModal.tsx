@@ -43,7 +43,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
           <Tabs variant="enclosed">
             <TabList>
               <Tab>Wallets</Tab>
-              <Tab>Paths</Tab>
+              <Tab>Nodes</Tab>
               <Tab>PubKeys</Tab>
               <Tab>Balances</Tab>
             </TabList>
@@ -51,9 +51,9 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
               <TabPanel>
                 <Wallets wallets={app?.wallets || []} />
               </TabPanel>
-              <TabPanel>
-                <Paths paths={app?.paths || []} />
-              </TabPanel>
+              {/*<TabPanel>*/}
+              {/*  <Paths paths={app?.paths || []} />*/}
+              {/*</TabPanel>*/}
               <TabPanel>
                 <Pubkeys pubkeys={app?.pubkeys || []} />
               </TabPanel>

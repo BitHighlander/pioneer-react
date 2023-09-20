@@ -24,8 +24,8 @@ const Home = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
-    console.log("pubkeyContext: ", pubkeyContext);
-    setAddress(pubkeyContext.master || pubkeyContext.pubkey);
+    console.log("2 pubkeyContext: ", pubkeyContext);
+    setAddress(pubkeyContext.master || pubkeyContext.pubkey || pubkeyContext);
   }, [pubkeyContext]);
 
   const openModal = (type: any) => {
@@ -77,7 +77,7 @@ const Home = () => {
         Select Blockchain
       </Button>
       <br />
-      Address: {pubkeyContext?.master || pubkeyContext?.pubkey}
+      Address: {address}
       <Button onClick={() => openModal("View Address")}>View Address</Button>
       <br />
     </div>

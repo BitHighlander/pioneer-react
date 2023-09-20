@@ -240,12 +240,12 @@ export const PioneerProvider = ({
 
       // @TODO add custom paths from localstorage
       const paths: any = [];
+      console.log("VITE_PIONEER_URL_SPEC: ",)
       const spec =
-        //@ts-ignore
-        import.meta.env.VITE_PIONEER_URL_SPEC ||
         //@ts-ignore
         "https://pioneers.dev/spec/swagger.json";
       //@ts-ignore
+      console.log("spec: ", spec);
       const wss = import.meta.env.VITE_PIONEER_URL_WS || "wss://pioneers.dev";
       const configPioneer: any = {
         blockchains,
@@ -281,7 +281,18 @@ export const PioneerProvider = ({
           walletMetaMask.accounts = accounts;
 
           const successMetaMask = await appInit.pairWallet(walletMetaMask);
-          //console.log("successMetaMask: ", successMetaMask);
+          console.log("successMetaMask: ", successMetaMask);
+          if(successMetaMask){
+            // @ts-ignore
+            if (appInit.pubkeyContext?.master || appInit?.pubkey){
+              // @ts-ignore
+              dispatch({
+                type: WalletActions.SET_PUBKEY_CONTEXT,
+                // @ts-ignore
+                payload: appInit.pubkeyContext?.master || appInit?.pubkey,
+              });  
+            }
+          }
           // @ts-ignore
           dispatch({
             type: WalletActions.SET_STATUS,

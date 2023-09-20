@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="cleaned up logs">
+    <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="cleaned up logs and errors">
+      <change afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Nodes.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/utils/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/utils/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/modals/SettingsModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/modals/SettingsModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/pages/home/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/pages/home/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,13 +33,13 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/lib/pages/home/index.tsx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/.gitignore" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/index.tsx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/App.tsx" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/vercel.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/.gitignore" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/App.tsx" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/package.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/lib/pages/home/index.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/vercel.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/index.tsx" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -52,7 +54,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/lib/components/WalletSelect" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path" value="$USER_HOME$/.nvm/versions/node/v20.1.0/bin/node" />
@@ -123,9 +125,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.dev" />
         <item itemvalue="npm.build" />
         <item itemvalue="npm.release" />
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.lint:fix" />
         <item itemvalue="npm.build:turbo" />
       </list>
@@ -196,14 +198,10 @@
       <workItem from="1692233184622" duration="10000" />
       <workItem from="1692374697181" duration="4842000" />
       <workItem from="1694561479786" duration="1720000" />
-      <workItem from="1694916946290" duration="4189000" />
-    </task>
-    <task id="LOCAL-00017" summary="begin build">
-      <created>1684971609370</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1684971609370</updated>
+      <workItem from="1694916946290" duration="11369000" />
+      <workItem from="1695168394085" duration="1154000" />
+      <workItem from="1695229909883" duration="602000" />
+      <workItem from="1695230878195" duration="318000" />
     </task>
     <task id="LOCAL-00018" summary="begin build">
       <created>1684971793950</created>
@@ -541,7 +539,14 @@
       <option name="project" value="LOCAL" />
       <updated>1694920822667</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="cleaned up logs and errors">
+      <created>1694921781288</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1694921781288</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -561,7 +566,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="remove yarn lock to fix ci" />
     <MESSAGE value="fix auto-forward in kk desktop" />
     <MESSAGE value="use dotenv" />
     <MESSAGE value="fix double rendering" />
@@ -586,6 +590,7 @@
     <MESSAGE value="status to shake tree" />
     <MESSAGE value="expanded" />
     <MESSAGE value="cleaned up logs" />
-    <option name="LAST_COMMIT_MESSAGE" value="cleaned up logs" />
+    <MESSAGE value="cleaned up logs and errors" />
+    <option name="LAST_COMMIT_MESSAGE" value="cleaned up logs and errors" />
   </component>
 </project>

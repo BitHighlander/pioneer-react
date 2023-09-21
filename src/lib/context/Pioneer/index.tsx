@@ -39,6 +39,7 @@ import { KkRestAdapter } from "@keepkey/hdwallet-keepkey-rest";
 import { KeepKeySdk } from "@keepkey/keepkey-sdk";
 import { SDK } from "@pioneer-sdk/sdk";
 import * as core from "@shapeshiftoss/hdwallet-core";
+import { enableShapeShiftSnap, shapeShiftSnapInstalled } from '@shapeshiftoss/metamask-snaps-adapter'
 // import * as keplr from "@shapeshiftoss/hdwallet-keplr";
 import * as metaMask from "@shapeshiftoss/hdwallet-metamask";
 import type { NativeHDWallet } from "@shapeshiftoss/hdwallet-native";
@@ -58,6 +59,8 @@ import { v4 as uuidv4 } from "uuid";
 import { checkKeepkeyAvailability, timeout } from "lib/components/utils";
 
 const eventEmitter = new EventEmitter();
+
+const SNAP_ID = "npm:@shapeshiftoss/metamask-snaps"
 
 export enum WalletActions {
   SET_STATUS = "SET_STATUS",
@@ -179,44 +182,83 @@ export const PioneerProvider = ({
   // @ts-ignore
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  //@TODO build Native Wallet from Metamask
-  // if (!hashStored) {
-  //   //generate from MM
-  //   const message = 'Pioneers:0xD9B4BEF9:gen1';
-  //   const { hardenedPath, relPath } = walletMetaMask.ethGetAccountPaths({
-  //     coin: 'Ethereum',
-  //     accountIdx: 0,
-  //   })[0];
-  //   const sig = await walletMetaMask.ethSignMessage({
-  //     addressNList: hardenedPath.concat(relPath),
-  //     message,
-  //   });
-  //   // @ts-ignore
-  //   //console.log('sig: ', sig.signature);
-  //   // @ts-ignore
-  //   localStorage.setItem('hash', sig.signature);
-  //   // @ts-ignore
-  //   hashStored = sig.signature;
-  // }
+  //TODO add wallet to state
+  const connectWallet = async function(wallet:string){
+    try{
+      console.log("connectWallet: ",wallet)
+
+      if(wallet === "metamask"){
+        // walletMetaMask = await metaMaskAdapter.pairDevice();
+        // if (walletMetaMask) {
+        //   // pair metamask
+        //   await walletMetaMask.initialize();
+        //   //console.log("walletMetaMask: ", walletMetaMask);
+        //
+        //   // get all accounts
+        //   //@ts-ignore
+        //   const accounts = await window.ethereum.request({
+        //     method: "eth_requestAccounts",
+        //   });
+        //   //console.log("accounts: ", accounts);
+        //   //@ts-ignore
+        //   walletMetaMask.accounts = accounts;
+        //
+        //   const successMetaMask = await appInit.pairWallet(walletMetaMask);
+        //   console.log("successMetaMask: ", successMetaMask);
+        //   if(successMetaMask){
+        //     // @ts-ignore
+        //     if (appInit.pubkeyContext?.master || appInit?.pubkey){
+        //       // @ts-ignore
+        //       dispatch({
+        //         type: WalletActions.SET_PUBKEY_CONTEXT,
+        //         // @ts-ignore
+        //         payload: appInit.pubkeyContext?.master || appInit?.pubkey,
+        //       });
+        //     }
+        //   }
+        //   // @ts-ignore
+        //   dispatch({
+        //     type: WalletActions.SET_STATUS,
+        //     payload: "MetaMask connected!",
+        //   });
+        // }
+      }else if (wallet === "keepkey"){
+
+      }
+
+
+
+    }catch(e){
+      console.error(e)
+    }
+  }
 
   const onStart = async function () {
     try {
-      // eslint-disable-next-line no-console
-      //console.log("onStart***** ");
       const serviceKey: string | null = localStorage.getItem("serviceKey"); // KeepKey api key
       let queryKey: string | null = localStorage.getItem("queryKey");
       let username: string | null = localStorage.getItem("username");
       //@ts-ignore
       dispatch({ type: WalletActions.SET_USERNAME, payload: username });
 
+      //if auto connecting
+      let metamaskPaired = localStorage.getItem("metamaskPaired");
+      console.log("metamaskPaired: ", metamaskPaired);
+
+      const isKeepkeyAvailable = await checkKeepkeyAvailability();
+      console.log("isKeepkeyAvailable: ", isKeepkeyAvailable);
+
+      //is metamask available?
       const isMetaMaskAvailable = (): boolean => {
         return (
-          (window as any).ethereum !== undefined &&
-          (window as any).ethereum.isMetaMask
+            (window as any).ethereum !== undefined &&
+            (window as any).ethereum.isMetaMask
         );
       };
       const keyring = new core.Keyring();
       const metaMaskAdapter = metaMask.MetaMaskAdapter.useKeyring(keyring);
+
+
 
       if (!queryKey) {
         queryKey = `key:${uuidv4()}`;
@@ -246,7 +288,7 @@ export const PioneerProvider = ({
         "https://pioneers.dev/spec/swagger.json";
       //@ts-ignore
       console.log("spec: ", spec);
-      const wss = import.meta.env.VITE_PIONEER_URL_WS || "wss://pioneers.dev";
+      const wss = "wss://pioneers.dev";
       const configPioneer: any = {
         blockchains,
         username,
@@ -264,7 +306,18 @@ export const PioneerProvider = ({
       // Example usage
       let walletMetaMask: metaMask.MetaMaskHDWallet | undefined;
       if (isMetaMaskAvailable()) {
-        // //console.log("isMetaMaskAvailable ")
+        //is snap enabled?
+        let isSnapInstalled = await shapeShiftSnapInstalled(SNAP_ID);
+        console.log(isSnapInstalled)
+
+        //if not installed install snap
+        if(!isSnapInstalled){
+            //install it
+            let result = await enableShapeShiftSnap(SNAP_ID);
+            console.log("result: ", result)
+        }
+
+        //console.log("isMetaMaskAvailable ")
         walletMetaMask = await metaMaskAdapter.pairDevice();
         if (walletMetaMask) {
           // pair metamask
@@ -290,7 +343,7 @@ export const PioneerProvider = ({
                 type: WalletActions.SET_PUBKEY_CONTEXT,
                 // @ts-ignore
                 payload: appInit.pubkeyContext?.master || appInit?.pubkey,
-              });  
+              });
             }
           }
           // @ts-ignore
@@ -300,11 +353,8 @@ export const PioneerProvider = ({
           });
         }
       } else {
-        //console.log("MetaMask is not available");
+        console.log("MetaMask is not available");
       }
-
-      const isKeepkeyAvailable = await checkKeepkeyAvailability();
-      //console.log("isKeepkeyAvailable: ", isKeepkeyAvailable);
 
       let walletKeepKey: core.HDWallet;
       if (isKeepkeyAvailable) {

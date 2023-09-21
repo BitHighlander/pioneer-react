@@ -29,6 +29,9 @@ root.render(
     <App />
   </>
 );
+
+//end dev mode
+
 export {
   Pioneer,
   PioneerProvider,

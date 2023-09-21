@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="cleaned up logs and errors">
-      <change afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Nodes.tsx" afterDir="false" />
+    <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="force to remote pioneer">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/modals/SettingsModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/modals/SettingsModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Nodes.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/pages/home/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/pages/home/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -201,14 +201,9 @@
       <workItem from="1694916946290" duration="11369000" />
       <workItem from="1695168394085" duration="1154000" />
       <workItem from="1695229909883" duration="602000" />
-      <workItem from="1695230878195" duration="318000" />
-    </task>
-    <task id="LOCAL-00018" summary="begin build">
-      <created>1684971793950</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1684971793950</updated>
+      <workItem from="1695230878195" duration="746000" />
+      <workItem from="1695231667722" duration="648000" />
+      <workItem from="1695317220574" duration="3809000" />
     </task>
     <task id="LOCAL-00019" summary="begin layout">
       <created>1684973470901</created>
@@ -546,7 +541,14 @@
       <option name="project" value="LOCAL" />
       <updated>1694921781288</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="force to remote pioneer">
+      <created>1695231265443</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1695231265444</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -566,7 +568,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fix auto-forward in kk desktop" />
     <MESSAGE value="use dotenv" />
     <MESSAGE value="fix double rendering" />
     <MESSAGE value="begin pubkeys" />
@@ -591,6 +592,7 @@
     <MESSAGE value="expanded" />
     <MESSAGE value="cleaned up logs" />
     <MESSAGE value="cleaned up logs and errors" />
-    <option name="LAST_COMMIT_MESSAGE" value="cleaned up logs and errors" />
+    <MESSAGE value="force to remote pioneer" />
+    <option name="LAST_COMMIT_MESSAGE" value="force to remote pioneer" />
   </component>
 </project>

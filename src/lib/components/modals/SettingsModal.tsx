@@ -18,6 +18,7 @@ import Balances from "lib/components/pioneer/Pioneer/Balances";
 import Wallets from "lib/components/pioneer/Pioneer/Wallets";
 import Paths from "lib/components/pioneer/Pioneer/Paths";
 import Pubkeys from "lib/components/pioneer/Pioneer/Pubkeys";
+import Onboarding from "lib/components/Onboarding";
 import { usePioneer } from "lib/context/Pioneer";
 
 interface SettingsModalProps {
@@ -28,6 +29,22 @@ interface SettingsModalProps {
 const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
   const { state } = usePioneer();
   const { app, status } = state;
+  const [isOnboarded, setIsOnboarded] = useState(false);
+
+  const onStart = async function(){
+    try{
+      console.log("onStart")
+      let isOnboarded = await localStorage.getItem("isOnboarded")
+      if(!isOnboarded){
+        console.log("Starting onboarding process")
+      }
+    }catch(e){
+      console.error(e)
+    }
+  }
+  useEffect(() => {
+    onStart()
+  }, []);
 
   useEffect(() => {
     //console.log("app: ", app);
@@ -37,37 +54,39 @@ const SettingsModal: React.FC<SettingsModalProps> = ({ isOpen, onClose }) => {
     <Modal isOpen={isOpen} onClose={onClose} size={"xl"}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Pioneer Settings</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody>
-          <Tabs variant="enclosed">
-            <TabList>
-              <Tab>Wallets</Tab>
-              <Tab>Nodes</Tab>
-              <Tab>PubKeys</Tab>
-              <Tab>Balances</Tab>
-            </TabList>
-            <TabPanels>
-              <TabPanel>
-                <Wallets wallets={app?.wallets || []} />
-              </TabPanel>
-              {/*<TabPanel>*/}
-              {/*  <Paths paths={app?.paths || []} />*/}
-              {/*</TabPanel>*/}
-              <TabPanel>
-                <Pubkeys pubkeys={app?.pubkeys || []} />
-              </TabPanel>
-              <TabPanel>
-                <Balances balances={app?.balances || []} />
-              </TabPanel>
-            </TabPanels>
-          </Tabs>
-        </ModalBody>
-        <ModalFooter>
-          <Button colorScheme="blue" mr={3} onClick={onClose}>
-            Close
-          </Button>
-        </ModalFooter>
+        {!isOnboarded ? (<Onboarding onClose={onClose} />) : (<div>
+          <ModalHeader>Pioneer Settings</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Tabs variant="enclosed">
+              <TabList>
+                <Tab>Wallets</Tab>
+                <Tab>Nodes</Tab>
+                <Tab>PubKeys</Tab>
+                <Tab>Balances</Tab>
+              </TabList>
+              <TabPanels>
+                <TabPanel>
+                  <Wallets wallets={app?.wallets || []} />
+                </TabPanel>
+                {/*<TabPanel>*/}
+                {/*  <Paths paths={app?.paths || []} />*/}
+                {/*</TabPanel>*/}
+                <TabPanel>
+                  <Pubkeys pubkeys={app?.pubkeys || []} />
+                </TabPanel>
+                <TabPanel>
+                  <Balances balances={app?.balances || []} />
+                </TabPanel>
+              </TabPanels>
+            </Tabs>
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={onClose}>
+              Close
+            </Button>
+          </ModalFooter>
+        </div>)}
       </ModalContent>
     </Modal>
   );

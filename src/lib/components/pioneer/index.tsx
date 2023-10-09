@@ -136,6 +136,22 @@ const Pioneer = () => {
   const [pubkeys, setPubkeys] = useState([]);
   const [balances, setBalances] = useState([]);
 
+  const onStart = async function(){
+    try{
+      console.log("onStart")
+      let isOnboarded = await localStorage.getItem("isOnboarded")
+      if(!isOnboarded){
+        console.log("Starting onboarding process")
+        onOpen();
+      }
+    }catch(e){
+      console.error(e)
+    }
+  }
+  useEffect(() => {
+    onStart()
+  }, []);
+
   const settingsSelected = async function () {
     try {
       //console.log("settingsSelected");
@@ -224,20 +240,20 @@ const Pioneer = () => {
         if (balances) {
           setBalances(balances);
         }
-
+        
         // @ts-ignore
         window.ethereum.on("accountsChanged", async function (accounts: any) {
           // Time to reload your interface with accounts[0]!
-          // //console.log('accountsChanged: ', accounts);
+          console.log('accountsChanged: ', accounts);
           // TODO register new pubkeys
           const walletsPaired = app.wallets;
           //console.log("walletsPaired: ", walletsPaired);
           //console.log("pioneer context: ", app?.context);
           //if context is metamask
           if (app?.context === "metamask.wallet") {
-            //console.log("MetaMask is in context");
+            console.log("MetaMask is in context");
             const addressMetaMask = accounts[0];
-            //console.log("addressMetaMask: ", addressMetaMask);
+            console.log("addressMetaMask: ", addressMetaMask);
             setPubkeyContext(addressMetaMask);
             if (addressMetaMask !== app.pubkey) {
               //push event
@@ -248,9 +264,12 @@ const Pioneer = () => {
               dispatch({ type: "SET_PUBKEY_CONTEXT", payload: pubkeyContext });
             }
           }
+
           //if address[0] !== pubkey
 
-          // re-register metamask with more pubkeys
+          //
+
+
         });
       }
     } catch (e) {

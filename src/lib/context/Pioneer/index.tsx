@@ -39,9 +39,18 @@ import { KkRestAdapter } from "@keepkey/hdwallet-keepkey-rest";
 import { KeepKeySdk } from "@keepkey/keepkey-sdk";
 import { SDK } from "@pioneer-sdk/sdk";
 import * as core from "@shapeshiftoss/hdwallet-core";
-import { enableShapeShiftSnap, shapeShiftSnapInstalled } from '@shapeshiftoss/metamask-snaps-adapter'
+import {
+  enableShapeShiftSnap,
+  shapeShiftSnapInstalled,
+  BTCGetAddress as snapBitcoinGetAddress,
+  BTCGetPublicKeys as snapBitcoinGetPublicKeys,
+  BTCSignTransaction as snapBitcoinSignTransaction,
+} from "@shapeshiftoss/metamask-snaps-adapter";
 // import * as keplr from "@shapeshiftoss/hdwallet-keplr";
-import * as metaMask from "@shapeshiftoss/hdwallet-metamask";
+// import * as metaMask from "@shapeshiftoss/hdwallet-metamask";
+import * as metaMask from "@shapeshiftoss/hdwallet-shapeshift-multichain";
+import { MetaMaskAdapter as MetaMaskSnapAdapter } from '@shapeshiftoss/hdwallet-shapeshift-multichain'
+import { MetaMaskShapeShiftMultiChainHDWallet } from '@shapeshiftoss/hdwallet-shapeshift-multichain'
 import type { NativeHDWallet } from "@shapeshiftoss/hdwallet-native";
 import { EventEmitter } from "events";
 import { NativeAdapter } from "@shapeshiftoss/hdwallet-native";
@@ -60,11 +69,12 @@ import { checkKeepkeyAvailability, timeout } from "lib/components/utils";
 
 const eventEmitter = new EventEmitter();
 
-const SNAP_ID = "npm:@shapeshiftoss/metamask-snaps"
+const SNAP_ID = "npm:@shapeshiftoss/metamask-snaps";
 
 export enum WalletActions {
   SET_STATUS = "SET_STATUS",
   SET_USERNAME = "SET_USERNAME",
+  OPEN_MODAL = "OPEN_MODAL",
   SET_API = "SET_API",
   SET_APP = "SET_APP",
   SET_WALLET = "SET_WALLET",
@@ -124,6 +134,7 @@ export interface IPioneerContext {
 export type ActionTypes =
   | { type: WalletActions.SET_STATUS; payload: any }
   | { type: WalletActions.SET_USERNAME; payload: string }
+  | { type: WalletActions.OPEN_MODAL; payload: string }
   | { type: WalletActions.SET_APP; payload: any }
   | { type: WalletActions.SET_API; payload: any }
   | { type: WalletActions.SET_CONTEXT; payload: any }
@@ -153,6 +164,8 @@ const reducer = (state: InitialState, action: ActionTypes) => {
     case WalletActions.SET_USERNAME:
       //eventEmitter.emit("SET_USERNAME", action.payload);
       return { ...state, username: action.payload };
+    case WalletActions.OPEN_MODAL:
+      return { ...state, payload: action.payload };
     case WalletActions.SET_APP:
       return { ...state, app: action.payload };
     case WalletActions.SET_API:
@@ -181,13 +194,24 @@ export const PioneerProvider = ({
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const showModal = (message:string) => {
+    console.log("OPEN MODAL: modal: ", message)
+    setIsModalOpen(true);
+    // Optional: You can also set a message to be displayed in the modal
+  };
+
+  const hideModal = () => {
+    setIsModalOpen(false);
+  };
 
   //TODO add wallet to state
-  const connectWallet = async function(wallet:string){
-    try{
-      console.log("connectWallet: ",wallet)
+  const connectWallet = async function (wallet: string) {
+    try {
+      console.log("connectWallet: ", wallet);
 
-      if(wallet === "metamask"){
+      if (wallet === "metamask") {
         // walletMetaMask = await metaMaskAdapter.pairDevice();
         // if (walletMetaMask) {
         //   // pair metamask
@@ -222,16 +246,13 @@ export const PioneerProvider = ({
         //     payload: "MetaMask connected!",
         //   });
         // }
-      }else if (wallet === "keepkey"){
+      } else if (wallet === "keepkey") {
 
       }
-
-
-
-    }catch(e){
-      console.error(e)
+    } catch (e) {
+      console.error(e);
     }
-  }
+  };
 
   const onStart = async function () {
     try {
@@ -242,8 +263,11 @@ export const PioneerProvider = ({
       dispatch({ type: WalletActions.SET_USERNAME, payload: username });
 
       //if auto connecting
-      let metamaskPaired = localStorage.getItem("metamaskPaired");
-      console.log("metamaskPaired: ", metamaskPaired);
+      const isOnboarded = localStorage.getItem("userOnboarded");
+      console.log("isOnboarded: ", isOnboarded);
+
+      //
+
 
       const isKeepkeyAvailable = await checkKeepkeyAvailability();
       console.log("isKeepkeyAvailable: ", isKeepkeyAvailable);
@@ -251,14 +275,12 @@ export const PioneerProvider = ({
       //is metamask available?
       const isMetaMaskAvailable = (): boolean => {
         return (
-            (window as any).ethereum !== undefined &&
-            (window as any).ethereum.isMetaMask
+          (window as any).ethereum !== undefined &&
+          (window as any).ethereum.isMetaMask
         );
       };
       const keyring = new core.Keyring();
       const metaMaskAdapter = metaMask.MetaMaskAdapter.useKeyring(keyring);
-
-
 
       if (!queryKey) {
         queryKey = `key:${uuidv4()}`;
@@ -282,7 +304,7 @@ export const PioneerProvider = ({
 
       // @TODO add custom paths from localstorage
       const paths: any = [];
-      console.log("VITE_PIONEER_URL_SPEC: ",)
+      console.log("VITE_PIONEER_URL_SPEC: ");
       const spec =
         //@ts-ignore
         "https://pioneers.dev/spec/swagger.json";
@@ -304,17 +326,18 @@ export const PioneerProvider = ({
       // @ts-ignore
       dispatch({ type: WalletActions.SET_APP, payload: appInit });
       // Example usage
+      // @ts-ignore
       let walletMetaMask: metaMask.MetaMaskHDWallet | undefined;
       if (isMetaMaskAvailable()) {
         //is snap enabled?
-        let isSnapInstalled = await shapeShiftSnapInstalled(SNAP_ID);
-        console.log(isSnapInstalled)
+        const isSnapInstalled = await shapeShiftSnapInstalled(SNAP_ID);
+        console.log(isSnapInstalled);
 
         //if not installed install snap
-        if(!isSnapInstalled){
-            //install it
-            let result = await enableShapeShiftSnap(SNAP_ID);
-            console.log("result: ", result)
+        if (!isSnapInstalled) {
+          //install it
+          const result = await enableShapeShiftSnap(SNAP_ID,"1.0.0");
+          console.log("result: ", result);
         }
 
         //console.log("isMetaMaskAvailable ")
@@ -322,7 +345,7 @@ export const PioneerProvider = ({
         if (walletMetaMask) {
           // pair metamask
           await walletMetaMask.initialize();
-          //console.log("walletMetaMask: ", walletMetaMask);
+          console.log("walletMetaMask: ", walletMetaMask);
 
           // get all accounts
           //@ts-ignore
@@ -333,24 +356,63 @@ export const PioneerProvider = ({
           //@ts-ignore
           walletMetaMask.accounts = accounts;
 
-          const successMetaMask = await appInit.pairWallet(walletMetaMask);
-          console.log("successMetaMask: ", successMetaMask);
-          if(successMetaMask){
-            // @ts-ignore
-            if (appInit.pubkeyContext?.master || appInit?.pubkey){
-              // @ts-ignore
-              dispatch({
-                type: WalletActions.SET_PUBKEY_CONTEXT,
-                // @ts-ignore
-                payload: appInit.pubkeyContext?.master || appInit?.pubkey,
-              });
-            }
-          }
           // @ts-ignore
           dispatch({
             type: WalletActions.SET_STATUS,
             payload: "MetaMask connected!",
           });
+          //@ts-ignore
+          dispatch({ type: WalletActions.ADD_WALLET, payload: walletMetaMask });
+
+          appInit.pairWallet(walletMetaMask);
+          console.log("walletMetaMask: ", walletMetaMask);
+          //get btc address
+          // let accountInfo = await walletMetaMask.getAccountInfo("bitcoin");
+          // console.log("accountInfo: ", accountInfo);
+          
+          //get pubkeys
+          // let pubkeys = await walletMetaMask.getPublicKeys([
+          //   {
+          //     addressNList: [0x80000000 + 44, 0x80000000 + 0, 0x80000000 + 0],
+          //     curve: "secp256k1",
+          //     showDisplay: true, // Not supported by TrezorConnect or Ledger, but KeepKey should do it
+          //     coin: "Bitcoin",
+          //   }])
+          // console.log(pubkeys)
+
+          let address = await walletMetaMask.binanceGetAddress({
+            addressNList: [ 2147483692, 2147483648, 2147483648, 0, 4 ]
+          })
+          
+          // let address = await walletMetaMask.btcGetAddress({
+          //   addressNList: [ 2147483692, 2147483648, 2147483648, 0, 4 ],
+          //   coin: 'Bitcoin',
+          //   scriptType: 'p2pkh',
+          //   showDisplay: false
+          // })
+
+          // let address = await walletMetaMask.btcGetAddress({
+          //   addressNList: [ 2147483692, 2147483793, 2147483648, 0, 3 ],
+          //   coin: 'BitcoinCash',
+          //   scriptType: 'p2pkh',
+          //   showDisplay: false
+          // })
+          console.log("METAMASK BTC ADDRESS: ", address);
+          
+          
+          // console.log("successMetaMask: ", successMetaMask);
+          // if (successMetaMask) {
+          //   // @ts-ignore
+          //   if (appInit.pubkeyContext?.master || appInit?.pubkey) {
+          //     // @ts-ignore
+          //     dispatch({
+          //       type: WalletActions.SET_PUBKEY_CONTEXT,
+          //       // @ts-ignore
+          //       payload: appInit.pubkeyContext?.master || appInit?.pubkey,
+          //     });
+          //   }
+          // }
+
         }
       } else {
         console.log("MetaMask is not available");
@@ -379,9 +441,6 @@ export const PioneerProvider = ({
             KkRestAdapter.useKeyring(keyring).pairDevice(sdkKeepKey),
             timeout(30000),
           ]);
-          // pair keepkey
-          const successKeepKey = await appInit.pairWallet(walletKeepKey);
-          //console.log("successKeepKey: ", successKeepKey);
           //@ts-ignore
           dispatch({ type: WalletActions.ADD_WALLET, payload: walletKeepKey });
           // @ts-ignore
@@ -389,63 +448,46 @@ export const PioneerProvider = ({
             type: WalletActions.SET_STATUS,
             payload: "KeepKey connected!",
           });
+          // pair keepkey
+          appInit.pairWallet(walletKeepKey);
+          //console.log("successKeepKey: ", successKeepKey);
+
         } catch (error) {
           //@ts-ignore
           console.error("Error or Timeout:", error.message);
           alert("Please restart your KeepKey and try again.");
         }
       }
-
+      
       let walletSoftware: NativeHDWallet | null;
-      let mnemonic;
-      let hashStored;
-      let hash;
+      //if native wallet saved
+      let mnemonic = localStorage.getItem("seedPhrase");
       const nativeAdapter = NativeAdapter.useKeyring(keyring);
-      //is metamask available AND no KeepKey
-      hashStored = localStorage.getItem("hash");
 
-      if (hashStored) {
-        //generate software from metamask
-        //console.log('hashStored: ', hashStored);
-        const hashSplice = (str: string | any[] | null) => {
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          return str.slice(0, 34);
-        };
-        // @ts-ignore
-        hash = hashSplice(hashStored);
-        // eslint-disable-next-line no-console
-        //console.log('hash (trimmed): ', hash);
-        // @ts-ignore
-        const hashBytes = hash.replace("0x", "");
-        //console.log('hashBytes', hashBytes);
-        //console.log('hashBytes', hashBytes.length);
-        mnemonic = entropyToMnemonic(hashBytes.toString(`hex`));
-
+      if(mnemonic){
+        console.log("mnemonic: ", mnemonic);
+        
+        //if no metamask AND no keepkey
         // get walletSoftware
         walletSoftware = await nativeAdapter.pairDevice("testid");
         await nativeAdapter.initialize();
         // @ts-ignore
         await walletSoftware.loadDevice({ mnemonic });
-        const successSoftware = await appInit.pairWallet(walletSoftware);
-        //console.log("successSoftware: ", successSoftware);
 
-        //events!
-        const events = await appInit.startSocket();
-
-        events.on("message", (event: any) => {
-          //console.log("message: ", event);
+        // @ts-ignore
+        dispatch({ type: WalletActions.ADD_WALLET, payload: walletSoftware });
+        // @ts-ignore
+        dispatch({
+          type: WalletActions.SET_STATUS,
+          payload: "Software wallet connected!",
         });
-
-        events.on("blocks", (event: any) => {
-          //console.log("blocks: ", event);
-          // @ts-ignore
-          dispatch({
-            type: WalletActions.SET_STATUS,
-            payload: "Block Scanned!",
-          });
-        });
+        
+        console.log("walletSoftware: ", walletSoftware);
+        appInit.pairWallet(walletSoftware);
       }
+
+
+
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e);
@@ -454,6 +496,7 @@ export const PioneerProvider = ({
 
   // onstart get data
   useEffect(() => {
+    showModal('foo');
     onStart();
   }, []);
 
@@ -463,6 +506,10 @@ export const PioneerProvider = ({
   return (
     <PioneerContext.Provider value={value}>{children}</PioneerContext.Provider>
   );
+};
+
+type ModalProps = {
+  onClose: () => void;
 };
 
 export const usePioneer = (): any =>

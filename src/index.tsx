@@ -16,19 +16,17 @@ import MiddleEllipsis from "lib/components/MiddleEllipsis";
 
 import App from "./App";
 
-// To publish as lib uncomment
+// To publish run as dev uncomment
 
-// index.tsx
-
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
-);
-root.render(
-  <>
-    <ColorModeScript initialColorMode={theme.config?.initialColorMode} />
-    <App />
-  </>
-);
+// const root = ReactDOM.createRoot(
+//   document.getElementById("root") as HTMLElement
+// );
+// root.render(
+//   <>
+//     <ColorModeScript initialColorMode={theme.config?.initialColorMode} />
+//     <App />
+//   </>
+// );
 
 //end dev mode
 

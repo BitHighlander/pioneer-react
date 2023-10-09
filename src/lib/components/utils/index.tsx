@@ -38,10 +38,10 @@ export const MiddleEllipsis: React.FC<MiddleEllipsisProps> = ({ text }) => {
   const backPart = text.slice(-10);
 
   return (
-      <span>
+    <span>
       {frontPart}
-        {ellipsis}
-        {backPart}
+      {ellipsis}
+      {backPart}
     </span>
   );
 };

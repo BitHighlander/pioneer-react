@@ -123,7 +123,7 @@ export default function Balances({ balances }: { balances: Balance[] }) {
   useEffect(() => {
     const setUser = async () => {
       try {
-        console.log("balances: ",app.balances)
+        console.log("balances: ", app.balances);
         if (app && app.wallets) {
           const { wallets, balances } = app;
           const updatedBalances = balances.map((balance: Balance) => {

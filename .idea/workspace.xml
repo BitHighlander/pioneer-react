@@ -1,33 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="add snaps">
-      <change afterPath="$PROJECT_DIR$/src/lib/components/Onboarding/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/pages/home/components/SelectInput.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/pages/home/components/SelectOutput.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/lib/pages/home/components/Settings.tsx" afterDir="false" />
+    <list default="true" id="750d8ba7-3118-420f-bb91-96d91617e316" name="Changes" comment="EOD">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/AssetSelect/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/AssetSelect/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/modals/Onboarding.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/modals/SettingsModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/modals/SettingsModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Balances.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Balances.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/lib/components/pioneer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/pioneer/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/components/utils/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/components/utils/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/layout/Pioneer/Balances.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/layout/Pioneer/MiddleEllipsis.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/layout/Pioneer/Pubkey.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/layout/Pioneer/Receive.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/layout/Pioneer/Send.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/layout/Pioneer/View.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/layout/Pioneer/Wallets.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/pages/home/components/CTASection.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/pages/home/components/SomeImage.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/pages/home/components/SomeText.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/pages/home/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/pages/home/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/pages/home/components/SelectInput.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/pages/home/components/SelectOutput.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/pages/home/components/Settings.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -54,24 +34,24 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Wallets.tsx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/.gitignore" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/package.json" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Balances.tsx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/dist/index.js" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/node_modules/@shapeshiftoss/metamask-snaps-adapter/dist/index.d.ts" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/lib/components/pioneer/index.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/node_modules/@shapeshiftoss/metamask-snaps-adapter/dist/utxo/bitcoin/bitcoin.d.ts" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/lib/components/BlockchainSelect/index.tsx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/lib/components/modals/SettingsModal.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/dist/index.js" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/dist/robots.txt" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/package.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/vercel.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/lib/components/Onboarding/index.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/lib/pages/home/index.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/lib/context/Pioneer/index.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/lib/components/pioneer/index.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/lib/components/modals/SettingsModal.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/.gitignore" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/App.tsx" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/lib/components/modals/AssetModal.tsx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/lib/pages/home/index.tsx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/vercel.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Balances.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/lib/components/pioneer/Pioneer/Wallets.tsx" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/index.tsx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/lib/components/Onboarding/index.tsx" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/node_modules/@shapeshiftoss/metamask-snaps-adapter/dist/utxo/bitcoin/bitcoin.d.ts" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/node_modules/@shapeshiftoss/metamask-snaps-adapter/dist/index.d.ts" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -244,13 +224,9 @@
       <workItem from="1695748629086" duration="6051000" />
       <workItem from="1695789680139" duration="601000" />
       <workItem from="1695913747285" duration="4159000" />
-    </task>
-    <task id="LOCAL-00020" summary="begin pioneer">
-      <created>1684980174480</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1684980174480</updated>
+      <workItem from="1696870805885" duration="7501000" />
+      <workItem from="1697061851720" duration="3277000" />
+      <workItem from="1698355000756" duration="4000" />
     </task>
     <task id="LOCAL-00021" summary="pioneer-sdk no pollyfill!">
       <created>1684984785429</created>
@@ -588,7 +564,14 @@
       <option name="project" value="LOCAL" />
       <updated>1695324796559</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="EOD">
+      <created>1696870819986</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1696870819986</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -608,7 +591,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fix double rendering" />
     <MESSAGE value="begin pubkeys" />
     <MESSAGE value="pubkey work" />
     <MESSAGE value="detecting pioneer!" />
@@ -633,6 +615,7 @@
     <MESSAGE value="cleaned up logs and errors" />
     <MESSAGE value="force to remote pioneer" />
     <MESSAGE value="add snaps" />
-    <option name="LAST_COMMIT_MESSAGE" value="add snaps" />
+    <MESSAGE value="EOD" />
+    <option name="LAST_COMMIT_MESSAGE" value="EOD" />
   </component>
 </project>

@@ -142,7 +142,7 @@ const Pioneer = () => {
       let isOnboarded = await localStorage.getItem("isOnboarded")
       if(!isOnboarded){
         console.log("Starting onboarding process")
-        onOpen();
+        //onOpen();
       }
     }catch(e){
       console.error(e)

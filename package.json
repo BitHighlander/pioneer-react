@@ -1,6 +1,6 @@
 {
   "name": "@pioneer-platform/pioneer-react",
-  "version": "0.2.38",
+  "version": "0.2.39",
   "author": "highlander",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -34,6 +34,7 @@
     "@keepkey/keepkey-sdk": "^0.2.48",
     "@pioneer-platform/pioneer-client": "^9.0.6",
     "@pioneer-sdk/sdk": "1.1.160",
+    "@pioneer-sdk/sdk-v2": "0.0.3",
     "@shapeshiftoss/hdwallet-core": "^1.50.0",
     "@shapeshiftoss/hdwallet-metamask": "^1.50.0",
     "@shapeshiftoss/hdwallet-native": "^1.50.3",
